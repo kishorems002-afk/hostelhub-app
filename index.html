@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#4935d5">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#4938df">
 <title>HostelHub - Smart Hostel Management</title>
 <style>
 :root {
@@ -449,6 +448,13 @@ function updateProfile(e){
 }
 renderLoginStart();
 function renderLoginStart(){}
-</script>
-</body>
+</script>  
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .catch(error => console.error(error));
+  });
+}
+</script></body>
 </html>
