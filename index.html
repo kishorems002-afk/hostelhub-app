@@ -2,214 +2,256 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HostelHub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4338ca">
+<title>HostelHub - Smart Hostel Management</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f3f4ff;color:#20244b}
-header{background:linear-gradient(135deg,#5141e8,#3425b9);color:white;padding:24px 20px;border-radius:0 0 26px 26px}
-header h1{margin:0;font-size:27px}
-header p{margin-bottom:0}
-main{max-width:460px;margin:auto;padding:14px 14px 85px}
-.card{background:white;padding:17px;border-radius:17px;margin:12px 0;box-shadow:0 3px 14px #292b6010}
-h2{font-size:19px;margin:5px 0 14px}
-input,textarea,select{width:100%;padding:13px;border:1px solid #dedff1;border-radius:10px;margin:6px 0 12px;font-size:15px}
-button{border:0;background:linear-gradient(110deg,#5141e8,#4930ce);color:white;padding:13px;border-radius:11px;font-size:14px;cursor:pointer}
-.primary{width:100%}
+:root{--p:#4935d5;--dark:#29216c;--bg:#f5f6ff;--border:#e2e5f5}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;color:#20264a;font-size:14px}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.top{background:linear-gradient(130deg,#4338ca,#6254ec);color:white;padding:17px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 3px 12px #30249b30}
+.logo{font-size:28px}.brand{font-size:23px;font-weight:800}.sub{font-size:12px;margin-top:5px;opacity:.9}
+.wrap{max-width:440px;margin:auto;padding:15px 13px 85px}
+.card{background:white;border:1px solid var(--border);border-radius:15px;padding:16px;margin-bottom:13px;box-shadow:0 3px 12px #30249b09}
+h2{font-size:19px;margin:0 0 13px}h3{font-size:14px;margin:0 0 9px}
+.muted{color:#777f9b;font-size:12px}.hero{background:linear-gradient(140deg,#4935d5,#6655ed);color:white;border-radius:18px;padding:20px;margin-bottom:14px}
+.avatar{width:53px;height:53px;border-radius:50%;background:#fff;color:var(--p);display:grid;place-items:center;font-size:28px}
+.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}
+input,textarea,select{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:white;margin:5px 0 12px;outline-color:var(--p)}
+textarea{min-height:85px;resize:vertical}
+.btn{width:100%;padding:13px;border:0;border-radius:10px;color:white;background:linear-gradient(100deg,#4935d5,#623fe0);font-weight:bold}
+.btn2{padding:9px 13px;border:1px solid var(--border);border-radius:9px;background:white;color:var(--p)}
+.tabs{display:flex;background:#f0f1ff;border-radius:30px;padding:4px;margin-bottom:17px}
+.tabs button{width:50%;border:0;padding:11px;border-radius:25px;background:transparent;color:#656982}
+.tabs button.active{background:var(--p);color:white}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.tile{background:#f6f5ff;border:1px solid #e3e2f6;color:#392bb8;min-height:95px;font-weight:bold}
-.tile span{display:block;font-size:25px;margin-bottom:9px}
-.item{background:#f0f4ff;border-radius:12px;padding:13px;margin:9px 0;font-size:13px}
-.top{display:flex;align-items:center;gap:12px}
-.avatar{background:white;color:#4939d6;border-radius:50%;font-size:30px;padding:10px}
-.muted{font-size:12px;color:#777}
-.hidden{display:none!important}
-nav{position:fixed;bottom:0;left:0;right:0;background:white;display:flex;justify-content:space-around;padding:10px 2px;box-shadow:0 -3px 15px #22222212}
-nav button{background:white;color:#777;padding:7px 5px;font-size:11px;flex:1}
-nav button.active{color:#4b35dc;font-weight:bold}
-nav span{display:block;font-size:19px;margin-bottom:3px}
-.tag{display:inline-block;background:#d9f8df;color:#16843a;padding:5px 10px;border-radius:8px;font-size:11px}
+.tile{background:linear-gradient(145deg,#fff,#f7f6ff);border:1px solid var(--border);border-radius:14px;padding:19px 7px;text-align:center;color:#26274d;font-weight:bold;min-height:100px}
+.tile .ico{font-size:27px;display:block;margin-bottom:9px}
+.info{background:#f0f7ff;border-radius:10px;padding:12px;margin-top:10px}
+.green{background:#d9fbe2;color:#197a39;border-radius:15px;padding:5px 10px;font-size:11px}
+.day{display:flex;align-items:center;gap:11px;background:#f0f5ff;border-radius:12px;padding:11px;margin:8px 0}
+.circle{width:35px;height:35px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#d9e7ff;color:#3155bf;font-weight:bold}
+.notice{border:1px solid var(--border);border-radius:12px;padding:13px;margin:10px 0}
+.tag{font-size:11px;padding:5px 9px;border-radius:7px;background:#ffe0e8;color:#b4234d}
+.fee{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:9px 2px calc(9px + env(safe-area-inset-bottom));z-index:5}
+.nav button{border:0;background:none;color:#7b829b;font-size:10px;padding:3px}
+.nav b{display:block;font-size:21px;margin-bottom:3px}
+.nav button.active{color:var(--p);font-weight:bold}
+.page{display:none}.page.active{display:block}
+.loginbox{padding-top:23px;text-align:center}
+.loginlogo{font-size:65px;color:var(--p)}
+#app{display:none}
+@media(min-width:700px){.wrap{max-width:480px}.top{padding-left:max(18px,calc((100% - 480px)/2))}}
 </style>
 </head>
 <body>
-<header>
-<h1>⌂ HostelHub</h1>
-<p>Smart Hostel Management</p>
+<header class="top">
+  <div class="logo">⌂</div>
+  <div><div class="brand">HostelHub</div><div class="sub">Smart Hostel Management</div></div>
 </header>
-<main>
-<section id="login" class="card">
-<div style="text-align:center;padding:20px 0">
-<div style="font-size:65px;color:#4935d4">⌂</div>
-<h1 style="color:#392bb8">HostelHub</h1>
-<p>Smart Hostel Management</p>
+
+<main class="wrap">
+<section id="login" class="card loginbox">
+  <div class="loginlogo">⌂</div>
+  <h2 style="font-size:28px;color:#302c90">HostelHub</h2>
+  <p class="muted">Smart Hostel Management</p>
+  <div class="tabs">
+    <button id="studentTab" class="active" onclick="setRole('Student')">Student</button>
+    <button id="wardenTab" onclick="setRole('Warden')">Warden</button>
+  </div>
+  <p id="loginTitle">Student Login</p>
+  <input id="user" placeholder="♙  User ID" autocomplete="username">
+  <input id="pass" type="password" placeholder="🔒  Password" autocomplete="current-password">
+  <button class="btn" onclick="loginApp()">Login</button>
+  <p class="muted">HostelHub Working Model</p>
+  <p class="muted">Demo: enter any User ID and password</p>
+</section>
+
+<div id="app">
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="row">
+      <div class="avatar">●</div>
+      <div>Welcome,<h2 id="welcome" style="margin:5px 0">Rahul</h2><span id="roleLabel">Student</span></div>
+    </div>
+  </div>
+  <div id="studentHome">
+    <div class="card"><div class="row"><span style="font-size:28px">🏢</span><div><h3>Sunrise Hostel</h3><div class="muted">Block B · Room 204 · Bed B-2</div></div></div></div>
+    <div class="card row between"><div><h3>🚪 Gate Timings</h3><b>06:00 AM – 09:30 PM</b></div><span class="green">Open</span></div>
+  </div>
+  <div id="wardenHome" style="display:none">
+    <div class="grid">
+      <div class="card">👥<h2>420</h2><span class="muted">Total Students</span></div>
+      <div class="card">📩<h2 id="count">0</h2><span class="muted">Complaints</span></div>
+    </div>
+    <div class="card"><h3>Quick Actions</h3><div class="grid">
+      <button class="tile" onclick="go('announcements')">📢<br>Post Notice</button>
+      <button class="tile" onclick="go('update')">🍴<br>Update Menu</button>
+      <button class="tile" onclick="go('fees')">💳<br>Update Fees</button>
+      <button class="tile" onclick="go('complaints')">💬<br>View Complaints</button>
+    </div></div>
+  </div>
+  <div class="grid">
+    <button class="tile" onclick="go('menu')"><span class="ico">🍴</span>Food Menu</button>
+    <button class="tile" onclick="go('announcements')"><span class="ico">🔔</span>Announcements</button>
+    <button class="tile" onclick="go('complaints')"><span class="ico">💬</span>Complaints</button>
+    <button class="tile" onclick="go('fees')"><span class="ico">👛</span>Fees</button>
+    <button class="tile" onclick="go('gate')"><span class="ico">🚪</span>Gate Timings</button>
+    <button class="tile" onclick="go('profile')"><span class="ico">👤</span>Profile</button>
+  </div>
+</section>
+
+<section id="menu" class="page">
+  <div class="card"><h2>📅 Weekly Food Menu</h2><div id="menuList"></div></div>
+</section>
+
+<section id="announcements" class="page">
+  <div class="card"><h2>🔔 Announcements</h2>
+    <div id="noticeList"></div>
+  </div>
+  <div class="card" id="postNotice" style="display:none">
+    <h3>Post New Notice</h3>
+    <input id="noticeTitle" placeholder="Notice title">
+    <select id="noticeType"><option>Important</option><option>Notice</option><option>General</option><option>Reminder</option></select>
+    <textarea id="noticeText" placeholder="Write notice details"></textarea>
+    <button class="btn" onclick="addNotice()">Publish Notice</button>
+  </div>
+</section>
+
+<section id="complaints" class="page">
+  <div class="card"><h2>💬 Complaints</h2>
+    <textarea id="complaintText" placeholder="Describe your complaint..."></textarea>
+    <button class="btn" onclick="addComplaint()">Submit Complaint</button>
+  </div>
+  <div class="card"><h3>My Complaints</h3><div id="complaintList"></div></div>
+</section>
+
+<section id="fees" class="page">
+  <div class="card"><h2>👛 Hostel Fee Details</h2>
+    <div class="fee"><span>1st Semester</span><b>₹69,500</b></div>
+    <div class="fee"><span>2nd Semester</span><b>₹54,400</b></div>
+    <div class="fee"><span>3rd Semester</span><b>₹21,900</b></div>
+    <div class="info">ℹ️ Please pay the due amount by the 15th of next month.</div>
+  </div>
+  <div class="card"><h3>Payment Status</h3><div class="row between"><span>Demo Status</span><span class="green">View Only</span></div><p class="muted">This is sample information, not a real payment system.</p></div>
+</section>
+
+<section id="gate" class="page">
+  <div class="card"><h2>🚪 Gate Opening & Closing</h2>
+    <div style="text-align:center;padding:18px"><div class="muted">Daily Gate Timings</div><h2>06:00 AM – 09:30 PM</h2><span class="green">Open: Demo Status</span></div>
+    <div class="info"><b>Important Points</b><p>• Students must carry their ID card.</p><p>• After 9:30 PM, entry may require warden permission.</p><p>• Contact the warden in an emergency.</p></div>
+  </div>
+</section>
+
+<section id="update" class="page">
+  <div class="card"><h2>🍴 Update Food Menu</h2><p class="muted">Enter weekly menu</p>
+    <div id="menuInputs"></div>
+    <button class="btn" onclick="saveMenu()">Save Menu</button>
+    <p class="muted">Saved menu appears on the Food Menu screen in this browser.</p>
+  </div>
+</section>
+
+<section id="profile" class="page">
+  <div class="card"><h2>👤 My Profile</h2><div class="row"><div class="avatar">●</div><div><h3 id="profileName">Rahul</h3><p id="profileRole" class="muted">Student</p></div></div><hr style="border:0;border-top:1px solid #eee;margin:18px 0">
+    <p>🏢 Sunrise Hostel</p><p>🛏️ Block B · Room 204 · Bed B-2</p>
+    <button class="btn" onclick="logout()">Logout</button>
+  </div>
+</section>
 </div>
-<div class="grid">
-<button id="studentBtn" onclick="setRole('Student')" >Student</button>
-<button id="wardenBtn" onclick="setRole('Warden')" style="background:#eee;color:#333">Warden</button>
-</div>
-<p id="loginLabel">Student Login</p>
-<input id="username" placeholder="User ID">
-<input id="password" type="password" placeholder="Password">
-<button class="primary" onclick="login()">Login</button>
-<p class="muted" style="text-align:center">HostelHub Working Model</p>
-</section>
-
-<section id="app" class="hidden">
-<div class="card">
-<div class="top">
-<div class="avatar">●</div>
-<div>Welcome,<br><b id="userLabel">Student</b><br><small id="roleLabel">Student</small></div>
-</div>
-</div>
-
-<section id="home">
-<div class="card">
-<h3>🏢 Sunrise Hostel</h3>
-<p class="muted">Block B · Room 204 · Bed B-2</p>
-<div class="item">🚪 Gate Timings<br><b id="gateLabel">06:00 AM – 09:30 PM</b><br><br><span class="tag">Open</span></div>
-<div class="grid">
-<button class="tile" onclick="page('food')"><span>🍽️</span>Food Menu</button>
-<button class="tile" onclick="page('announcements')"><span>🔔</span>Announcements</button>
-<button class="tile" onclick="page('complaints')"><span>💬</span>Complaints</button>
-<button class="tile" onclick="page('fees')"><span>💳</span>Fees</button>
-<button class="tile" onclick="page('gate')"><span>🕒</span>Gate Timings</button>
-<button id="wardenTile" class="tile hidden" onclick="page('update')"><span>🛠️</span>Update Menu</button>
-</div>
-</div>
-</section>
-
-<section id="food" class="card hidden">
-<h2>🍽️ Weekly Food Menu</h2>
-<div id="menuList"></div>
-</section>
-
-<section id="announcements" class="card hidden">
-<h2>📢 Announcements</h2>
-<div id="noticeList"></div>
-</section>
-
-<section id="complaints" class="card hidden">
-<h2>💬 Complaints</h2>
-<textarea id="complaintText" placeholder="Describe your complaint..."></textarea>
-<button class="primary" onclick="submitComplaint()">Submit Complaint</button>
-<h3>My Complaints</h3>
-<div id="complaintList"></div>
-</section>
-
-<section id="fees" class="card hidden">
-<h2>💳 Hostel Fee Details</h2>
-<div class="item">1st Semester <b style="float:right">₹69,500</b></div>
-<div class="item">2nd Semester <b style="float:right">₹54,400</b></div>
-<div class="item">3rd Semester <b style="float:right">₹21,900</b></div>
-<p class="muted">Please contact the warden for payment details.</p>
-</section>
-
-<section id="gate" class="card hidden">
-<h2>🕒 Gate Opening & Closing</h2>
-<div class="item" id="gateDetails">06:00 AM – 09:30 PM</div>
-<p>Carry your student ID card. After closing time, contact the warden for permission.</p>
-</section>
-
-<section id="update" class="card hidden">
-<h2>🛠️ Warden Dashboard</h2>
-<label>Monday</label><input id="monday" placeholder="Rice, Sambar, Cabbage Thoran">
-<label>Tuesday</label><input id="tuesday" placeholder="Chapati, Vegetable Curry">
-<label>Wednesday</label><input id="wednesday" placeholder="Rice, Chicken Curry">
-<label>Gate Opening</label><input id="opening" placeholder="06:00 AM">
-<label>Gate Closing</label><input id="closing" placeholder="09:30 PM">
-<label>New Announcement</label><textarea id="notice" placeholder="Enter announcement"></textarea>
-<button class="primary" onclick="saveData()">Save Updates</button>
-</section>
-
-<button class="primary" onclick="logout()" style="margin:10px 0">Logout</button>
-</section>
 </main>
 
-<nav id="nav" class="hidden">
-<button class="active" onclick="page('home',this)"><span>⌂</span>Home</button>
-<button onclick="page('food',this)"><span>🍴</span>Menu</button>
-<button onclick="page('complaints',this)"><span>☏</span>Complaints</button>
-<button onclick="page('fees',this)"><span>▣</span>Fees</button>
-<button onclick="page('announcements',this)"><span>♙</span>Notices</button>
+<nav id="nav" class="nav" style="display:none">
+  <button class="active" data-page="home" onclick="go('home')"><b>⌂</b>Home</button>
+  <button data-page="menu" onclick="go('menu')"><b>♨</b>Menu</button>
+  <button data-page="complaints" onclick="go('complaints')"><b>▤</b>Complaints</button>
+  <button data-page="fees" onclick="go('fees')"><b>▣</b>Fees</button>
+  <button data-page="profile" onclick="go('profile')"><b>♙</b>Profile</button>
 </nav>
 
 <script>
-let role="Student",user="";
-const defaults={
-Monday:"Rice, Sambar, Cabbage Thoran",
-Tuesday:"Chapati, Vegetable Curry",
-Wednesday:"Rice, Chicken Curry",
-Thursday:"Rice, Dal, Mixed Vegetables",
-Friday:"Biriyani, Raita",
-Saturday:"Meals, Fish Curry",
-Sunday:"Special Menu"
-};
-function getData(k,d){return localStorage.getItem("hh_"+k)||d}
+let role='Student';
+let complaints=[];
+let notices=[
+ {type:'Important',title:'Freshers Day Celebration',date:'16 Sep 2026',text:'B.Tech / BBA / BCA students: Check the college notice for event timings and class updates.'},
+ {type:'Notice',title:'YIP Competition',date:'16 Sep 2026',text:'All students are requested to register and submit ideas.'},
+ {type:'General',title:'Hostel Maintenance',date:'12 Sep 2026',text:'Please check with the warden for maintenance updates.'},
+ {type:'Reminder',title:'Fee Payment',date:'10 Sep 2026',text:'Kindly clear pending fees by the announced due date.'}
+];
+let days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+let meals=['Rice, Sambar, Cabbage Thoran','Chapati, Vegetable Curry, Salad','Rice, Chicken Curry, Kanji','Rice, Dal, Mixed Vegetables','Biriyani, Raita','Meals, Fish Curry','Special Menu'];
+const $=id=>document.getElementById(id);
 function setRole(r){
-role=r;
-document.getElementById("loginLabel").textContent=r+" Login";
-document.getElementById("studentBtn").style.background=r==="Student"?"#4935dc":"#eee";
-document.getElementById("studentBtn").style.color=r==="Student"?"white":"#333";
-document.getElementById("wardenBtn").style.background=r==="Warden"?"#4935dc":"#eee";
-document.getElementById("wardenBtn").style.color=r==="Warden"?"white":"#333";
+ role=r;
+ $('studentTab').classList.toggle('active',r==='Student');
+ $('wardenTab').classList.toggle('active',r==='Warden');
+ $('loginTitle').textContent=r+' Login';
 }
-function login(){
-user=document.getElementById("username").value.trim();
-if(!user){alert("Enter your User ID or name");return}
-if(role==="Warden" && document.getElementById("password").value!=="warden123"){
-alert("Demo Warden password: warden123");return}
-document.getElementById("login").classList.add("hidden");
-document.getElementById("app").classList.remove("hidden");
-document.getElementById("nav").classList.remove("hidden");
-document.getElementById("userLabel").textContent=user;
-document.getElementById("roleLabel").textContent=role;
-document.getElementById("wardenTile").classList.toggle("hidden",role!=="Warden");
-render();page("home");
-}
-function page(id,btn){
-["home","food","announcements","complaints","fees","gate","update"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));
-if(id==="update"&&role!=="Warden"){alert("Warden access only");page("home");return}
-document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-if(btn)btn.classList.add("active");
-render();
-}
-function render(){
-document.getElementById("menuList").innerHTML=Object.keys(defaults).map(day=>`<div class="item"><b>${day}</b><br>${getData(day,defaults[day])}</div>`).join("");
-document.getElementById("noticeList").innerHTML='<div class="item">'+getData("notice","Welcome to HostelHub! New hostel announcements will appear here.")+'</div>';
-let gate=getData("opening","06:00 AM")+" – "+getData("closing","09:30 PM");
-document.getElementById("gateLabel").textContent=gate;
-document.getElementById("gateDetails").textContent=gate;
-let complaints=JSON.parse(localStorage.getItem("hh_complaints")||"[]");
-document.getElementById("complaintList").innerHTML=complaints.map(c=>`<div class="item"><b>${c.user}</b><br>${escapeText(c.text)}</div>`).join("")||'<p class="muted">No complaints yet.</p>';
-}
-function escapeText(s){let d=document.createElement("div");d.textContent=s;return d.innerHTML}
-function submitComplaint(){
-let t=document.getElementById("complaintText").value.trim();
-if(!t){alert("Enter your complaint");return}
-let a=JSON.parse(localStorage.getItem("hh_complaints")||"[]");
-a.push({user:user,text:t});
-localStorage.setItem("hh_complaints",JSON.stringify(a));
-document.getElementById("complaintText").value="";
-render();alert("Complaint saved in demo.");
-}
-function saveData(){
-Object.keys(defaults).forEach(day=>{
-let input=document.getElementById(day.toLowerCase());
-if(input&&input.value.trim())localStorage.setItem("hh_"+day,input.value.trim());
-});
-["opening","closing","notice"].forEach(k=>{
-let v=document.getElementById(k).value.trim();
-if(v)localStorage.setItem("hh_"+k,v);
-});
-render();alert("Demo updates saved!");
+function loginApp(){
+ let name=$('user').value.trim();
+ if(!name||!$('pass').value){alert('Enter User ID and Password');return}
+ $('welcome').textContent=name;
+ $('profileName').textContent=name;
+ $('roleLabel').textContent=role;
+ $('profileRole').textContent=role;
+ $('studentHome').style.display=role==='Student'?'block':'none';
+ $('wardenHome').style.display=role==='Warden'?'block':'none';
+ $('postNotice').style.display=role==='Warden'?'block':'none';
+ $('login').style.display='none';
+ $('app').style.display='block';
+ $('nav').style.display='flex';
+ renderMenus();renderNotices();renderComplaints();
+ go('home');
 }
 function logout(){
-document.getElementById("app").classList.add("hidden");
-document.getElementById("nav").classList.add("hidden");
-document.getElementById("login").classList.remove("hidden");
-document.getElementById("username").value="";
-document.getElementById("password").value="";
+ $('app').style.display='none';$('nav').style.display='none';$('login').style.display='block';$('pass').value='';
 }
+function go(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ $(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderMenus(){
+ $('menuList').innerHTML=days.map((d,i)=>`<div class="day"><div class="circle">${d.slice(0,3)}</div><div><b>${d}</b><div class="muted" style="margin-top:5px">${meals[i]}</div></div></div>`).join('');
+ $('menuInputs').innerHTML=days.map((d,i)=>`<label><b>${d}</b><input id="day${i}" value="${meals[i].replace(/"/g,'&quot;')}"></label>`).join('');
+}
+function saveMenu(){
+ meals=days.map((d,i)=>$('day'+i).value.trim()||'Menu to be announced');
+ renderMenus();alert('Weekly menu updated!');
+}
+function renderNotices(){
+ $('noticeList').innerHTML=notices.map(n=>`<div class="notice"><span class="tag">${n.type}</span><h3 style="margin-top:10px">${escapeHTML(n.title)}</h3><div class="muted">${escapeHTML(n.date)}</div><p>${escapeHTML(n.text)}</p></div>`).join('');
+}
+function addNotice(){
+ let title=$('noticeTitle').value.trim(),text=$('noticeText').value.trim();
+ if(!title||!text){alert('Enter title and notice details');return}
+ notices.unshift({type:$('noticeType').value,title,date:new Date().toLocaleDateString(),text});
+ $('noticeTitle').value='';$('noticeText').value='';
+ renderNotices();alert('Notice published in this demo.');
+}
+function addComplaint(){
+ let t=$('complaintText').value.trim();
+ if(!t){alert('Please describe your complaint');return}
+ complaints.unshift({text:t,date:new Date().toLocaleDateString(),status:'Pending'});
+ $('complaintText').value='';renderComplaints();
+ alert('Complaint submitted in this demo.');
+}
+function renderComplaints(){
+ $('count').textContent=complaints.length;
+ $('complaintList').innerHTML=complaints.length?complaints.map(c=>`<div class="notice"><b>💬 ${escapeHTML(c.text)}</b><p class="muted">${escapeHTML(c.date)}</p><span class="green">${c.status}</span>${role==='Warden'?` <button class="btn2" onclick="resolveComplaint('${c.date}','${encodeURIComponent(c.text)}')">Resolve</button>`:''}</div>`).join(''):'<p class="muted">No complaints submitted yet.</p>';
+}
+function resolveComplaint(date,text){
+ let c=complaints.find(c=>c.date===date&&c.text===decodeURIComponent(text));
+ if(c)c.status='Resolved';
+ renderComplaints();
+}
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+renderMenus();
 </script>
 </body>
 </html>
