@@ -1,801 +1,457 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#3730c8">
+<meta name="theme-color" content="#4935d5">
 <title>HostelHub - Smart Hostel Management</title>
-
 <style>
 :root {
-  --primary:#4338ca;
-  --secondary:#7c3aed;
-  --ocean:#0891b2;
-  --ink:#20234d;
-  --muted:#737b9a;
-  --border:#e0e7ff;
-  --bg:#f2f6ff;
+  --purple:#4935d5;
+  --blue:#3977f6;
+  --bg:#f4f6ff;
+  --text:#20244a;
+  --muted:#727a98;
+  --card:#ffffff;
 }
 *{box-sizing:border-box}
 body{
-  margin:0;font-family:Arial, sans-serif;color:var(--ink);
-  background:linear-gradient(145deg,#e5faff,#f5f1ff,#eaf3ff);
-  min-height:100vh
+  margin:0;font-family:Arial,sans-serif;
+  background:var(--bg);color:var(--text)
 }
 button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,textarea:focus-visible{
-  outline:3px solid #67e8f9;outline-offset:2px
+button{cursor:pointer;border:0}
+header{
+  background:linear-gradient(120deg,#3024b9,#7254f6,#4789fa);
+  color:white;padding:18px 5%;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;box-shadow:0 5px 20px #3024b930
 }
-.topbar{
-  background:linear-gradient(115deg,#2525a8,#5145e5,#0891b2);
-  color:white;padding:18px 5%;display:flex;align-items:center;
-  justify-content:space-between;gap:12px;flex-wrap:wrap;
-  box-shadow:0 5px 22px #3730c833
-}
-.brand{display:flex;align-items:center;gap:11px}
-.logo{
-  width:45px;height:45px;border-radius:15px;background:#ffffff25;
-  display:grid;place-items:center;font-size:27px
-}
-.brand h1{font-size:22px;margin:0 0 4px}
-.brand p{margin:0;font-size:12px;opacity:.85}
-.small-btn{
-  border:1px solid #ffffff66;background:#ffffff18;color:white;
-  padding:10px 14px;border-radius:12px
-}
-main{max-width:1100px;margin:auto;padding:24px 16px 100px}
+.brand{font-size:24px;font-weight:800}
+.brand small{display:block;font-size:12px;font-weight:400;margin-top:5px}
+.header-btn{background:#ffffff25;color:white;padding:10px 13px;border-radius:12px}
+main{max-width:1150px;margin:24px auto;padding:0 15px 35px}
 .card{
-  background:#ffffffed;border:1px solid var(--border);
-  border-radius:20px;padding:19px;margin-bottom:17px;
-  box-shadow:0 8px 24px #4144bb0d
+  background:var(--card);padding:19px;border-radius:20px;
+  box-shadow:0 5px 22px #33314c0a;border:1px solid #e8eaff;
+  margin-bottom:16px
 }
-h2{font-size:20px;margin:0 0 15px}
-h3{font-size:15px;margin:0 0 10px}
-p{line-height:1.5}
-.muted{color:var(--muted);font-size:13px}
-.btn{
-  border:0;border-radius:12px;color:white;padding:13px 16px;
-  background:linear-gradient(100deg,#4338ca,#7c3aed,#0891b2);
-  font-weight:700;box-shadow:0 5px 14px #4338ca25
+h2,h3,p{margin-top:0}
+h2{font-size:22px}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.primary{
+  background:linear-gradient(100deg,#4935d5,#7653f6);
+  color:white;padding:12px 17px;border-radius:12px;font-weight:bold
 }
-.btn:active,.tile:active{transform:scale(.98)}
-.btn-light{
-  background:#eef2ff;color:#4338ca;border:1px solid #dbe3ff;
-  border-radius:11px;padding:10px 13px;font-weight:700
-}
-.full{width:100%}
+.secondary{background:#efedff;color:var(--purple);padding:10px 14px;border-radius:10px}
+.danger{background:#fff0f0;color:#c93f52;padding:9px 12px;border-radius:10px}
 input,textarea,select{
-  width:100%;padding:13px;border:1px solid #dce4f5;
-  border-radius:12px;background:#fff;color:var(--ink);margin:6px 0 12px
+  width:100%;padding:13px;border:1px solid #e0e4f4;
+  border-radius:11px;background:#fbfcff;margin:6px 0 12px;outline-color:#7461ef
 }
-textarea{min-height:95px;resize:vertical}
-label{font-size:13px;font-weight:700}
-.hidden{display:none!important}
-.login-wrap{max-width:430px;margin:30px auto}
-.login-card{text-align:center;padding:26px}
-.big-logo{
-  width:85px;height:85px;margin:0 auto 12px;border-radius:26px;
-  display:grid;place-items:center;font-size:49px;color:white;
-  background:linear-gradient(135deg,#4338ca,#8b5cf6,#06b6d4)
-}
-.login-card h2{font-size:27px;margin-bottom:5px}
-.role-tabs{display:flex;background:#edf0ff;border-radius:14px;padding:4px;margin:20px 0}
-.role-tabs button{
-  flex:1;border:0;border-radius:11px;padding:12px;background:transparent;
-  color:#626b8b;font-weight:700
-}
-.role-tabs button.active{background:linear-gradient(110deg,#4338ca,#6846e8);color:white}
-.hero{
-  color:white;padding:23px;border-radius:22px;margin-bottom:17px;
-  background:linear-gradient(125deg,#312eaf,#5145e5,#0891b2);
-  box-shadow:0 10px 26px #4338ca26
-}
-.hero h2{margin:0 0 6px;font-size:23px}
-.hero p{margin:5px 0;opacity:.9}
-.hero-line{display:flex;align-items:center;gap:14px}
-.avatar{
-  flex-shrink:0;width:62px;height:62px;border-radius:50%;
-  display:grid;place-items:center;color:white;font-size:29px;
-  background:linear-gradient(135deg,#67e8f9,#818cf8,#c084fc);
-  border:3px solid #ffffffaa;overflow:hidden
-}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.tile{
-  border:1px solid #dbe5ff;border-radius:18px;padding:17px 10px;
-  text-align:center;background:linear-gradient(145deg,#fff,#eaf4ff);
-  color:var(--ink);box-shadow:0 5px 15px #3730a30b;
-  transition:transform .15s
-}
-.tile .ico{font-size:31px;display:block;margin-bottom:9px}
-.tile strong{font-size:14px}
-.tile p{font-size:11px;color:var(--muted);margin:5px 0 0}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.stat{
-  border:1px solid var(--border);border-radius:15px;padding:16px;
-  background:linear-gradient(140deg,#fff,#eef6ff)
-}
-.stat span{font-size:25px}
-.stat h3{font-size:25px;margin:9px 0 5px}
-.stat p{font-size:12px;color:var(--muted);margin:0}
-.info-row,.student-row,.menu-row,.notice{
-  padding:13px;border:1px solid #e0e7ff;border-radius:14px;
-  background:linear-gradient(110deg,#fff,#f0f9ff);margin:10px 0
-}
-.info-row{display:flex;align-items:center;gap:12px}
-.info-icon{font-size:25px}
-.info-row .grow{flex:1;min-width:0}
-.status{
-  display:inline-block;padding:5px 9px;border-radius:20px;
-  background:#dcfce7;color:#166534;font-size:11px;font-weight:700
-}
-.notice .tag{
-  display:inline-block;padding:5px 9px;border-radius:8px;
-  background:#dbeafe;color:#1d4ed8;font-size:11px;font-weight:700
-}
-.notice p{font-size:13px;margin:8px 0}
-.menu-row{display:flex;align-items:center;gap:12px}
-.day-icon{
-  width:43px;height:43px;border-radius:14px;display:grid;
-  place-items:center;font-size:22px;background:#dbeafe
-}
-.menu-row div:last-child{flex:1}
-.menu-row p{margin:4px 0 0;font-size:12px;color:var(--muted)}
-.student-row{display:flex;align-items:center;gap:12px}
-.student-small-photo{
-  width:48px;height:48px;border-radius:50%;object-fit:cover;
-  background:#dbeafe;flex-shrink:0
-}
-.student-row .grow{flex:1;min-width:0}
-.student-row .grow p{overflow-wrap:anywhere}
-.profile-photo{
-  width:105px;height:105px;border-radius:50%;object-fit:cover;
-  border:4px solid white;box-shadow:0 4px 18px #5145e550
+label{font-size:13px;font-weight:600}
+.login-wrap{max-width:440px;margin:38px auto}
+.logo{
+  width:76px;height:76px;border-radius:25px;margin:0 auto 12px;
+  background:linear-gradient(140deg,#4831d4,#8764ff);
+  display:grid;place-items:center;color:white;font-size:40px;
+  box-shadow:0 10px 24px #4935d540
 }
 .center{text-align:center}
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:10;
-  display:flex;justify-content:space-around;gap:2px;
-  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
-  background:#ffffffed;backdrop-filter:blur(15px);
-  border-top:1px solid #dfe5f5;box-shadow:0 -5px 20px #3730a30a
+.role-switch{display:flex;gap:8px;margin:20px 0}
+.role-switch button{flex:1;padding:12px;border-radius:12px;background:#f0efff;color:#5544b8}
+.role-switch button.active{background:var(--purple);color:white}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.stat{padding:17px;border-radius:17px;background:white;border:1px solid #e7e9f6}
+.stat .emoji{font-size:25px}
+.stat strong{display:block;font-size:24px;margin:10px 0 4px}
+.stat small{color:var(--muted)}
+.hero{
+  background:linear-gradient(120deg,#4432cb,#7455f5,#4589f6);
+  color:white;border-radius:23px;padding:25px;display:flex;
+  align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px
 }
-.bottom-nav button{
-  border:0;background:transparent;color:#77809c;flex:1;
-  padding:5px 1px;font-size:10px;border-radius:10px
+.hero h2{margin-bottom:7px}
+.avatar{
+  width:76px;height:76px;border-radius:50%;object-fit:cover;
+  background:#e9e4ff;border:3px solid #ffffffa0
 }
-.bottom-nav button span{display:block;font-size:21px;margin-bottom:3px}
-.bottom-nav button.active{color:#4338ca;font-weight:800;background:#eeedff}
-.page-title{display:flex;align-items:center;gap:10px;margin:0 0 16px}
-.back-btn{
-  border:0;border-radius:10px;background:#e9eaff;color:#4338ca;
-  padding:9px 12px;font-size:18px
+.profile-row{display:flex;align-items:center;gap:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tile{
+  background:white;border:1px solid #e7e7fb;border-radius:18px;
+  padding:19px 10px;text-align:center;color:var(--text);
+  box-shadow:0 4px 14px #34316b08
 }
-hr{border:0;border-top:1px solid var(--border);margin:15px 0}
-.footer{text-align:center;color:var(--muted);font-size:11px;padding:15px}
-@media(min-width:700px){
-  main{padding-top:30px}
-  .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .stats{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .login-wrap{margin-top:50px}
+.tile span{display:block;font-size:30px;margin-bottom:12px}
+.tile b{font-size:13px}
+.tile:hover{transform:translateY(-2px);border-color:#a99cff}
+nav{
+  display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;
+  background:white;padding:9px;border-radius:16px
+}
+nav button{background:transparent;padding:11px 13px;border-radius:10px;color:#646b8b}
+nav button.active{background:#ece9ff;color:var(--purple);font-weight:bold}
+.item{
+  background:#fafaff;border:1px solid #ececf8;
+  border-radius:13px;padding:14px;margin:10px 0
+}
+.item h3{font-size:15px;margin-bottom:7px}
+.badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold;background:#e6f9eb;color:#248b50}
+.badge.orange{background:#fff1d9;color:#a96900}
+.badge.blue{background:#e5edff;color:#315fd0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #ececf6}
+th{color:var(--muted)}
+.table-wrap{overflow-x:auto}
+.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+.notice{padding:12px;border-radius:12px;background:#fff5d9;color:#775800;font-size:13px;line-height:1.6}
+@media(min-width:800px){
+  .layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}
+}
+@media(max-width:650px){
+  header{padding:15px}
+  .brand{font-size:21px}
+  main{margin-top:15px;padding:0 12px 25px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid{grid-template-columns:1fr}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{padding:19px}
+  nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  nav button{padding:11px 4px;font-size:12px}
 }
 </style>
 </head>
-
 <body>
 
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">🏠</div>
-    <div>
-      <h1>HostelHub</h1>
-      <p>Smart Hostel Management</p>
-    </div>
+<header>
+  <div class="brand">🏠 HostelHub
+    <small>Smart Hostel Management</small>
   </div>
-  <button id="headerLogout" class="small-btn hidden" onclick="logout()">↪ Logout</button>
+  <button id="logoutTop" class="header-btn hidden" onclick="logout()">↪ Logout</button>
 </header>
 
 <main>
-  <!-- LOGIN -->
-  <section id="loginScreen" class="login-wrap">
-    <div class="card login-card">
-      <div class="big-logo">🏡</div>
-      <h2>HostelHub</h2>
-      <p class="muted">Smart Hostel Management</p>
-
-      <div class="role-tabs">
-        <button id="studentTab" class="active" onclick="setRole('Student')">🎓 Student</button>
-        <button id="wardenTab" onclick="setRole('Warden')">🛡️ Warden</button>
-      </div>
-
-      <form onsubmit="login(event)">
-        <label for="user">User ID</label>
-        <input id="user" placeholder="Enter your user ID" required maxlength="60">
-
-        <label for="pass">Password</label>
-        <input id="pass" type="password" placeholder="Enter password" required maxlength="100">
-
-        <button class="btn full" type="submit">Login →</button>
-      </form>
-      <p class="muted">HostelHub Working Model · Demo</p>
+<section id="loginPage" class="login-wrap">
+  <div class="card center">
+    <div class="logo">🏡</div>
+    <h2 style="font-size:29px;color:#4030be;margin-bottom:5px">HostelHub</h2>
+    <p class="muted">Stay Connected · Stay Informed · Stay Comfortable</p>
+    <div class="role-switch">
+      <button id="studentRole" class="active" onclick="setRole('student')">👨‍🎓 Student</button>
+      <button id="wardenRole" onclick="setRole('warden')">🛡️ Warden</button>
     </div>
-  </section>
+    <form onsubmit="login(event)">
+      <label>User ID</label>
+      <input id="userId" required placeholder="Enter your user ID" autocomplete="username">
+      <label>Password</label>
+      <input id="password" required type="password" placeholder="Enter password" autocomplete="current-password">
+      <button class="primary" style="width:100%">Login →</button>
+    </form>
+    <p id="loginError" style="color:#d13e51;font-size:13px"></p>
+    <div class="notice" style="text-align:left">
+      <b>Demo credentials</b><br>
+      Student: student1 / 1234<br>
+      Warden: warden1 / 1234
+    </div>
+    <p class="muted" style="margin:14px 0 0">College project · Working demonstration</p>
+  </div>
+</section>
 
-  <!-- APP -->
-  <section id="app" class="hidden">
+<section id="appPage" class="hidden">
+  <div class="hero">
+    <div>
+      <p style="margin-bottom:8px">WELCOME TO HOSTELHUB ✨</p>
+      <h2 id="welcome">Hello, Student!</h2>
+      <p id="welcomeSub" style="margin-bottom:0;font-size:13px">Your hostel, all in one place.</p>
+    </div>
+    <img id="heroAvatar" class="avatar" alt="Profile photo"
+      src="https://ui-avatars.com/api/?name=Student&background=ddd6fe&color=4935d5">
+  </div>
 
-    <!-- HOME -->
-    <section id="home" class="page">
-      <div class="hero">
-        <div class="hero-line">
-          <div class="avatar" id="homeAvatar">👤</div>
-          <div>
-            <p>Welcome,</p>
-            <h2 id="welcomeName">Student</h2>
-            <p id="welcomeRole">Student</p>
-          </div>
-        </div>
-      </div>
-
-      <div id="studentHome">
-        <div class="card">
-          <div class="info-row">
-            <span class="info-icon">🏢</span>
-            <div class="grow">
-              <h3>Sunrise Hostel</h3>
-              <p class="muted">Block B · Room 204 · Bed B-2</p>
-            </div>
-          </div>
-          <div class="info-row">
-            <span class="info-icon">🚪</span>
-            <div class="grow">
-              <h3>Gate Timings</h3>
-              <p>06:00 AM – 09:30 PM</p>
-            </div>
-            <span class="status">Open</span>
-          </div>
-        </div>
-
-        <h2>✨ Quick Access</h2>
-        <div class="grid">
-          <button class="tile" onclick="go('menu')"><span class="ico">🍱</span><strong>Food Menu</strong><p>Weekly meals</p></button>
-          <button class="tile" onclick="go('announcements')"><span class="ico">🔔</span><strong>Announcements</strong><p>Latest notices</p></button>
-          <button class="tile" onclick="go('complaints')"><span class="ico">💬</span><strong>Complaints</strong><p>Submit an issue</p></button>
-          <button class="tile" onclick="go('fees')"><span class="ico">💳</span><strong>Fees</strong><p>Fee details</p></button>
-          <button class="tile" onclick="go('gate')"><span class="ico">🚪</span><strong>Gate Timings</strong><p>Opening hours</p></button>
-          <button class="tile" onclick="go('profile')"><span class="ico">👤</span><strong>My Profile</strong><p>Student details</p></button>
-        </div>
-      </div>
-
-      <div id="wardenHome" class="hidden">
-        <div class="stats">
-          <div class="stat"><span>👥</span><h3 id="studentCount">3</h3><p>Demo Students</p></div>
-          <div class="stat"><span>📢</span><h3 id="noticeCount">4</h3><p>Announcements</p></div>
-          <div class="stat"><span>📝</span><h3 id="complaintCount">0</h3><p>Complaints</p></div>
-          <div class="stat"><span>🟢</span><h3>Active</h3><p>Demo System</p></div>
-        </div>
-        <div class="card">
-          <h2>⚡ Warden Quick Actions</h2>
-          <div class="grid">
-            <button class="tile" onclick="go('announcements')"><span class="ico">📢</span><strong>Post Notice</strong></button>
-            <button class="tile" onclick="go('menu')"><span class="ico">🍱</span><strong>Update Menu</strong></button>
-            <button class="tile" onclick="go('fees')"><span class="ico">💰</span><strong>View Fees</strong></button>
-            <button class="tile" onclick="go('complaints')"><span class="ico">💬</span><strong>View Complaints</strong></button>
-            <button class="tile" onclick="go('students')"><span class="ico">👥</span><strong>Student Details</strong></button>
-            <button class="tile" onclick="go('history')"><span class="ico">🕒</span><strong>Login History</strong></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOD MENU -->
-    <section id="menu" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>🍱 Weekly Food Menu</h2></div>
-      <div id="menuList"></div>
-      <div id="menuEditor" class="card hidden">
-        <h3>✏️ Update Weekly Menu</h3>
-        <p class="muted">Enter one meal for each day.</p>
-        <div id="menuInputs"></div>
-        <button class="btn full" onclick="saveMenu()">Save Menu</button>
-      </div>
-    </section>
-
-    <!-- ANNOUNCEMENTS -->
-    <section id="announcements" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>🔔 Announcements</h2></div>
-      <div id="noticeEditor" class="card hidden">
-        <h3>📢 Create Announcement</h3>
-        <form onsubmit="addNotice(event)">
-          <label>Title</label><input id="noticeTitle" required maxlength="100">
-          <label>Category</label>
-          <select id="noticeCategory"><option>Important</option><option>Notice</option><option>General</option><option>Reminder</option></select>
-          <label>Message</label><textarea id="noticeText" required maxlength="1000"></textarea>
-          <button class="btn full">Publish Notice</button>
-        </form>
-      </div>
-      <div id="noticeList"></div>
-    </section>
-
-    <!-- COMPLAINTS -->
-    <section id="complaints" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>💬 Complaints</h2></div>
-      <div id="complaintForm" class="card">
-        <h3>Submit a Complaint</h3>
-        <form onsubmit="addComplaint(event)">
-          <label>Subject</label><input id="complaintSubject" required maxlength="100" placeholder="e.g. Fan not working">
-          <label>Describe your complaint</label><textarea id="complaintText" required maxlength="1000" placeholder="Explain the issue..."></textarea>
-          <button class="btn full">Submit Complaint</button>
-        </form>
-      </div>
-      <div class="card"><h3>📋 Complaint Records</h3><div id="complaintList"></div></div>
-    </section>
-
-    <!-- FEES -->
-    <section id="fees" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>💳 Hostel Fees</h2></div>
-      <div class="card">
-        <h3>💰 Semester Fee Details</h3>
-        <div class="info-row"><div class="grow">1st month</div><strong>₹3000</strong></div>
-        <div class="info-row"><div class="grow">2nd month</div><strong>₹3000</strong></div>
-        <div class="info-row"><div class="grow">3rd month</div><strong>₹3000</strong></div>
-        <hr>
-        <p class="muted">Demo fee details only. Confirm actual dues with the hostel office.</p>
-      </div>
-      <div class="card">
-        <h3>📌 Payment Status</h3>
-        <p>Check pending fees with the hostel office.</p>
-        <span class="status">Contact Warden</span>
-      </div>
-    </section>
-
-    <!-- GATE -->
-    <section id="gate" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>🚪 Gate Timings</h2></div>
-      <div class="card center">
-        <div style="font-size:60px">🕒</div>
-        <h2>Gate Opening & Closing</h2>
-        <h2 style="color:#4338ca;font-size:25px">06:00 AM – 09:30 PM</h2>
-        <span class="status">Demo Schedule</span>
-      </div>
-      <div class="card">
-        <h3>Important Information</h3>
-        <p>• Follow your hostel's official entry rules.</p>
-        <p>• Contact the warden for late entry permission.</p>
-        <p>• Follow emergency procedures provided by your hostel.</p>
-      </div>
-    </section>
-
-    <!-- PROFILE -->
-    <section id="profile" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>👤 My Profile</h2></div>
-      <div class="card center">
-        <img id="profilePhoto" class="profile-photo" src="https://placehold.co/200x200/5145e5/ffffff?text=Student" alt="Profile photo">
-        <p><label for="photoInput">📸 Change Profile Photo</label></p>
-        <input id="photoInput" type="file" accept="image/*">
-        <button class="btn-light" onclick="uploadPhoto()">Save Photo</button>
-        <h2 id="profileName" style="margin-top:18px">Student</h2>
-        <p id="profileId" class="muted">Student ID</p>
-        <hr>
-        <div class="info-row"><span>🏢</span><div class="grow">Sunrise Hostel</div></div>
-        <div class="info-row"><span>🛏️</span><div class="grow">Block B · Room 204 · Bed B-2</div></div>
-        <div class="info-row"><span>🕒</span><div class="grow">Last login: <strong id="lastLogin">This session</strong></div></div>
-        <button class="btn full" onclick="logout()">Logout</button>
-      </div>
-    </section>
-
-    <!-- STUDENT DIRECTORY -->
-    <section id="students" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>👥 Student Directory</h2></div>
-      <div class="card">
-        <p class="muted">Sample records for demonstration. Use fictional student data in this public demo.</p>
-        <input id="studentSearch" placeholder="🔍 Search by name or student ID" oninput="renderStudents()">
-        <div id="studentList"></div>
-      </div>
-    </section>
-
-    <!-- LOGIN HISTORY -->
-    <section id="history" class="page hidden">
-      <div class="page-title"><button class="back-btn" onclick="go('home')">←</button><h2>🕒 Login History</h2></div>
-      <div class="card">
-        <p class="muted">This demo stores events in this browser only. It cannot track other devices or prove physical gate entry/exit.</p>
-        <div id="historyList"></div>
-        <button class="btn-light" onclick="renderHistory()">Refresh History</button>
-      </div>
-    </section>
-
-    <div class="footer">HostelHub · Smart Hostel Management · Working Demo</div>
-  </section>
+  <nav id="navigation"></nav>
+  <div id="view"></div>
+</section>
 </main>
 
-<nav id="bottomNav" class="bottom-nav hidden">
-  <button data-page="home" class="active" onclick="go('home')"><span>🏠</span>Home</button>
-  <button data-page="menu" onclick="go('menu')"><span>🍱</span>Menu</button>
-  <button data-page="complaints" onclick="go('complaints')"><span>💬</span>Complaints</button>
-  <button data-page="fees" onclick="go('fees')"><span>💳</span>Fees</button>
-  <button data-page="profile" onclick="go('profile')"><span>👤</span>Profile</button>
-</nav>
+<footer>HostelHub © 2026 · Smart Hostel Management Working Model</footer>
 
 <script>
-"use strict";
-
-const $ = id => document.getElementById(id);
-const DAYS = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-
-let role = "Student";
-let currentUser = "";
-let currentPage = "home";
-
-const defaultMenu = [
- "Rice, Sambar, Cabbage Thoran",
- "Chapati, Vegetable Curry, Salad",
- "Rice, Chicken Curry, Kanji",
- "Rice, Dal, Mixed Vegetables",
- "Biriyani, Raita",
- "Meals, Fish Curry",
- "Special Menu"
+const initialStudents = [
+ {id:'student1',name:'Rahul',course:'BCA',year:'3rd Semester',room:'204',block:'B',phone:'9876543210',photo:'',status:'Inside',fees:21900},
+ {id:'student2',name:'Anjali',course:'BCA',year:'3rd Semester',room:'205',block:'B',phone:'9876501234',photo:'',status:'Inside',fees:15000},
+ {id:'student3',name:'Arjun',course:'BBA',year:'2nd Semester',room:'108',block:'A',phone:'9876512340',photo:'',status:'Outside',fees:0},
+ {id:'student4',name:'Meera',course:'BTech',year:'3rd Semester',room:'302',block:'C',phone:'9876523450',photo:'',status:'Inside',fees:12000}
 ];
 
-function readStore(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : fallback;
-  } catch {
-    return fallback;
+const read = (key,fallback) => {
+ try {
+  const value=localStorage.getItem(key);
+  return value ? JSON.parse(value) : fallback;
+ } catch(e) { return fallback; }
+};
+let students=read('hh_students',initialStudents);
+let notices=read('hh_notices',[
+ {title:'Freshers Day Celebration',type:'Important',date:'16 Sep 2026',body:'Please check the college schedule and follow the instructions.'},
+ {title:'YIP Competition',type:'Notice',date:'16 Sep 2026',body:'Students are encouraged to register and submit their ideas.'},
+ {title:'Hostel Maintenance',type:'General',date:'12 Sep 2026',body:'Please follow hostel maintenance announcements.'}
+]);
+let complaints=read('hh_complaints',[
+ {name:'Rahul',room:'204',text:'Fan not working in room',status:'Pending',date:'10 Sep 2026'}
+]);
+let logs=read('hh_logs',[]);
+let menu=read('hh_menu',[
+ 'Rice, Sambar, Cabbage Thoran',
+ 'Chapati, Vegetable Curry, Salad',
+ 'Rice, Chicken Curry, Kanji',
+ 'Rice, Dal, Mixed Vegetables',
+ 'Biriyani, Raita',
+ 'Meals, Fish Curry',
+ 'Special Menu'
+]);
+let fees=read('hh_fees',{1:69500,2:54400,3:21900});
+let role='student',current=null,tab='Home';
+
+function save(){
+ localStorage.setItem('hh_students',JSON.stringify(students));
+ localStorage.setItem('hh_notices',JSON.stringify(notices));
+ localStorage.setItem('hh_complaints',JSON.stringify(complaints));
+ localStorage.setItem('hh_logs',JSON.stringify(logs));
+ localStorage.setItem('hh_menu',JSON.stringify(menu));
+ localStorage.setItem('hh_fees',JSON.stringify(fees));
+}
+function escapeHTML(s){
+ return String(s??'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+function setRole(r){
+ role=r;
+ document.getElementById('studentRole').classList.toggle('active',r==='student');
+ document.getElementById('wardenRole').classList.toggle('active',r==='warden');
+ document.getElementById('loginError').textContent='';
+}
+function login(e){
+ e.preventDefault();
+ const id=document.getElementById('userId').value.trim();
+ const pass=document.getElementById('password').value;
+ if(pass!=='1234'){
+  document.getElementById('loginError').textContent='Demo password is 1234.';
+  return;
+ }
+ if(role==='warden' && id==='warden1'){
+  current={id:'warden1',name:'Mr. R. Sharma',type:'warden'};
+ }else if(role==='student'){
+  const student=students.find(s=>s.id===id);
+  if(!student){
+   document.getElementById('loginError').textContent='Student ID not found. Try student1.';
+   return;
   }
+  current={...student,type:'student'};
+ }else{
+  document.getElementById('loginError').textContent='Invalid ID for selected login.';
+  return;
+ }
+ document.getElementById('loginPage').classList.add('hidden');
+ document.getElementById('appPage').classList.remove('hidden');
+ document.getElementById('logoutTop').classList.remove('hidden');
+ tab='Home';
+ if(current.type==='student'){
+  logEvent(current.id,'Login');
+ }
+ render();
 }
-
-function writeStore(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-    return true;
-  } catch {
-    alert("Browser storage is full or unavailable.");
-    return false;
+function logout(){
+ if(current?.type==='student')logEvent(current.id,'Logout');
+ current=null;
+ document.getElementById('loginPage').classList.remove('hidden');
+ document.getElementById('appPage').classList.add('hidden');
+ document.getElementById('logoutTop').classList.add('hidden');
+ document.getElementById('password').value='';
+}
+function logEvent(id,event){
+ logs.unshift({id,event,time:new Date().toLocaleString()});
+ save();
+}
+function photo(s){
+ return s.photo || 'https://ui-avatars.com/api/?name='+encodeURIComponent(s.name)+'&background=ddd6fe&color=4935d5&size=128';
+}
+function navItems(){
+ return current.type==='warden'
+ ? [['Home','🏠'],['Students','👨‍🎓'],['Entry/Exit','🚪'],['Notices','📢'],['Food Menu','🍲'],['Complaints','💬'],['Fees','💳'],['Profile','👤']]
+ : [['Home','🏠'],['Food Menu','🍲'],['Notices','📢'],['Complaints','💬'],['Fees','💳'],['Gate Timings','🚪'],['Profile','👤']];
+}
+function render(){
+ document.getElementById('welcome').textContent='Hello, '+current.name+'!';
+ document.getElementById('welcomeSub').textContent=current.type==='warden'?'Warden Dashboard · Sunrise Hostel':'Student Dashboard · Sunrise Hostel';
+ document.getElementById('heroAvatar').src=current.type==='student'?photo(current):photo({name:current.name});
+ document.getElementById('navigation').innerHTML=navItems().map(([name,icon])=>
+ `<button class="${tab===name?'active':''}" onclick="go('${name}')">${icon} ${name}</button>`
+ ).join('');
+ renderView();
+}
+function go(t){tab=t;render()}
+function stat(icon,label,value){
+ return `<div class="stat"><div class="emoji">${icon}</div><strong>${value}</strong><small>${label}</small></div>`;
+}
+function tile(name,icon){
+ return `<button class="tile" onclick="go('${name}')"><span>${icon}</span><b>${name}</b></button>`;
+}
+function renderView(){
+ const v=document.getElementById('view');
+ if(tab==='Home'){
+  if(current.type==='warden'){
+   v.innerHTML=`
+   <div class="stats">
+   ${stat('👨‍🎓','Total Students',students.length)}
+   ${stat('🟢','Inside Hostel',students.filter(s=>s.status==='Inside').length)}
+   ${stat('🚶','Outside Hostel',students.filter(s=>s.status==='Outside').length)}
+   ${stat('💬','Pending Complaints',complaints.filter(c=>c.status==='Pending').length)}
+   </div>
+   <div class="layout"><div class="card"><h2>⚡ Quick Actions</h2><div class="tiles">
+   ${tile('Students','👨‍🎓')}${tile('Entry/Exit','🚪')}${tile('Notices','📢')}${tile('Food Menu','🍲')}${tile('Complaints','💬')}${tile('Fees','💳')}
+   </div></div>
+   <div class="card"><h2>📢 Latest Announcements</h2>${noticeList(3)}</div></div>
+   <div class="card"><h2>🚪 Recent Student Activity</h2>${logTable(5)}</div>`;
+  }else{
+   const s=students.find(x=>x.id===current.id)||current;
+   v.innerHTML=`
+   <div class="grid">
+    <div class="card"><div class="profile-row"><img class="avatar" src="${photo(s)}" alt="Student"><div><h3>${escapeHTML(s.name)}</h3><p class="muted">${escapeHTML(s.id)} · ${escapeHTML(s.course)}</p></div></div><hr style="border:0;border-top:1px solid #eee;margin:18px 0"><p>🏢 Sunrise Hostel</p><p class="muted">Block ${escapeHTML(s.block)} · Room ${escapeHTML(s.room)}</p><p>🚪 Gate: 06:00 AM – 09:30 PM</p><span class="badge">Hostel ${escapeHTML(s.status)}</span></div>
+    <div class="card"><h3>✨ Your Hostel Hub</h3><p class="muted">Check announcements, meals, fee information and raise complaints.</p><div class="tiles">${tile('Food Menu','🍲')}${tile('Notices','📢')}${tile('Complaints','💬')}${tile('Fees','💳')}</div></div>
+   </div>
+   <div class="card"><h2>📢 Latest Notices</h2>${noticeList(3)}</div>
+   <div class="card"><h2>🍽️ Today's Menu</h2><p>${escapeHTML(menu[(new Date().getDay()+6)%7])}</p></div>`;
   }
+ }else if(tab==='Students')v.innerHTML=studentList();
+ else if(tab==='Entry/Exit')v.innerHTML=entryPage();
+ else if(tab==='Notices')v.innerHTML=noticePage();
+ else if(tab==='Food Menu')v.innerHTML=menuPage();
+ else if(tab==='Complaints')v.innerHTML=complaintPage();
+ else if(tab==='Fees')v.innerHTML=feesPage();
+ else if(tab==='Gate Timings')v.innerHTML=gatePage();
+ else if(tab==='Profile')v.innerHTML=profilePage();
 }
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, ch => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[ch]));
+function noticeList(n){
+ return notices.slice(0,n).map(x=>`<div class="item"><span class="badge blue">${escapeHTML(x.type)}</span><h3 style="margin-top:10px">${escapeHTML(x.title)}</h3><p class="muted">${escapeHTML(x.date)}</p><p style="font-size:14px;line-height:1.5">${escapeHTML(x.body)}</p></div>`).join('')||'<p class="muted">No announcements yet.</p>';
 }
-
-function setRole(value) {
-  role = value;
-  $("studentTab").classList.toggle("active", value === "Student");
-  $("wardenTab").classList.toggle("active", value === "Warden");
-  $("user").placeholder = value === "Student" ? "Enter student ID" : "Enter warden ID";
+function noticePage(){
+ return `<div class="card"><h2>📢 Announcements</h2>${current.type==='warden'?`<form onsubmit="addNotice(event)"><label>Title</label><input id="ntitle" required placeholder="Notice title"><label>Category</label><select id="ntype"><option>Important</option><option>Notice</option><option>General</option><option>Reminder</option></select><label>Message</label><textarea id="nbody" required placeholder="Write announcement"></textarea><button class="primary">Publish Notice</button></form>`:''}${noticeList(50)}</div>`;
 }
-
-function login(event) {
-  event.preventDefault();
-  const name = $("user").value.trim();
-  const password = $("pass").value;
-
-  if (!name || !password) {
-    alert("Enter your user ID and password.");
-    return;
-  }
-
-  // DEMO ONLY: this is not secure authentication.
-  // Any non-empty ID/password can enter the selected demo role.
-  currentUser = name;
-  sessionStorage.setItem("hhUser", name);
-  sessionStorage.setItem("hhRole", role);
-  sessionStorage.setItem("hhLastLogin", new Date().toLocaleString());
-
-  addLog("Login", name, role);
-  showApp();
-  $("pass").value = "";
+function addNotice(e){
+ e.preventDefault();
+ notices.unshift({title:document.getElementById('ntitle').value,type:document.getElementById('ntype').value,date:new Date().toLocaleDateString(),body:document.getElementById('nbody').value});
+ save();render();
 }
-
-function showApp() {
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  $("bottomNav").classList.remove("hidden");
-  $("headerLogout").classList.remove("hidden");
-
-  $("welcomeName").textContent = currentUser;
-  $("welcomeRole").textContent = role;
-  $("profileName").textContent = currentUser;
-  $("profileId").textContent = role === "Student" ? currentUser : "Warden account";
-  $("lastLogin").textContent = sessionStorage.getItem("hhLastLogin") || "This session";
-
-  $("studentHome").classList.toggle("hidden", role !== "Student");
-  $("wardenHome").classList.toggle("hidden", role !== "Warden");
-  $("noticeEditor").classList.toggle("hidden", role !== "Warden");
-  $("menuEditor").classList.toggle("hidden", role !== "Warden");
-  $("complaintForm").classList.toggle("hidden", role === "Warden");
-
-  const photo = readStore("hhPhoto_" + currentUser, "");
-  $("homeAvatar").innerHTML = photo
-    ? `<img src="${photo}" alt="Profile photo">`
-    : "👤";
-  $("profilePhoto").src = photo || "https://placehold.co/200x200/5145e5/ffffff?text=Student";
-
-  renderAll();
-  go("home");
+function studentList(){
+ return `<div class="card"><h2>👨‍🎓 Student Management</h2><input id="studentSearch" placeholder="Search name or student ID..." oninput="filterStudents()">
+ ${current.type==='warden'?`<button class="primary" onclick="addStudentForm()">＋ Add Student</button><div id="addStudentArea"></div>`:''}
+ <div id="studentResults">${studentRows(students)}</div></div>`;
 }
-
-function logout() {
-  if (!currentUser) return;
-  addLog("Logout", currentUser, role);
-  sessionStorage.removeItem("hhUser");
-  sessionStorage.removeItem("hhRole");
-  sessionStorage.removeItem("hhLastLogin");
-  currentUser = "";
-  $("app").classList.add("hidden");
-  $("bottomNav").classList.add("hidden");
-  $("headerLogout").classList.add("hidden");
-  $("loginScreen").classList.remove("hidden");
-  $("user").value = "";
-  $("pass").value = "";
-  setRole("Student");
+function studentRows(list){
+ return `<div class="grid">${list.map(s=>`<div class="item"><div class="profile-row"><img class="avatar" src="${photo(s)}" alt=""><div><h3>${escapeHTML(s.name)}</h3><p class="muted">${escapeHTML(s.id)}</p></div></div><p class="muted">Course: ${escapeHTML(s.course)} · ${escapeHTML(s.year)}</p><p>🏠 Block ${escapeHTML(s.block)}, Room ${escapeHTML(s.room)}</p><p>📱 ${escapeHTML(s.phone)}</p><span class="badge ${s.status==='Outside'?'orange':''}">${escapeHTML(s.status)}</span> <button class="secondary" onclick="viewStudent('${s.id}')">View Details</button></div>`).join('')}</div>`;
 }
-
-function go(page) {
-  if (role === "Student" && ["students","history"].includes(page)) {
-    alert("This page is available in the Warden demo view.");
-    return;
-  }
-
-  currentPage = page;
-  document.querySelectorAll(".page").forEach(el => el.classList.add("hidden"));
-  $(page)?.classList.remove("hidden");
-
-  document.querySelectorAll(".bottom-nav button").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.page === page);
-  });
-
-  window.scrollTo({top:0,behavior:"smooth"});
-  if (page === "students") renderStudents();
-  if (page === "history") renderHistory();
+function filterStudents(){
+ const q=document.getElementById('studentSearch').value.toLowerCase();
+ document.getElementById('studentResults').innerHTML=studentRows(students.filter(s=>(s.name+' '+s.id+' '+s.room).toLowerCase().includes(q)));
 }
-
-function uploadPhoto() {
-  const file = $("photoInput").files[0];
-  if (!file) {
-    alert("Choose a profile photo first.");
-    return;
-  }
-  if (!file.type.startsWith("image/")) {
-    alert("Please choose an image file.");
-    return;
-  }
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Choose a photo smaller than 2 MB.");
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const size = 300;
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext("2d");
-      const crop = Math.min(img.width, img.height);
-      ctx.drawImage(
-        img,
-        (img.width - crop) / 2,
-        (img.height - crop) / 2,
-        crop, crop, 0, 0, size, size
-      );
-
-      const data = canvas.toDataURL("image/jpeg", .8);
-      if (writeStore("hhPhoto_" + currentUser, data)) {
-        $("profilePhoto").src = data;
-        $("homeAvatar").innerHTML = `<img src="${data}" alt="Profile photo">`;
-        alert("Profile photo saved on this browser.");
-      }
-    };
-    img.onerror = () => alert("Could not read this image.");
-    img.src = reader.result;
-  };
-  reader.readAsDataURL(file);
+function addStudentForm(){
+ document.getElementById('addStudentArea').innerHTML=`<form class="item" onsubmit="addStudent(event)">
+ <label>Student ID</label><input id="sid" required placeholder="e.g. student5">
+ <label>Full Name</label><input id="sname" required>
+ <label>Course</label><input id="scourse" required placeholder="BCA">
+ <label>Semester</label><input id="syear" placeholder="3rd Semester">
+ <label>Room</label><input id="sroom" required>
+ <label>Block</label><input id="sblock" value="A" required>
+ <label>Phone</label><input id="sphone" placeholder="Phone number">
+ <label>Profile Photo URL (optional)</label><input id="sphoto" type="url" placeholder="https://...">
+ <button class="primary">Save Student</button></form>`;
 }
-
-function renderMenu() {
-  const menu = readStore("hhMenu", defaultMenu);
-  $("menuList").innerHTML = menu.map((meal, i) => `
-    <div class="menu-row">
-      <div class="day-icon">${["🔵","🌸","🟢","🟠","🔴","🔷","🟡"][i]}</div>
-      <div><strong>${DAYS[i]}</strong><p>${escapeHTML(meal)}</p></div>
-    </div>
-  `).join("");
-
-  $("menuInputs").innerHTML = DAYS.map((day, i) => `
-    <label>${day}</label>
-    <input id="meal${i}" value="${escapeHTML(menu[i])}" maxlength="200">
-  `).join("");
+function addStudent(e){
+ e.preventDefault();
+ const id=document.getElementById('sid').value.trim();
+ if(students.some(s=>s.id===id)){alert('This student ID already exists.');return}
+ students.push({id,name:document.getElementById('sname').value,course:document.getElementById('scourse').value,year:document.getElementById('syear').value,room:document.getElementById('sroom').value,block:document.getElementById('sblock').value,phone:document.getElementById('sphone').value,photo:document.getElementById('sphoto').value,status:'Inside',fees:0});
+ save();render();
 }
-
-function saveMenu() {
-  if (role !== "Warden") return;
-  const menu = DAYS.map((_, i) => $("meal" + i).value.trim());
-  if (writeStore("hhMenu", menu)) {
-    renderMenu();
-    alert("Demo menu updated on this browser.");
-  }
+function viewStudent(id){
+ const s=students.find(x=>x.id===id);if(!s)return;
+ alert(`STUDENT DETAILS\n\nName: ${s.name}\nID: ${s.id}\nCourse: ${s.course}\nSemester: ${s.year}\nBlock: ${s.block}\nRoom: ${s.room}\nPhone: ${s.phone}\nHostel status: ${s.status}\nPending fees: ₹${s.fees}`);
 }
-
-function getNotices() {
-  return readStore("hhNotices", [
-    {title:"Freshers Day Celebration",category:"Important",
-     date:"16 Sep 2026",text:"Check your official college notice for the latest schedule."},
-    {title:"VIP Competition",category:"Notice",
-     date:"16 Sep 2026",text:"Students can check the college notice board for registration details."},
-    {title:"Hostel Maintenance",category:"General",
-     date:"12 Sep 2026",text:"Check with the warden for maintenance updates."},
-    {title:"Fee Payment",category:"Reminder",
-     date:"10 Sep 2026",text:"Contact the hostel office regarding pending fees."}
-  ]);
+function entryPage(){
+ return `<div class="card"><h2>🚪 Student Entry / Exit Register</h2><p class="muted">Demo records for hostel entry and exit. Warden can record an event below.</p>
+ ${current.type==='warden'?`<form onsubmit="recordEvent(event)"><label>Student</label><select id="logStudent">${students.map(s=>`<option value="${s.id}">${escapeHTML(s.name)} (${s.id})</option>`).join('')}</select><label>Event</label><select id="logType"><option>Entry</option><option>Exit</option></select><button class="primary">Record Activity</button></form>`:''}
+ <h3>Current Hostel Status</h3><div class="table-wrap"><table><tr><th>Student</th><th>Room</th><th>Status</th></tr>${students.map(s=>`<tr><td>${escapeHTML(s.name)}</td><td>${escapeHTML(s.room)}</td><td><span class="badge ${s.status==='Outside'?'orange':''}">${escapeHTML(s.status)}</span></td></tr>`).join('')}</table></div>
+ <h3 style="margin-top:25px">Activity History</h3>${logTable(100)}</div>`;
 }
-
-function renderNotices() {
-  const notices = getNotices();
-  $("noticeCount").textContent = notices.length;
-
-  $("noticeList").innerHTML = notices.map((n, i) => `
-    <div class="notice">
-      <span class="tag">${escapeHTML(n.category)}</span>
-      <h3 style="margin-top:10px">${escapeHTML(n.title)}</h3>
-      <p class="muted">${escapeHTML(n.date || "")}</p>
-      <p>${escapeHTML(n.text)}</p>
-      ${role === "Warden" ? `<button class="btn-light" onclick="deleteNotice(${i})">Delete</button>` : ""}
-    </div>
-  `).join("");
+function recordEvent(e){
+ e.preventDefault();
+ const id=document.getElementById('logStudent').value;
+ const type=document.getElementById('logType').value;
+ const s=students.find(x=>x.id===id);
+ if(!s)return;
+ s.status=type==='Entry'?'Inside':'Outside';
+ logs.unshift({id,event:type,time:new Date().toLocaleString()});
+ save();render();
 }
-
-function addNotice(event) {
-  event.preventDefault();
-  if (role !== "Warden") return;
-  const notices = getNotices();
-  notices.unshift({
-    title:$("noticeTitle").value.trim(),
-    category:$("noticeCategory").value,
-    date:new Date().toLocaleDateString(),
-    text:$("noticeText").value.trim()
-  });
-  if (writeStore("hhNotices", notices)) {
-    $("noticeTitle").value = "";
-    $("noticeText").value = "";
-    renderNotices();
-    alert("Demo announcement published.");
-  }
+function logTable(n){
+ const items=logs.slice(0,n);
+ return items.length?`<div class="table-wrap"><table><tr><th>Student ID</th><th>Activity</th><th>Date / Time</th></tr>${items.map(l=>`<tr><td>${escapeHTML(l.id)}</td><td>${escapeHTML(l.event)}</td><td>${escapeHTML(l.time)}</td></tr>`).join('')}</table></div>`:'<p class="muted">No activity recorded yet.</p>';
 }
-
-function deleteNotice(index) {
-  if (role !== "Warden" || !confirm("Delete this announcement?")) return;
-  const notices = getNotices();
-  notices.splice(index, 1);
-  if (writeStore("hhNotices", notices)) renderNotices();
+function menuPage(){
+ return `<div class="card"><h2>🍲 Weekly Food Menu</h2>${current.type==='warden'?`<form onsubmit="saveMenu(event)">`:''}
+ ${menu.map((m,i)=>`<div class="item"><h3>${['☀️ Monday','🌷 Tuesday','🌿 Wednesday','🍊 Thursday','🌸 Friday','🌊 Saturday','⭐ Sunday'][i]}</h3>${current.type==='warden'?`<input id="meal${i}" value="${escapeHTML(m)}" required>`:`<p>${escapeHTML(m)}</p>`}</div>`).join('')}
+ ${current.type==='warden'?`<button class="primary">Save Weekly Menu</button></form>`:''}</div>`;
 }
-
-function getComplaints() {
-  return readStore("hhComplaints", []);
+function saveMenu(e){
+ e.preventDefault();menu=menu.map((m,i)=>document.getElementById('meal'+i).value);save();alert('Weekly menu saved!');render();
 }
-
-function addComplaint(event) {
-  event.preventDefault();
-  const complaints = getComplaints();
-  complaints.unshift({
-    subject:$("complaintSubject").value.trim(),
-    text:$("complaintText").value.trim(),
-    user:currentUser,
-    date:new Date().toLocaleString(),
-    status:"Pending"
-  });
-  if (writeStore("hhComplaints", complaints)) {
-    $("complaintSubject").value = "";
-    $("complaintText").value = "";
-    renderComplaints();
-    alert("Demo complaint saved on this browser.");
-  }
+function complaintPage(){
+ return `<div class="card"><h2>💬 Complaints & Maintenance</h2>${current.type==='student'?`<form onsubmit="addComplaint(event)"><label>Describe your complaint</label><textarea id="complaintText" required placeholder="Water leakage, fan issue, food quality..." rows="3"></textarea><button class="primary">Submit Complaint</button></form>`:''}<h3>Complaint Records</h3>${complaints.length?complaints.map((c,i)=>`<div class="item"><h3>${escapeHTML(c.text)}</h3><p class="muted">${escapeHTML(c.name)} · Room ${escapeHTML(c.room)} · ${escapeHTML(c.date)}</p><span class="badge ${c.status==='Pending'?'orange':''}">${escapeHTML(c.status)}</span>${current.type==='warden'&&c.status==='Pending'?` <button class="secondary" onclick="resolveComplaint(${i})">Mark Resolved</button>`:''}</div>`).join(''):'<p class="muted">No complaints yet.</p>'}</div>`;
 }
-
-function renderComplaints() {
-  const complaints = getComplaints();
-  $("complaintCount").textContent = complaints.filter(c => c.status === "Pending").length;
-
-  $("complaintList").innerHTML = complaints.map((c, i) => `
-    <div class="notice">
-      <h3>💬 ${escapeHTML(c.subject)}</h3>
-      <p>${escapeHTML(c.text)}</p>
-      <p class="muted">Submitted by ${escapeHTML(c.user)} · ${escapeHTML(c.date)}</p>
-      <span class="status">${escapeHTML(c.status)}</span>
-      ${role === "Warden" && c.status === "Pending"
-        ? `<button class="btn-light" onclick="resolveComplaint(${i})">Mark Resolved</button>` : ""}
-    </div>
-  `).join("") || "<p class='muted'>No complaints recorded in this browser.</p>";
+function addComplaint(e){
+ e.preventDefault();
+ complaints.unshift({name:current.name,room:current.room,text:document.getElementById('complaintText').value,status:'Pending',date:new Date().toLocaleDateString()});
+ save();alert('Complaint submitted in this demo.');render();
 }
-
-function resolveComplaint(index) {
-  if (role !== "Warden") return;
-  const complaints = getComplaints();
-  complaints[index].status = "Resolved";
-  if (writeStore("hhComplaints", complaints)) renderComplaints();
+function resolveComplaint(i){
+ complaints[i].status='Resolved';save();render();
 }
-
-const demoStudents = [
-  {id:"HH2026-204",name:"Rahul",room:"Block B · Room 204",photo:"https://placehold.co/100x100/5145e5/ffffff?text=R"},
-  {id:"HH2026-205",name:"Arun",room:"Block B · Room 205",photo:"https://placehold.co/100x100/0891b2/ffffff?text=A"},
-  {id:"HH2026-206",name:"Akhil",room:"Block A · Room 206",photo:"https://placehold.co/100x100/7c3aed/ffffff?text=A"}
-];
-
-function renderStudents() {
-  const q = ($("studentSearch")?.value || "").toLowerCase();
-  const students = demoStudents.filter(s =>
-    (s.name + " " + s.id + " " + s.room).toLowerCase().includes(q)
-  );
-
-  $("studentCount").textContent = demoStudents.length;
-  $("studentList").innerHTML = students.map(s => `
-    <div class="student-row">
-      <img class="student-small-photo" src="${s.photo}" alt="">
-      <div class="grow">
-        <strong>${escapeHTML(s.name)}</strong>
-        <p class="muted">${escapeHTML(s.id)}</p>
-        <p class="muted">${escapeHTML(s.room)}</p>
-      </div>
-      <button class="btn-light" onclick="showStudent('${s.id}')">View</button>
-    </div>
-  `).join("") || "<p>No students found.</p>";
+function feesPage(){
+ const s=current.type==='student'?students.find(x=>x.id===current.id):null;
+ return `<div class="card"><h2>💳 Hostel Fee Details</h2>${s?`<div class="item"><h3>${escapeHTML(s.name)}</h3><p class="muted">Student ID: ${escapeHTML(s.id)}</p><h2>Pending Amount: ₹${s.fees.toLocaleString('en-IN')}</h2></div>`:''}
+ ${[1,2,3].map(i=>`<div class="item"><p><b>${i}${i===1?'st':i===2?'nd':'rd'} Semester</b><strong style="float:right">₹${Number(fees[i]).toLocaleString('en-IN')}</strong></p></div>`).join('')}
+ ${current.type==='warden'?`<form onsubmit="updateFees(event)"><h3>Update Semester Fees</h3><label>Semester</label><select id="feeSem"><option value="1">1st Semester</option><option value="2">2nd Semester</option><option value="3">3rd Semester</option></select><label>Amount (₹)</label><input id="feeAmount" type="number" min="0" required><button class="primary">Update Fees</button></form>
+ <h3>Student Pending Fees</h3>${students.map(st=>`<div class="item">${escapeHTML(st.name)} (${escapeHTML(st.id)}) — ₹${st.fees.toLocaleString('en-IN')} <button class="secondary" onclick="setPaid('${st.id}')">Mark Paid</button></div>`).join('')}`:`<div class="notice">For actual fee payments, connect a secure payment gateway. This demo does not process payments.</div>`}</div>`;
 }
-
-function showStudent(id) {
-  const s = demoStudents.find(item => item.id === id);
-  if (s) alert("Student: " + s.name + "\nID: " + s.id + "\nRoom: " + s.room +
-    "\n\nSample data only. Real student details need a protected database.");
+function updateFees(e){
+ e.preventDefault();fees[document.getElementById('feeSem').value]=Number(document.getElementById('feeAmount').value);save();render();
 }
-
-function addLog(action, user, userRole) {
-  const logs = readStore("hhLogs", []);
-  logs.unshift({
-    action,
-    user,
-    role:userRole,
-    time:new Date().toLocaleString()
-  });
-  writeStore("hhLogs", logs.slice(0,100));
+function setPaid(id){
+ const s=students.find(x=>x.id===id);if(s){s.fees=0;save();render()}
 }
-
-function renderHistory() {
-  const logs = readStore("hhLogs", []);
-  $("historyList").innerHTML = logs.map(log => `
-    <div class="student-row">
-      <span style="font-size:24px">${log.action === "Login" ? "🟢" : "🔴"}</span>
-      <div class="grow">
-        <strong>${escapeHTML(log.user)}</strong>
-        <p class="muted">${escapeHTML(log.role)} · ${escapeHTML(log.action)}</p>
-        <p class="muted">${escapeHTML(log.time)}</p>
-      </div>
-    </div>
-  `).join("") || "<p class='muted'>No activity recorded.</p>";
+function gatePage(){
+ return `<div class="card"><h2>🚪 Gate Opening & Closing</h2><div class="center" style="padding:22px;background:#eefff6;border-radius:16px"><div style="font-size:42px">🕕</div><h2>06:00 AM – 09:30 PM</h2><span class="badge">Regular Gate Timings</span></div><h3 style="margin-top:20px">Important Rules</h3><div class="item">🪪 Students should carry their ID card.</div><div class="item">🌙 After closing time, follow hostel rules and contact the warden when necessary.</div><div class="item">📞 Emergency situations should be reported to the warden.</div><p class="muted">These are sample project settings. Confirm actual timings with your hostel.</p></div>`;
 }
-
-function renderAll() {
-  renderMenu();
-  renderNotices();
-  renderComplaints();
-  renderStudents();
-  renderHistory();
+function profilePage(){
+ const s=current.type==='student'?students.find(x=>x.id===current.id):null;
+ return `<div class="card"><h2>👤 My Profile</h2><div class="profile-row"><img class="avatar" src="${s?photo(s):photo({name:current.name})}" alt="Profile"><div><h3>${escapeHTML(current.name)}</h3><p class="muted">${current.type==='warden'?'Hostel Warden':escapeHTML(s.id)}</p></div></div>
+ ${s?`<div class="item"><p>🎓 Course: ${escapeHTML(s.course)}</p><p>📚 Semester: ${escapeHTML(s.year)}</p><p>🏠 Hostel: Sunrise Hostel</p><p>🛏️ Room: ${escapeHTML(s.room)} · Block ${escapeHTML(s.block)}</p><p>📱 Phone: ${escapeHTML(s.phone)}</p></div><form onsubmit="updateProfile(event)"><h3>Update Profile</h3><label>Full Name</label><input id="editName" value="${escapeHTML(s.name)}" required><label>Phone</label><input id="editPhone" value="${escapeHTML(s.phone)}"><label>Profile photo URL</label><input id="editPhoto" type="url" value="${escapeHTML(s.photo)}" placeholder="Paste a photo URL"><button class="primary">Save Profile</button></form>`:`<div class="item"><p>🏠 Sunrise Hostel</p><p>🛡️ Warden Dashboard</p><p class="muted">Manage student records, announcements, fees and hostel activity.</p></div>`}
+ <button class="danger" onclick="logout()">Logout</button></div>`;
 }
-
-// Restore the session if the page is refreshed.
-const savedUser = sessionStorage.getItem("hhUser");
-const savedRole = sessionStorage.getItem("hhRole");
-
-if (savedUser && savedRole && ["Student","Warden"].includes(savedRole)) {
-  currentUser = savedUser;
-  role = savedRole;
-  showApp();
-} else {
-  setRole("Student");
+function updateProfile(e){
+ e.preventDefault();
+ const s=students.find(x=>x.id===current.id);if(!s)return;
+ s.name=document.getElementById('editName').value;
+ s.phone=document.getElementById('editPhone').value;
+ s.photo=document.getElementById('editPhoto').value;
+ current={...s,type:'student'};save();render();alert('Profile updated in this browser.');
 }
+renderLoginStart();
+function renderLoginStart(){}
 </script>
 </body>
 </html>
