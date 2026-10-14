@@ -153,9 +153,6 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
     </form>
     <p id="loginError" style="color:#d13e51;font-size:13px"></p>
     <div class="notice" style="text-align:left">
-      <b>Demo credentials</b><br>
-      Student: student1 / 1234<br>
-      Warden: warden1 / 1234
     </div>
     <p class="muted" style="margin:14px 0 0">College project · Working demonstration</p>
   </div>
@@ -423,8 +420,8 @@ function resolveComplaint(i){
 function feesPage(){
  const s=current.type==='student'?students.find(x=>x.id===current.id):null;
  return `<div class="card"><h2>💳 Hostel Fee Details</h2>${s?`<div class="item"><h3>${escapeHTML(s.name)}</h3><p class="muted">Student ID: ${escapeHTML(s.id)}</p><h2>Pending Amount: ₹${s.fees.toLocaleString('en-IN')}</h2></div>`:''}
- ${[1,2,3].map(i=>`<div class="item"><p><b>${i}${i===1?'st':i===2?'nd':'rd'} Semester</b><strong style="float:right">₹${Number(fees[i]).toLocaleString('en-IN')}</strong></p></div>`).join('')}
- ${current.type==='warden'?`<form onsubmit="updateFees(event)"><h3>Update Semester Fees</h3><label>Semester</label><select id="feeSem"><option value="1">1st Semester</option><option value="2">2nd Semester</option><option value="3">3rd Semester</option></select><label>Amount (₹)</label><input id="feeAmount" type="number" min="0" required><button class="primary">Update Fees</button></form>
+ ${[1,2,3].map(i=>`<div class="item"><p><b>${i}${i===1?'st':i===2?'nd':'rd'} month</b><strong style="float:right">₹${Number(fees[i]).toLocaleString('en-IN')}</strong></p></div>`).join('')}
+ ${current.type==='warden'?`<form onsubmit="updateFees(event)"><h3>Update monthly Fees</h3><label>month</label><select id="feeSem"><option value="1">1st month</option><option value="2">2nd month</option><option value="3">3rd month</option></select><label>Amount (₹)</label><input id="feeAmount" type="number" min="0" required><button class="primary">Update Fees</button></form>
  <h3>Student Pending Fees</h3>${students.map(st=>`<div class="item">${escapeHTML(st.name)} (${escapeHTML(st.id)}) — ₹${st.fees.toLocaleString('en-IN')} <button class="secondary" onclick="setPaid('${st.id}')">Mark Paid</button></div>`).join('')}`:`<div class="notice">For actual fee payments, connect a secure payment gateway. This demo does not process payments.</div>`}</div>`;
 }
 function updateFees(e){
