@@ -1,277 +1,753 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#4935d5">
-<title>HostelHub - Smart Hostel Management</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostelHub</title>
+
 <style>
-:root{--p:#4935d5;--bg:#f4f6ff;--text:#20244a;--muted:#727a98}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer;border:0}
-header{background:linear-gradient(120deg,#3024b9,#7254f6,#4789fa);color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center}
-.brand{font-size:24px;font-weight:bold}
-.brand small{display:block;font-size:12px;font-weight:normal;margin-top:5px}
-main{max-width:1150px;margin:24px auto;padding:0 15px}
-.card{background:white;padding:19px;border-radius:18px;border:1px solid #e8eaff;margin-bottom:16px;box-shadow:0 5px 22px #33314c0a}
-h2,h3,p{margin-top:0}
-.muted{color:var(--muted);font-size:13px;line-height:1.6}
-.primary{background:linear-gradient(100deg,#4935d5,#7653f6);color:white;padding:12px 17px;border-radius:11px;font-weight:bold}
-.secondary{background:#efedff;color:var(--p);padding:10px 14px;border-radius:10px}
-.danger{background:#fff0f0;color:#c93f52;padding:10px;border-radius:10px}
-input,textarea,select{width:100%;padding:12px;border:1px solid #e0e4f4;border-radius:10px;background:#fbfcff;margin:6px 0 12px}
-label{font-size:13px;font-weight:bold;display:block}
-.center{text-align:center}.hidden{display:none!important}
-.login-wrap{max-width:470px;margin:35px auto}
-.logo{font-size:42px;margin:10px}
-.role-switch{display:flex;gap:8px;margin:20px 0}
-.role-switch button{flex:1;padding:12px;border-radius:10px;background:#f0efff;color:#5544b8}
-.role-switch button.active{background:var(--p);color:white}
-.hero{background:linear-gradient(120deg,#4432cb,#7455f5,#4589f6);color:white;border-radius:20px;padding:24px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.avatar{width:76px;height:76px;border-radius:50%;object-fit:cover;background:#e9e4ff;border:3px solid #ffffffa0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
-.stat,.item{background:#fafaff;border:1px solid #e7e9f6;border-radius:13px;padding:15px;margin:9px 0}
-.stat strong{display:block;font-size:24px;margin:8px 0}
-.stat small{color:var(--muted)}
-.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.tile{background:white;border:1px solid #e7e7fb;border-radius:15px;padding:17px 8px;text-align:center;color:var(--text)}
-.tile span{display:block;font-size:28px;margin-bottom:8px}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;background:white;padding:9px;border-radius:14px}
-nav button{background:transparent;padding:11px;border-radius:9px;color:#646b8b}
-nav button.active{background:#ece9ff;color:var(--p);font-weight:bold}
-.badge{display:inline-block;border-radius:20px;padding:5px 9px;font-size:11px;font-weight:bold;background:#e6f9eb;color:#248b50}
-.orange{background:#fff1d9;color:#a96900}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:10px;border-bottom:1px solid #ececf6}
-.table-wrap{overflow-x:auto}
-.notice{background:#fff5d9;color:#775800;padding:12px;border-radius:10px;font-size:13px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media(min-width:800px){.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}}
-@media(max-width:650px){header{padding:15px}.brand{font-size:21px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.tiles{grid-template-columns:repeat(2,1fr)}nav{display:grid;grid-template-columns:repeat(3,1fr)}nav button{padding:10px 3px;font-size:12px}.hero{padding:17px}}
+:root {
+  --primary: #603bc4;
+  --secondary: #382078;
+  --light: #f5f3ff;
+  --text: #25213a;
+  --danger: #d93045;
+  --success: #16834a;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6fb;
+  color: var(--text);
+}
+button, input, textarea, select { font: inherit; }
+button {
+  border: 0;
+  padding: 11px 15px;
+  border-radius: 9px;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+button:hover { opacity: .9; }
+button.secondary { background: #e9e4fb; color: var(--secondary); }
+button.danger { background: var(--danger); }
+input, textarea, select {
+  width: 100%;
+  border: 1px solid #d9d5e7;
+  border-radius: 9px;
+  padding: 11px;
+  margin: 6px 0 14px;
+  background: white;
+}
+textarea { min-height: 80px; resize: vertical; }
+label { font-size: 14px; font-weight: 600; }
+h1, h2, h3 { margin-top: 0; }
+.hidden { display: none !important; }
+.muted { color: #716c83; font-size: 13px; }
+.error { color: var(--danger); font-size: 14px; }
+.success { color: var(--success); font-size: 14px; }
+.app-header {
+  background: linear-gradient(120deg, var(--secondary), var(--primary));
+  color: white;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brand { font-size: 23px; font-weight: 800; }
+.brand span { color: #d9ceff; }
+.header-user { display: flex; align-items: center; gap: 10px; }
+.header-user img { width: 38px; height: 38px; object-fit: cover; border-radius: 50%; }
+.layout { display: flex; min-height: calc(100vh - 75px); }
+.sidebar {
+  width: 225px;
+  flex-shrink: 0;
+  padding: 18px 12px;
+  background: white;
+  border-right: 1px solid #e9e6f2;
+}
+.nav-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 4px 0;
+  background: transparent;
+  color: #49435f;
+}
+.nav-btn.active, .nav-btn:hover { background: var(--light); color: var(--primary); }
+main { flex: 1; min-width: 0; padding: 24px; }
+.page { max-width: 1050px; margin: auto; }
+.card {
+  background: white;
+  border: 1px solid #ece9f5;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #20104c08;
+}
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 15px; }
+.stat { padding: 20px; border-radius: 14px; background: white; border: 1px solid #ece9f5; }
+.stat strong { display: block; font-size: 28px; color: var(--primary); margin-top: 8px; }
+.login-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: linear-gradient(140deg, #322064, #8064dc);
+}
+.login-card { background: white; padding: 28px; border-radius: 20px; width: min(100%, 440px); }
+.login-logo { font-size: 30px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.row > * { flex: 1; }
+.profile-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+.profile-photo {
+  width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
+  border: 4px solid #e4dcff; background: #f0ecff;
+}
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 12px; border-bottom: 1px solid #eeeaf5; text-align: left; }
+th { color: #655b7f; font-size: 13px; }
+.badge { background: #eee9ff; color: var(--secondary); padding: 5px 9px; border-radius: 20px; font-size: 12px; }
+.menu-day { border-left: 4px solid var(--primary); padding: 12px; margin: 10px 0; background: #faf9ff; border-radius: 8px; }
+.notice { padding: 13px; border-bottom: 1px solid #eee; }
+footer { text-align: center; color: #88829a; padding: 18px; font-size: 12px; }
+@media(max-width:700px) {
+  .layout { display: block; }
+  .sidebar { width: 100%; display: flex; overflow-x: auto; gap: 4px; padding: 8px; border-right: 0; border-bottom: 1px solid #eee; }
+  .nav-btn { width: auto; white-space: nowrap; margin: 0; }
+  main { padding: 14px; }
+  .app-header { padding: 14px; }
+  .profile-top { align-items: flex-start; }
+}
 </style>
 </head>
 <body>
-<header>
- <div class="brand">🏠 HostelHub<small>Smart Hostel Management</small></div>
- <button id="logoutTop" class="secondary hidden" onclick="logout()">↪ Logout</button>
-</header>
-<main>
+
+<!-- LOGIN -->
 <section id="loginPage" class="login-wrap">
- <div class="card center">
-  <div class="logo">🏡</div>
-  <h2 style="color:#4030be">HostelHub</h2>
-  <p class="muted">Stay Connected · Stay Informed · Stay Comfortable</p>
-  <div class="role-switch">
-   <button id="studentRole" class="active" onclick="setRole('student')">👨‍🎓 Student</button>
-   <button id="wardenRole" onclick="setRole('warden')">🛡️ Warden</button>
+  <div class="login-card">
+    <div class="login-logo">🏠 HostelHub</div>
+    <p class="muted">Your hostel, all in one place.</p>
+
+    <form id="loginForm">
+      <label for="loginUsername">Username</label>
+      <input id="loginUsername" required autocomplete="username" placeholder="Enter username">
+
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password">
+
+      <label for="loginRole">Login as</label>
+      <select id="loginRole">
+        <option value="student">Student</option>
+        <option value="warden">Warden</option>
+      </select>
+
+      <button style="width:100%" type="submit">Login</button>
+      <p id="loginMessage" class="error" role="status"></p>
+    </form>
+
+    <hr style="border:0;border-top:1px solid #eee;margin:20px 0">
+    <h3>Create an account</h3>
+    <form id="registerForm">
+      <label for="regName">Full name</label>
+      <input id="regName" required placeholder="Your full name">
+
+      <label for="regUsername">Username</label>
+      <input id="regUsername" required minlength="3" placeholder="Choose a username">
+
+      <label for="regPassword">Password</label>
+      <input id="regPassword" type="password" required minlength="4" placeholder="At least 4 characters">
+
+      <label for="regRole">Account type</label>
+      <select id="regRole">
+        <option value="student">Student</option>
+        <option value="warden">Warden</option>
+      </select>
+
+      <button class="secondary" style="width:100%" type="submit">Register</button>
+      <p id="registerMessage" class="muted" role="status"></p>
+    </form>
+
+    <p class="muted">Demo student: student1 / 1234<br>Demo warden: warden1 / 1234</p>
   </div>
-  <div id="loginFormArea">
-   <form onsubmit="login(event)">
-    <label>User ID</label><input id="userId" required autocomplete="username" placeholder="Enter your user ID">
-    <label>Password</label><input id="password" required type="password" autocomplete="current-password" placeholder="Enter password">
-    <button class="primary" style="width:100%">Login →</button>
-   </form>
-   <button class="secondary" style="width:100%;margin-top:10px" onclick="showRegister()">＋ Create New Account</button>
-  </div>
-  <div id="registerFormArea" class="hidden">
-   <h3>Create Account</h3>
-   <form onsubmit="registerAccount(event)">
-    <label>Full Name</label><input id="regName" required>
-    <label>Choose User ID</label><input id="regId" required minlength="4" placeholder="e.g. student5">
-    <label>Create Password</label><input id="regPassword" type="password" required minlength="4">
-    <label>Profile Picture (optional)</label><input id="regPhoto" type="file" accept="image/jpeg,image/png,image/webp">
-    <div id="studentRegisterFields">
-     <label>Course</label><input id="regCourse" placeholder="BCA">
-     <label>Semester</label><input id="regYear" placeholder="1st Semester">
-     <label>Room Number</label><input id="regRoom" placeholder="206">
-     <label>Block</label><input id="regBlock" value="A">
-     <label>Phone Number</label><input id="regPhone" type="tel">
-    </div>
-    <button class="primary" style="width:100%">Register Account</button>
-   </form>
-   <button class="secondary" style="width:100%;margin-top:10px" onclick="showLogin()">Back to Login</button>
-  </div>
-  <p id="loginError" style="color:#d13e51;font-size:13px;margin-top:12px"></p>
-  <div class="notice">Demo only: accounts are saved in this browser. Warden registration is open for testing and must be restricted in a real deployment.</div>
-  <p class="muted" style="margin-top:14px">College project · Working demonstration</p>
- </div>
 </section>
 
+<!-- APP -->
 <section id="appPage" class="hidden">
- <div class="hero">
-  <div><p>WELCOME TO HOSTELHUB ✨</p><h2 id="welcome">Hello!</h2><p id="welcomeSub">Your hostel, all in one place.</p></div>
-  <img id="heroAvatar" class="avatar" alt="Profile photo">
- </div>
- <nav id="navigation"></nav><div id="view"></div>
+  <header class="app-header">
+    <div class="brand">🏠 Hostel<span>Hub</span></div>
+    <div class="header-user">
+      <img id="headerPhoto" alt="Profile">
+      <span id="headerName">User</span>
+      <button id="logoutBtn" class="secondary">Logout</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
+      <button class="nav-btn" data-page="profile">👤 My Profile</button>
+      <button class="nav-btn" data-page="students" data-warden>👥 Students</button>
+      <button class="nav-btn" data-page="notices">📢 Notices</button>
+      <button class="nav-btn" data-page="menu">🍽️ Weekly Menu</button>
+      <button class="nav-btn" data-page="complaints">📝 Complaints</button>
+      <button class="nav-btn" data-page="fees">💳 Fees</button>
+      <button class="nav-btn" data-page="gate">🕒 Gate Timings</button>
+    </nav>
+
+    <main><div class="page" id="pageContent"></div></main>
+  </div>
+  <footer>HostelHub · Hostel management made simple</footer>
 </section>
-</main>
-<footer>HostelHub © 2026 · Smart Hostel Management</footer>
 
 <script>
-const initialStudents=[
-{id:'student1',name:'Rahul',course:'BCA',year:'3rd Semester',room:'204',block:'B',phone:'9876543210',photo:'',status:'Inside',fees:21900},
-{id:'student2',name:'Anjali',course:'BCA',year:'3rd Semester',room:'205',block:'B',phone:'9876501234',photo:'',status:'Inside',fees:15000},
-{id:'student3',name:'Arjun',course:'BBA',year:'2nd Semester',room:'108',block:'A',phone:'9876512340',photo:'',status:'Outside',fees:0},
-{id:'student4',name:'Meera',course:'BTech',year:'3rd Semester',room:'302',block:'C',phone:'9876523450',photo:'',status:'Inside',fees:12000}
-];
-function read(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
-let students=read('hh_students',initialStudents);
-let accounts=read('hh_accounts',[]);
-let notices=read('hh_notices',[
-{title:'Freshers Day Celebration',type:'Important',date:'16 Sep 2026',body:'Please check the college schedule and follow the instructions.'},
-{title:'YIP Competition',type:'Notice',date:'16 Sep 2026',body:'Students are encouraged to register and submit their ideas.'},
-{title:'Hostel Maintenance',type:'General',date:'12 Sep 2026',body:'Please follow hostel maintenance announcements.'}
-]);
-let complaints=read('hh_complaints',[{name:'Rahul',room:'204',text:'Fan not working in room',status:'Pending',date:'10 Sep 2026'}]);
-let logs=read('hh_logs',[]);
-let menu=read('hh_menu',['Rice, Sambar, Cabbage Thoran','Chapati, Vegetable Curry, Salad','Rice, Chicken Curry, Kanji','Rice, Dal, Mixed Vegetables','Biriyani, Raita','Meals, Fish Curry','Special Menu']);
-let fees=read('hh_fees',{1:69500,2:54400,3:21900});
-let role='student',current=null,tab='Home';
+"use strict";
 
-function save(){
- localStorage.setItem('hh_students',JSON.stringify(students));
- localStorage.setItem('hh_notices',JSON.stringify(notices));
- localStorage.setItem('hh_complaints',JSON.stringify(complaints));
- localStorage.setItem('hh_logs',JSON.stringify(logs));
- localStorage.setItem('hh_menu',JSON.stringify(menu));
- localStorage.setItem('hh_fees',JSON.stringify(fees));
+const $ = id => document.getElementById(id);
+const STORE = {
+  accounts: "hostelhub_accounts_v1",
+  profiles: "hostelhub_profiles_v1",
+  students: "hostelhub_students_v1",
+  notices: "hostelhub_notices_v1",
+  menu: "hostelhub_menu_v1",
+  complaints: "hostelhub_complaints_v1",
+  fees: "hostelhub_fees_v1",
+  gate: "hostelhub_gate_v1"
+};
+
+let currentUser = null;
+let currentPage = "dashboard";
+let pendingProfilePhoto = null;
+
+function readStore(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value === null ? fallback : value;
+  } catch {
+    return fallback;
+  }
 }
-function saveAccounts(){localStorage.setItem('hh_accounts',JSON.stringify(accounts))}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function setRole(r){
- role=r;
- studentRole.classList.toggle('active',r==='student');
- wardenRole.classList.toggle('active',r==='warden');
- loginError.textContent='';
- studentRegisterFields.classList.toggle('hidden',r!=='student');
+function writeStore(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
-function showRegister(){loginFormArea.classList.add('hidden');registerFormArea.classList.remove('hidden');setRole(role)}
-function showLogin(){registerFormArea.classList.add('hidden');loginFormArea.classList.remove('hidden')}
-function readPhoto(file){
- return new Promise((resolve,reject)=>{
-  if(!file){resolve('');return}
-  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){reject(Error('Use a JPG, PNG or WebP image.'));return}
-  if(file.size>2*1024*1024){reject(Error('Photo must be 2 MB or smaller.'));return}
-  const reader=new FileReader();
-  reader.onload=()=>resolve(reader.result);
-  reader.onerror=()=>reject(Error('Could not read photo.'));
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  })[ch]);
+}
+function getAccounts() { return readStore(STORE.accounts, []); }
+function getProfiles() { return readStore(STORE.profiles, {}); }
+function getProfile(username) {
+  return getProfiles()[username] || { name: username, phone:"", email:"", photo:"", role:"student" };
+}
+function getPhoto(username) {
+  return getProfile(username).photo || "https://placehold.co/120x120?text=Profile";
+}
+function seedDemoData() {
+  let accounts = getAccounts();
+  if (!accounts.some(a => a.username === "student1")) {
+    accounts.push({ username:"student1", password:"1234", role:"student", name:"Demo Student" });
+  }
+  if (!accounts.some(a => a.username === "warden1")) {
+    accounts.push({ username:"warden1", password:"1234", role:"warden", name:"Demo Warden" });
+  }
+  writeStore(STORE.accounts, accounts);
+
+  const profiles = getProfiles();
+  if (!profiles.student1) profiles.student1 = { name:"Demo Student", phone:"", email:"", photo:"", role:"student" };
+  if (!profiles.warden1) profiles.warden1 = { name:"Demo Warden", phone:"", email:"", photo:"", role:"warden" };
+  writeStore(STORE.profiles, profiles);
+
+  if (!localStorage.getItem(STORE.students)) writeStore(STORE.students, [
+    { username:"student1", name:"Demo Student", room:"101", phone:"", status:"Active" }
+  ]);
+  if (!localStorage.getItem(STORE.notices)) writeStore(STORE.notices, [
+    { id:1, title:"Welcome to HostelHub", body:"Check the weekly food menu and hostel notices here.", date:new Date().toLocaleDateString() }
+  ]);
+  if (!localStorage.getItem(STORE.menu)) writeStore(STORE.menu, [
+    { day:"Monday", breakfast:"Idli and sambar", lunch:"Rice, dal and vegetables", dinner:"Chapati and curry" },
+    { day:"Tuesday", breakfast:"Dosa and chutney", lunch:"Rice and chicken curry", dinner:"Vegetable pulao" },
+    { day:"Wednesday", breakfast:"Puttu and kadala", lunch:"Rice, sambar and vegetables", dinner:"Chapati and egg curry" },
+    { day:"Thursday", breakfast:"Upma and banana", lunch:"Rice and fish curry", dinner:"Dosa and chutney" },
+    { day:"Friday", breakfast:"Appam and stew", lunch:"Rice, dal and vegetables", dinner:"Fried rice" },
+    { day:"Saturday", breakfast:"Poori and potato", lunch:"Rice and curry", dinner:"Chapati and paneer curry" },
+    { day:"Sunday", breakfast:"Bread and omelette", lunch:"Special lunch", dinner:"Light dinner" }
+  ]);
+  if (!localStorage.getItem(STORE.complaints)) writeStore(STORE.complaints, []);
+  if (!localStorage.getItem(STORE.fees)) writeStore(STORE.fees, []);
+  if (!localStorage.getItem(STORE.gate)) writeStore(STORE.gate, { open:"06:00", close:"21:00", note:"Please return before closing time." });
+}
+seedDemoData();
+
+$("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const username = $("loginUsername").value.trim();
+  const password = $("loginPassword").value;
+  const role = $("loginRole").value;
+  const account = getAccounts().find(a => a.username.toLowerCase() === username.toLowerCase()
+    && a.password === password && a.role === role);
+
+  if (!account) {
+    $("loginMessage").textContent = "Invalid username, password, or account type.";
+    return;
+  }
+  loginAs(account);
+});
+
+$("registerForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const name = $("regName").value.trim();
+  const username = $("regUsername").value.trim();
+  const password = $("regPassword").value;
+  const role = $("regRole").value;
+  const message = $("registerMessage");
+
+  if (name.length < 2) { message.textContent = "Please enter your full name."; return; }
+  if (!/^[a-zA-Z0-9_.-]{3,30}$/.test(username)) {
+    message.textContent = "Username must be 3–30 characters (letters, numbers, _, . or -).";
+    return;
+  }
+  if (password.length < 4) { message.textContent = "Password must contain at least 4 characters."; return; }
+
+  const accounts = getAccounts();
+  if (accounts.some(a => a.username.toLowerCase() === username.toLowerCase())) {
+    message.textContent = "That username is already registered.";
+    return;
+  }
+
+  accounts.push({ username, password, role, name });
+  writeStore(STORE.accounts, accounts);
+
+  const profiles = getProfiles();
+  profiles[username] = { name, phone:"", email:"", photo:"", role };
+  writeStore(STORE.profiles, profiles);
+
+  if (role === "student") {
+    const students = readStore(STORE.students, []);
+    students.push({ username, name, room:"Not assigned", phone:"", status:"Active" });
+    writeStore(STORE.students, students);
+  }
+
+  message.className = "success";
+  message.textContent = "Account created. You can now log in.";
+  $("loginUsername").value = username;
+  $("loginRole").value = role;
+});
+
+function loginAs(account) {
+  currentUser = { username:account.username, role:account.role };
+  currentPage = "dashboard";
+  $("loginPage").classList.add("hidden");
+  $("appPage").classList.remove("hidden");
+  document.querySelectorAll("[data-warden]").forEach(el => {
+    el.classList.toggle("hidden", currentUser.role !== "warden");
+  });
+  updateHeader();
+  renderPage("dashboard");
+}
+
+function updateHeader() {
+  const profile = getProfile(currentUser.username);
+  $("headerName").textContent = profile.name || currentUser.username;
+  $("headerPhoto").src = getPhoto(currentUser.username);
+}
+
+$("logoutBtn").addEventListener("click", () => {
+  currentUser = null;
+  pendingProfilePhoto = null;
+  $("appPage").classList.add("hidden");
+  $("loginPage").classList.remove("hidden");
+  $("loginForm").reset();
+  $("loginMessage").textContent = "";
+});
+
+$("sidebar").addEventListener("click", event => {
+  const button = event.target.closest("[data-page]");
+  if (!button || button.classList.contains("hidden")) return;
+  renderPage(button.dataset.page);
+});
+
+function renderPage(page) {
+  if (!currentUser) return;
+  if (page === "students" && currentUser.role !== "warden") page = "dashboard";
+  currentPage = page;
+
+  document.querySelectorAll(".nav-btn").forEach(btn =>
+    btn.classList.toggle("active", btn.dataset.page === page)
+  );
+
+  const content = $("pageContent");
+  const profile = getProfile(currentUser.username);
+
+  if (page === "dashboard") {
+    const studentCount = readStore(STORE.students, []).length;
+    const noticeCount = readStore(STORE.notices, []).length;
+    content.innerHTML = `
+      <h1>Welcome, ${escapeHTML(profile.name || currentUser.username)}!</h1>
+      <p class="muted">Here is your HostelHub overview.</p>
+      <div class="grid">
+        <div class="stat">Account type<strong>${escapeHTML(currentUser.role)}</strong></div>
+        <div class="stat">Notices<strong>${noticeCount}</strong></div>
+        ${currentUser.role === "warden" ? `<div class="stat">Students<strong>${studentCount}</strong></div>` : ""}
+      </div>
+      <div class="card" style="margin-top:18px">
+        <h2>Quick Actions</h2>
+        <div class="row">
+          <button onclick="renderPage('profile')">Edit My Profile</button>
+          <button class="secondary" onclick="renderPage('menu')">View Weekly Menu</button>
+          <button class="secondary" onclick="renderPage('notices')">View Notices</button>
+        </div>
+      </div>
+      <div class="card"><h2>Latest Notices</h2>${noticeListHTML(3)}</div>`;
+  }
+
+  if (page === "profile") {
+    pendingProfilePhoto = profile.photo || "";
+    content.innerHTML = `
+      <h1>My Profile</h1>
+      <div class="card">
+        <div class="profile-top">
+          <img class="profile-photo" id="profilePreview" src="${escapeHTML(pendingProfilePhoto || "https://placehold.co/120x120?text=Profile")}" alt="Profile picture">
+          <div><h3>${escapeHTML(profile.name || currentUser.username)}</h3>
+            <span class="badge">${escapeHTML(currentUser.role)}</span>
+            <p class="muted">Update your personal information below.</p>
+          </div>
+        </div>
+        <form id="profileForm">
+          <label for="profilePhoto">Profile picture</label>
+          <input id="profilePhoto" type="file" accept="image/*">
+          <label for="profileName">Full name</label>
+          <input id="profileName" required maxlength="80" value="${escapeHTML(profile.name || "")}">
+          <label for="profilePhone">Phone number</label>
+          <input id="profilePhone" type="tel" maxlength="20" value="${escapeHTML(profile.phone || "")}" placeholder="Enter phone number">
+          <label for="profileEmail">Email address</label>
+          <input id="profileEmail" type="email" maxlength="120" value="${escapeHTML(profile.email || "")}" placeholder="Enter email address">
+          <label>Username</label>
+          <input value="${escapeHTML(currentUser.username)}" readonly>
+          <label>Account type</label>
+          <input value="${escapeHTML(currentUser.role)}" readonly>
+          <p id="profileMessage" role="status" class="muted"></p>
+          <button type="submit">Save Changes</button>
+          <button type="button" class="secondary" id="resetProfilePhoto">Restore Saved Picture</button>
+        </form>
+      </div>`;
+
+    $("profilePhoto").addEventListener("change", handlePhotoChange);
+    $("resetProfilePhoto").addEventListener("click", () => {
+      pendingProfilePhoto = profile.photo || "";
+      $("profilePreview").src = pendingProfilePhoto || "https://placehold.co/120x120?text=Profile";
+      $("profilePhoto").value = "";
+    });
+    $("profileForm").addEventListener("submit", saveProfile);
+  }
+
+  if (page === "students") renderStudents(content);
+  if (page === "notices") renderNotices(content);
+  if (page === "menu") renderMenu(content);
+  if (page === "complaints") renderComplaints(content);
+  if (page === "fees") renderFees(content);
+  if (page === "gate") renderGate(content);
+}
+
+function handlePhotoChange(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please choose a valid image file.");
+    event.target.value = "";
+    return;
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    alert("Please choose an image smaller than 2 MB.");
+    event.target.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    pendingProfilePhoto = reader.result;
+    $("profilePreview").src = reader.result;
+  };
+  reader.onerror = () => alert("Could not read that image.");
   reader.readAsDataURL(file);
- });
 }
-async function registerAccount(e){
- e.preventDefault();
- const name=regName.value.trim(),id=regId.value.trim(),password=regPassword.value;
- loginError.style.color='#d13e51';loginError.textContent='';
- if(!/^[a-zA-Z0-9_-]{4,30}$/.test(id)){loginError.textContent='User ID must be 4–30 letters, numbers, _ or -.';return}
- if(students.some(s=>s.id.toLowerCase()===id.toLowerCase())||accounts.some(a=>a.id.toLowerCase()===id.toLowerCase())||id.toLowerCase()==='warden1'){loginError.textContent='User ID already exists.';return}
- try{
-  const picture=await readPhoto(regPhoto.files[0]);
-  if(role==='student'){
-   const s={id,name,course:regCourse.value.trim(),year:regYear.value.trim(),room:regRoom.value.trim(),block:regBlock.value.trim(),phone:regPhone.value.trim(),photo:picture,status:'Inside',fees:0};
-   if(!s.course||!s.room||!s.block){loginError.textContent='Enter course, room and block.';return}
-   students.push(s);
+
+function saveProfile(event) {
+  event.preventDefault();
+  const name = $("profileName").value.trim();
+  const phone = $("profilePhone").value.trim();
+  const email = $("profileEmail").value.trim();
+  const message = $("profileMessage");
+
+  if (name.length < 2) {
+    message.className = "error";
+    message.textContent = "Please enter a valid name.";
+    return;
   }
-  accounts.push({id,name,password,type:role,photo:picture});
-  save();saveAccounts();e.target.reset();showLogin();
-  userId.value=id;document.getElementById('password').value=password;
-  loginError.style.color='#248b50';loginError.textContent='Account created. You can now log in.';
- }catch(err){loginError.textContent=err.message}
-}
-function login(e){
- e.preventDefault();
- const id=userId.value.trim(),pass=password.value;
- loginError.style.color='#d13e51';loginError.textContent='';
- let a=accounts.find(x=>x.id.toLowerCase()===id.toLowerCase()&&x.password===pass&&x.type===role);
- if(!a&&pass==='1234'){
-  if(role==='warden'&&id==='warden1')a={id,name:'Mr. R. Sharma',type:'warden',photo:''};
-  if(role==='student'){const s=students.find(x=>x.id===id);if(s)a={...s,type:'student'}}
- }
- if(!a){loginError.textContent='Invalid ID, password or account type.';return}
- if(role==='student'){
-  const s=students.find(x=>x.id===a.id);
-  if(!s){loginError.textContent='Student record not found.';return}
-  current={...s,type:'student'};logEvent(id,'Login');
- }else current={...a,type:'warden'};
- loginPage.classList.add('hidden');appPage.classList.remove('hidden');logoutTop.classList.remove('hidden');tab='Home';render();
-}
-function logout(){
- if(current?.type==='student')logEvent(current.id,'Logout');
- current=null;loginPage.classList.remove('hidden');appPage.classList.add('hidden');logoutTop.classList.add('hidden');password.value='';showLogin();
-}
-function logEvent(id,event){logs.unshift({id,event,time:new Date().toLocaleString()});save()}
-function photo(s){return s.photo||'https://ui-avatars.com/api/?name='+encodeURIComponent(s.name||'User')+'&background=ddd6fe&color=4935d5&size=128'}
-function navItems(){return current.type==='warden'?[['Home','🏠'],['Students','👨‍🎓'],['Entry/Exit','🚪'],['Notices','📢'],['Food Menu','🍲'],['Complaints','💬'],['Fees','💳'],['Profile','👤']]:[['Home','🏠'],['Food Menu','🍲'],['Notices','📢'],['Complaints','💬'],['Fees','💳'],['Gate Timings','🚪'],['Profile','👤']]}
-function render(){
- welcome.textContent='Hello, '+current.name+'!';
- welcomeSub.textContent=current.type==='warden'?'Warden Dashboard · Sunrise Hostel':'Student Dashboard · Sunrise Hostel';
- heroAvatar.src=current.photo||photo(current);
- navigation.innerHTML=navItems().map(([n,i])=>`<button class="${tab===n?'active':''}" onclick="go('${n}')">${i} ${n}</button>`).join('');
- renderView();
-}
-function go(t){tab=t;render()}
-function stat(i,l,v){return `<div class="stat"><div>${i}</div><strong>${v}</strong><small>${l}</small></div>`}
-function tile(n,i){return `<button class="tile" onclick="go('${n}')"><span>${i}</span><b>${n}</b></button>`}
-function renderView(){
- const v=document.getElementById('view');
- if(tab==='Home'){
-  if(current.type==='warden'){
-   v.innerHTML=`<div class="stats">${stat('👨‍🎓','Total Students',students.length)}${stat('🟢','Inside Hostel',students.filter(s=>s.status==='Inside').length)}${stat('🚶','Outside Hostel',students.filter(s=>s.status==='Outside').length)}${stat('💬','Pending Complaints',complaints.filter(c=>c.status==='Pending').length)}</div><div class="layout"><div class="card"><h2>⚡ Quick Actions</h2><div class="tiles">${tile('Students','👨‍🎓')}${tile('Entry/Exit','🚪')}${tile('Notices','📢')}${tile('Food Menu','🍲')}${tile('Complaints','💬')}${tile('Fees','💳')}</div></div><div class="card"><h2>📢 Latest Announcements</h2>${noticeList(3)}</div></div><div class="card"><h2>🚪 Recent Activity</h2>${logTable(5)}</div>`;
-  }else{
-   const s=students.find(x=>x.id===current.id)||current;
-   v.innerHTML=`<div class="grid"><div class="card"><div class="profile-row"><img class="avatar" src="${photo(s)}"><div><h3>${esc(s.name)}</h3><p class="muted">${esc(s.id)} · ${esc(s.course)}</p></div></div><hr><p>🏢 Sunrise Hostel</p><p>Block ${esc(s.block)} · Room ${esc(s.room)}</p><p>🚪 Gate: 06:00 AM – 09:30 PM</p><span class="badge">${esc(s.status)}</span></div><div class="card"><h3>✨ Your Hostel Hub</h3><div class="tiles">${tile('Food Menu','🍲')}${tile('Notices','📢')}${tile('Complaints','💬')}${tile('Fees','💳')}</div></div></div><div class="card"><h2>📢 Latest Notices</h2>${noticeList(3)}</div><div class="card"><h2>🍽️ Today's Menu</h2>${esc(menu[(new Date().getDay()+6)%7])}</div>`;
+  if (phone && !/^[+\d\s()-]{7,20}$/.test(phone)) {
+    message.className = "error";
+    message.textContent = "Please enter a valid phone number.";
+    return;
   }
- }else if(tab==='Students')v.innerHTML=studentList();
- else if(tab==='Entry/Exit')v.innerHTML=entryPage();
- else if(tab==='Notices')v.innerHTML=noticePage();
- else if(tab==='Food Menu')v.innerHTML=menuPage();
- else if(tab==='Complaints')v.innerHTML=complaintPage();
- else if(tab==='Fees')v.innerHTML=feesPage();
- else if(tab==='Gate Timings')v.innerHTML=gatePage();
- else if(tab==='Profile')v.innerHTML=profilePage();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    message.className = "error";
+    message.textContent = "Please enter a valid email address.";
+    return;
+  }
+
+  const profiles = getProfiles();
+  profiles[currentUser.username] = {
+    ...getProfile(currentUser.username),
+    name, phone, email,
+    photo: pendingProfilePhoto || "",
+    role: currentUser.role
+  };
+
+  try {
+    writeStore(STORE.profiles, profiles);
+
+    const accounts = getAccounts().map(a =>
+      a.username === currentUser.username ? { ...a, name } : a
+    );
+    writeStore(STORE.accounts, accounts);
+
+    const students = readStore(STORE.students, []).map(s =>
+      s.username === currentUser.username ? { ...s, name, phone } : s
+    );
+    writeStore(STORE.students, students);
+
+    updateHeader();
+    message.className = "success";
+    message.textContent = "Your profile has been saved successfully.";
+    const heading = document.querySelector("#pageContent .profile-top h3");
+    if (heading) heading.textContent = name;
+  } catch {
+    message.className = "error";
+    message.textContent = "Could not save profile. Try a smaller image.";
+  }
 }
-function noticeList(n){return notices.slice(0,n).map(x=>`<div class="item"><span class="badge">${esc(x.type)}</span><h3>${esc(x.title)}</h3><p class="muted">${esc(x.date)}</p><p>${esc(x.body)}</p></div>`).join('')||'<p>No notices yet.</p>'}
-function noticePage(){return `<div class="card"><h2>📢 Announcements</h2>${current.type==='warden'?`<form onsubmit="addNotice(event)"><label>Title</label><input id="ntitle" required><label>Category</label><select id="ntype"><option>Important</option><option>Notice</option><option>General</option><option>Reminder</option></select><label>Message</label><textarea id="nbody" required></textarea><button class="primary">Publish Notice</button></form>`:''}${noticeList(50)}</div>`}
-function addNotice(e){e.preventDefault();notices.unshift({title:ntitle.value,type:ntype.value,date:new Date().toLocaleDateString(),body:nbody.value});save();render()}
-function studentList(){return `<div class="card"><h2>👨‍🎓 Student Management</h2><input id="studentSearch" placeholder="Search name, ID or room" oninput="filterStudents()">${current.type==='warden'?'<button class="primary" onclick="addStudentForm()">＋ Add Student</button><div id="addStudentArea"></div>':''}<div id="studentResults">${studentRows(students)}</div></div>`}
-function studentRows(list){return `<div class="grid">${list.map(s=>`<div class="item"><div class="profile-row"><img class="avatar" src="${photo(s)}"><div><h3>${esc(s.name)}</h3><p class="muted">${esc(s.id)}</p></div></div><p>Course: ${esc(s.course)} · ${esc(s.year)}</p><p>Block ${esc(s.block)}, Room ${esc(s.room)}</p><p>Phone: ${esc(s.phone)}</p><span class="badge">${esc(s.status)}</span> <button class="secondary" onclick="viewStudent('${s.id}')">View Details</button></div>`).join('')}</div>`}
-function filterStudents(){const q=studentSearch.value.toLowerCase();studentResults.innerHTML=studentRows(students.filter(s=>(s.name+' '+s.id+' '+s.room).toLowerCase().includes(q)))}
-function addStudentForm(){addStudentArea.innerHTML=`<form class="item" onsubmit="addStudent(event)"><label>Student ID</label><input id="sid" required><label>Name</label><input id="sname" required><label>Course</label><input id="scourse" required><label>Semester</label><input id="syear"><label>Room</label><input id="sroom" required><label>Block</label><input id="sblock" value="A" required><label>Phone</label><input id="sphone"><label>Profile Picture</label><input id="sphoto" type="file" accept="image/jpeg,image/png,image/webp"><label>Temporary Password</label><input id="spass" type="password" minlength="4" required><button class="primary">Save Student</button></form>`}
-async function addStudent(e){
- e.preventDefault();
- if(students.some(s=>s.id.toLowerCase()===sid.value.trim().toLowerCase())||accounts.some(a=>a.id.toLowerCase()===sid.value.trim().toLowerCase())){alert('ID already exists');return}
- try{const pic=await readPhoto(sphoto.files[0]),s={id:sid.value.trim(),name:sname.value.trim(),course:scourse.value.trim(),year:syear.value.trim(),room:sroom.value.trim(),block:sblock.value.trim(),phone:sphone.value.trim(),photo:pic,status:'Inside',fees:0};students.push(s);accounts.push({id:s.id,name:s.name,password:spass.value,type:'student',photo:pic});save();saveAccounts();render()}catch(err){alert(err.message)}
+
+function renderStudents(content) {
+  const students = readStore(STORE.students, []);
+  content.innerHTML = `
+    <h1>Student Management</h1>
+    <div class="card">
+      <h2>Add Student</h2>
+      <form id="addStudentForm" class="grid">
+        <div><label for="studentName">Student name</label><input id="studentName" required></div>
+        <div><label for="studentUsername">Username (optional)</label><input id="studentUsername"></div>
+        <div><label for="studentRoom">Room number</label><input id="studentRoom" required></div>
+        <div><label for="studentPhone">Phone number</label><input id="studentPhone"></div>
+        <div style="align-self:end"><button type="submit">Add Student</button></div>
+      </form>
+      <p id="studentMessage" class="muted"></p>
+    </div>
+    <div class="card"><h2>Registered Students (${students.length})</h2>
+      <div class="table-wrap"><table><thead><tr><th>Name</th><th>Username</th><th>Room</th><th>Phone</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>${students.map((s,i)=>`<tr>
+        <td>${escapeHTML(s.name)}</td><td>${escapeHTML(s.username || "—")}</td>
+        <td>${escapeHTML(s.room)}</td><td>${escapeHTML(s.phone || "—")}</td>
+        <td>${escapeHTML(s.status || "Active")}</td>
+        <td><button class="danger" data-remove-student="${i}">Remove</button></td>
+      </tr>`).join("") || `<tr><td colspan="6">No students yet.</td></tr>`}</tbody></table></div>
+    </div>`;
+
+  $("addStudentForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const name = $("studentName").value.trim();
+    const username = $("studentUsername").value.trim();
+    const room = $("studentRoom").value.trim();
+    const phone = $("studentPhone").value.trim();
+    if (!name || !room) return;
+    const list = readStore(STORE.students, []);
+    list.push({ name, username, room, phone, status:"Active" });
+    writeStore(STORE.students, list);
+    renderPage("students");
+  });
+
+  content.querySelectorAll("[data-remove-student]").forEach(button => {
+    button.addEventListener("click", () => {
+      const index = Number(button.dataset.removeStudent);
+      const list = readStore(STORE.students, []);
+      if (!confirm("Remove this student from the list?")) return;
+      list.splice(index, 1);
+      writeStore(STORE.students, list);
+      renderPage("students");
+    });
+  });
 }
-function viewStudent(id){const s=students.find(x=>x.id===id);if(s)alert(`Name: ${s.name}\nID: ${s.id}\nCourse: ${s.course}\nRoom: ${s.room}\nBlock: ${s.block}\nPhone: ${s.phone}\nStatus: ${s.status}\nPending fees: ₹${s.fees}`)}
-function entryPage(){return `<div class="card"><h2>🚪 Entry / Exit Register</h2>${current.type==='warden'?`<form onsubmit="recordEvent(event)"><label>Student</label><select id="logStudent">${students.map(s=>`<option value="${s.id}">${esc(s.name)} (${esc(s.id)})</option>`).join('')}</select><label>Event</label><select id="logType"><option>Entry</option><option>Exit</option></select><button class="primary">Record Activity</button></form>`:''}<h3>Current Status</h3><div class="table-wrap"><table><tr><th>Student</th><th>Room</th><th>Status</th></tr>${students.map(s=>`<tr><td>${esc(s.name)}</td><td>${esc(s.room)}</td><td>${esc(s.status)}</td></tr>`).join('')}</table></div><h3>Activity History</h3>${logTable(100)}</div>`}
-function recordEvent(e){e.preventDefault();const s=students.find(x=>x.id===logStudent.value),type=logType.value;if(!s)return;s.status=type==='Entry'?'Inside':'Outside';logs.unshift({id:s.id,event:type,time:new Date().toLocaleString()});save();render()}
-function logTable(n){const a=logs.slice(0,n);return a.length?`<div class="table-wrap"><table><tr><th>Student ID</th><th>Activity</th><th>Date / Time</th></tr>${a.map(x=>`<tr><td>${esc(x.id)}</td><td>${esc(x.event)}</td><td>${esc(x.time)}</td></tr>`).join('')}</table></div>`:'<p class="muted">No activity recorded.</p>'}
-function menuPage(){return `<div class="card"><h2>🍲 Weekly Food Menu</h2>${current.type==='warden'?'<form onsubmit="saveMenu(event)">':''}${menu.map((m,i)=>`<div class="item"><h3>${['☀️ Monday','🌷 Tuesday','🌿 Wednesday','🍊 Thursday','🌸 Friday','🌊 Saturday','⭐ Sunday'][i]}</h3>${current.type==='warden'?`<input id="meal${i}" value="${esc(m)}" required>`:`<p>${esc(m)}</p>`}</div>`).join('')}${current.type==='warden'?'<button class="primary">Save Weekly Menu</button></form>':''}</div>`}
-function saveMenu(e){e.preventDefault();menu=menu.map((m,i)=>document.getElementById('meal'+i).value);save();alert('Weekly menu saved!');render()}
-function complaintPage(){return `<div class="card"><h2>💬 Complaints & Maintenance</h2>${current.type==='student'?'<form onsubmit="addComplaint(event)"><label>Describe your complaint</label><textarea id="complaintText" required rows="3" placeholder="Water leakage, fan issue, food quality..."></textarea><button class="primary">Submit Complaint</button></form>':''}<h3>Complaint Records</h3>${complaints.length?complaints.map((c,i)=>`<div class="item"><h3>${esc(c.text)}</h3><p class="muted">${esc(c.name)} · Room ${esc(c.room)} · ${esc(c.date)}</p><span class="badge ${c.status==='Pending'?'orange':''}">${esc(c.status)}</span>${current.type==='warden'&&c.status==='Pending'?` <button class="secondary" onclick="resolveComplaint(${i})">Mark Resolved</button>`:''}</div>`).join(''):'<p>No complaints yet.</p>'}</div>`}
-function addComplaint(e){e.preventDefault();complaints.unshift({name:current.name,room:current.room||'—',text:complaintText.value,status:'Pending',date:new Date().toLocaleDateString()});save();alert('Complaint submitted');render()}
-function resolveComplaint(i){complaints[i].status='Resolved';save();render()}
-function feesPage(){const s=current.type==='student'?students.find(x=>x.id===current.id):null;return `<div class="card"><h2>💳 Hostel Fee Details</h2>${s?`<div class="item"><h3>${esc(s.name)}</h3><p>Student ID: ${esc(s.id)}</p><h2>Pending Amount: ₹${s.fees.toLocaleString('en-IN')}</h2></div>`:''}${[1,2,3].map(i=>`<div class="item">${i}${i===1?'st':i===2?'nd':'rd'} month <strong style="float:right">₹${Number(fees[i]).toLocaleString('en-IN')}</strong></div>`).join('')}${current.type==='warden'?`<form onsubmit="updateFees(event)"><h3>Update Monthly Fees</h3><label>Month</label><select id="feeSem"><option value="1">1st month</option><option value="2">2nd month</option><option value="3">3rd month</option></select><label>Amount (₹)</label><input id="feeAmount" type="number" min="0" required><button class="primary">Update Fees</button></form><h3>Student Pending Fees</h3>${students.map(st=>`<div class="item">${esc(st.name)} (${esc(st.id)}) — ₹${st.fees.toLocaleString('en-IN')} <button class="secondary" onclick="setPaid('${st.id}')">Mark Paid</button></div>`).join('')}`:'<div class="notice">This demo does not process payments.</div>'}</div>`}
-function updateFees(e){e.preventDefault();fees[feeSem.value]=Number(feeAmount.value);save();render()}
-function setPaid(id){const s=students.find(x=>x.id===id);if(s){s.fees=0;save();render()}}
-function gatePage(){return `<div class="card"><h2>🚪 Gate Opening & Closing</h2><div class="center item"><div style="font-size:42px">🕕</div><h2>06:00 AM – 09:30 PM</h2><span class="badge">Regular Gate Timings</span></div><h3>Important Rules</h3><div class="item">🪪 Carry your student ID card.</div><div class="item">🌙 Contact the warden after closing time.</div><div class="item">📞 Report emergencies to the warden.</div><p class="muted">Sample timings; confirm with your hostel.</p></div>`}
-function profilePage(){
- const s=current.type==='student'?students.find(x=>x.id===current.id):null;
- return `<div class="card"><h2>👤 My Profile</h2><div class="profile-row"><img class="avatar" src="${current.photo||photo(current)}"><div><h3>${esc(current.name)}</h3><p class="muted">${s?esc(s.id):'Hostel Warden'}</p></div></div>${s?`<div class="item"><p>🎓 Course: ${esc(s.course)}</p><p>📚 Semester: ${esc(s.year)}</p><p>🏠 Sunrise Hostel</p><p>🛏️ Room: ${esc(s.room)} · Block ${esc(s.block)}</p><p>📱 Phone: ${esc(s.phone)}</p></div>`:''}<form onsubmit="updateProfile(event)"><h3>Update Profile</h3><label>Full Name</label><input id="editName" value="${esc(current.name)}" required>${s?`<label>Phone</label><input id="editPhone" value="${esc(s.phone)}">`:''}<label>Upload Profile Picture</label><input id="editPhoto" type="file" accept="image/jpeg,image/png,image/webp"><button class="primary">Save Profile</button></form><button class="danger" onclick="logout()">Logout</button></div>`;
+
+function noticeListHTML(limit = 100) {
+  const notices = readStore(STORE.notices, []).slice().reverse().slice(0,limit);
+  if (!notices.length) return `<p class="muted">No notices posted.</p>`;
+  return notices.map(n => `<div class="notice"><strong>${escapeHTML(n.title)}</strong>
+    <p>${escapeHTML(n.body)}</p><small class="muted">${escapeHTML(n.date || "")}</small></div>`).join("");
 }
-async function updateProfile(e){
- e.preventDefault();
- try{
-  const file=editPhoto.files[0],pic=await readPhoto(file),name=editName.value.trim();
-  if(current.type==='student'){
-   const s=students.find(x=>x.id===current.id);s.name=name;s.phone=editPhone.value.trim();if(file)s.photo=pic;current={...s,type:'student'};
-  }else{current.name=name;if(file)current.photo=pic}
-  const a=accounts.find(x=>x.id===current.id);if(a){a.name=name;if(file)a.photo=pic}
-  save();saveAccounts();render();alert('Profile updated!');
- }catch(err){alert(err.message)}
+
+function renderNotices(content) {
+  const warden = currentUser.role === "warden";
+  content.innerHTML = `<h1>Notices</h1>
+    ${warden ? `<div class="card"><h2>Post a Notice</h2>
+      <form id="noticeForm"><label for="noticeTitle">Title</label><input id="noticeTitle" required maxlength="100">
+      <label for="noticeBody">Message</label><textarea id="noticeBody" required maxlength="2000"></textarea>
+      <button type="submit">Publish Notice</button></form></div>` : ""}
+    <div class="card"><h2>Latest Updates</h2>${noticeListHTML()}</div>`;
+
+  if (warden) $("noticeForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const notices = readStore(STORE.notices, []);
+    notices.push({
+      id: Date.now(),
+      title: $("noticeTitle").value.trim(),
+      body: $("noticeBody").value.trim(),
+      date: new Date().toLocaleString()
+    });
+    writeStore(STORE.notices, notices);
+    renderPage("notices");
+  });
+}
+
+function renderMenu(content) {
+  const menu = readStore(STORE.menu, []);
+  const warden = currentUser.role === "warden";
+  content.innerHTML = `<h1>Weekly Food Menu</h1>
+    ${warden ? `<div class="card"><h2>Edit Weekly Menu</h2>
+      <form id="menuForm">
+      ${menu.map((m,i)=>`<div class="menu-day"><h3>${escapeHTML(m.day)}</h3>
+        <label for="breakfast${i}">Breakfast</label><input id="breakfast${i}" required maxlength="200" value="${escapeHTML(m.breakfast)}">
+        <label for="lunch${i}">Lunch</label><input id="lunch${i}" required maxlength="200" value="${escapeHTML(m.lunch)}">
+        <label for="dinner${i}">Dinner</label><input id="dinner${i}" required maxlength="200" value="${escapeHTML(m.dinner)}">
+      </div>`).join("")}
+      <button type="submit">Save Weekly Menu</button>
+      </form></div>` : ""}
+    <div class="card"><h2>This Week</h2>
+      ${menu.map(m=>`<div class="menu-day"><h3>${escapeHTML(m.day)}</h3>
+        <p><strong>Breakfast:</strong> ${escapeHTML(m.breakfast)}</p>
+        <p><strong>Lunch:</strong> ${escapeHTML(m.lunch)}</p>
+        <p><strong>Dinner:</strong> ${escapeHTML(m.dinner)}</p>
+      </div>`).join("")}</div>`;
+
+  if (warden) $("menuForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const updated = menu.map((m,i)=>({
+      day:m.day,
+      breakfast:$("breakfast"+i).value.trim(),
+      lunch:$("lunch"+i).value.trim(),
+      dinner:$("dinner"+i).value.trim()
+    }));
+    writeStore(STORE.menu, updated);
+    alert("Weekly menu saved.");
+    renderPage("menu");
+  });
+}
+
+function renderComplaints(content) {
+  const complaints = readStore(STORE.complaints, []);
+  const mine = complaints.filter(c => currentUser.role === "warden" || c.username === currentUser.username);
+  content.innerHTML = `<h1>Complaints & Requests</h1>
+    <div class="card"><h2>Submit a Complaint</h2>
+      <form id="complaintForm"><label for="complaintTitle">Subject</label><input id="complaintTitle" required maxlength="100">
+      <label for="complaintBody">Details</label><textarea id="complaintBody" required maxlength="2000"></textarea>
+      <button type="submit">Submit Complaint</button></form></div>
+    <div class="card"><h2>${currentUser.role === "warden" ? "All Complaints" : "My Complaints"}</h2>
+    ${mine.map(c=>`<div class="notice"><strong>${escapeHTML(c.title)}</strong>
+      <p>${escapeHTML(c.body)}</p><small class="muted">By ${escapeHTML(c.username)} · ${escapeHTML(c.date)}</small>
+      <p>Status: <span class="badge">${escapeHTML(c.status)}</span></p>
+      ${currentUser.role === "warden" ? `<button data-resolve="${c.id}">${c.status === "Resolved" ? "Reopen" : "Mark Resolved"}</button>` : ""}
+    </div>`).join("") || `<p class="muted">No complaints found.</p>`}</div>`;
+
+  $("complaintForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const list = readStore(STORE.complaints, []);
+    list.push({ id:Date.now(), username:currentUser.username, title:$("complaintTitle").value.trim(),
+      body:$("complaintBody").value.trim(), date:new Date().toLocaleString(), status:"Open" });
+    writeStore(STORE.complaints, list);
+    renderPage("complaints");
+  });
+
+  content.querySelectorAll("[data-resolve]").forEach(button => button.addEventListener("click", () => {
+    const id = Number(button.dataset.resolve);
+    const list = readStore(STORE.complaints, []).map(c => c.id === id
+      ? {...c, status:c.status === "Resolved" ? "Open" : "Resolved"} : c);
+    writeStore(STORE.complaints, list);
+    renderPage("complaints");
+  }));
+}
+
+function renderFees(content) {
+  let fees = readStore(STORE.fees, []);
+  if (currentUser.role === "warden") {
+    content.innerHTML = `<h1>Fee Management</h1>
+      <div class="card"><h2>Add Fee Record</h2>
+        <form id="feeForm" class="grid">
+          <div><label for="feeUser">Student username</label><input id="feeUser" required></div>
+          <div><label for="feeAmount">Amount</label><input id="feeAmount" type="number" min="0.01" step="0.01" required></div>
+          <div><label for="feeDue">Due date</label><input id="feeDue" type="date" required></div>
+          <div><label for="feeDescription">Description</label><input id="feeDescription" required></div>
+          <div style="align-self:end"><button type="submit">Add Fee</button></div>
+        </form></div>
+      <div class="card"><h2>All Fee Records</h2>${feeTable(fees,true)}</div>`;
+
+    $("feeForm").addEventListener("submit", event => {
+      event.preventDefault();
+      fees.push({ id:Date.now(), username:$("feeUser").value.trim(),
+        amount:Number($("feeAmount").value), due:$("feeDue").value,
+        description:$("feeDescription").value.trim(), status:"Unpaid" });
+      writeStore(STORE.fees, fees);
+      renderPage("fees");
+    });
+
+    content.querySelectorAll("[data-paid]").forEach(button => button.addEventListener("click", () => {
+      const id = Number(button.dataset.paid);
+      fees = readStore(STORE.fees, []).map(f => f.id === id
+        ? {...f, status:f.status === "Paid" ? "Unpaid" : "Paid"} : f);
+      writeStore(STORE.fees, fees);
+      renderPage("fees");
+    }));
+  } else {
+    fees = fees.filter(f => f.username === currentUser.username);
+    content.innerHTML = `<h1>My Fees</h1><div class="card"><p class="muted">Contact your warden if you have questions about a fee record.</p>${feeTable(fees,false)}</div>`;
+  }
+}
+
+function feeTable(fees, warden) {
+  if (!fees.length) return `<p class="muted">No fee records found.</p>`;
+  return `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Description</th><th>Amount</th><th>Due date</th><th>Status</th>${warden?"<th>Action</th>":""}</tr></thead><tbody>
+  ${fees.map(f=>`<tr><td>${escapeHTML(f.username)}</td><td>${escapeHTML(f.description)}</td><td>${Number(f.amount).toFixed(2)}</td><td>${escapeHTML(f.due)}</td><td>${escapeHTML(f.status)}</td>
+  ${warden?`<td><button data-paid="${f.id}">${f.status==="Paid"?"Mark Unpaid":"Mark Paid"}</button></td>`:""}</tr>`).join("")}
+  </tbody></table></div>`;
+}
+
+function renderGate(content) {
+  const gate = readStore(STORE.gate, {open:"06:00",close:"21:00",note:"Please return before closing time."});
+  const warden = currentUser.role === "warden";
+  content.innerHTML = `<h1>Gate Timings</h1>
+    <div class="card"><h2>Hostel Gate Schedule</h2>
+      <div class="grid"><div class="stat">Opening Time<strong>${escapeHTML(gate.open)}</strong></div>
+      <div class="stat">Closing Time<strong>${escapeHTML(gate.close)}</strong></div></div>
+      <p>${escapeHTML(gate.note)}</p>
+      ${warden?`<hr style="border:0;border-top:1px solid #eee;margin:20px 0">
+        <h3>Edit Gate Timings</h3>
+        <form id="gateForm"><label for="gateOpen">Opening time</label><input id="gateOpen" type="time" required value="${escapeHTML(gate.open)}">
+        <label for="gateClose">Closing time</label><input id="gateClose" type="time" required value="${escapeHTML(gate.close)}">
+        <label for="gateNote">Message</label><textarea id="gateNote" maxlength="500">${escapeHTML(gate.note)}</textarea>
+        <button type="submit">Save Timings</button></form>`:""}
+    </div>`;
+
+  if (warden) $("gateForm").addEventListener("submit", event => {
+    event.preventDefault();
+    writeStore(STORE.gate, {open:$("gateOpen").value, close:$("gateClose").value, note:$("gateNote").value.trim()});
+    renderPage("gate");
+  });
 }
 </script>
 </body>
