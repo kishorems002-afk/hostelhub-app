@@ -1,754 +1,131 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#5b45d6">
 <title>HostelHub</title>
-
 <style>
-:root {
-  --primary: #603bc4;
-  --secondary: #382078;
-  --light: #f5f3ff;
-  --text: #25213a;
-  --danger: #d93045;
-  --success: #16834a;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f6fb;
-  color: var(--text);
-}
-button, input, textarea, select { font: inherit; }
-button {
-  border: 0;
-  padding: 11px 15px;
-  border-radius: 9px;
-  background: var(--primary);
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-}
-button:hover { opacity: .9; }
-button.secondary { background: #e9e4fb; color: var(--secondary); }
-button.danger { background: var(--danger); }
-input, textarea, select {
-  width: 100%;
-  border: 1px solid #d9d5e7;
-  border-radius: 9px;
-  padding: 11px;
-  margin: 6px 0 14px;
-  background: white;
-}
-textarea { min-height: 80px; resize: vertical; }
-label { font-size: 14px; font-weight: 600; }
-h1, h2, h3 { margin-top: 0; }
-.hidden { display: none !important; }
-.muted { color: #716c83; font-size: 13px; }
-.error { color: var(--danger); font-size: 14px; }
-.success { color: var(--success); font-size: 14px; }
-.app-header {
-  background: linear-gradient(120deg, var(--secondary), var(--primary));
-  color: white;
-  padding: 18px 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.brand { font-size: 23px; font-weight: 800; }
-.brand span { color: #d9ceff; }
-.header-user { display: flex; align-items: center; gap: 10px; }
-.header-user img { width: 38px; height: 38px; object-fit: cover; border-radius: 50%; }
-.layout { display: flex; min-height: calc(100vh - 75px); }
-.sidebar {
-  width: 225px;
-  flex-shrink: 0;
-  padding: 18px 12px;
-  background: white;
-  border-right: 1px solid #e9e6f2;
-}
-.nav-btn {
-  display: block;
-  width: 100%;
-  text-align: left;
-  margin: 4px 0;
-  background: transparent;
-  color: #49435f;
-}
-.nav-btn.active, .nav-btn:hover { background: var(--light); color: var(--primary); }
-main { flex: 1; min-width: 0; padding: 24px; }
-.page { max-width: 1050px; margin: auto; }
-.card {
-  background: white;
-  border: 1px solid #ece9f5;
-  border-radius: 15px;
-  padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 3px 12px #20104c08;
-}
-.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(190px,1fr)); gap: 15px; }
-.stat { padding: 20px; border-radius: 14px; background: white; border: 1px solid #ece9f5; }
-.stat strong { display: block; font-size: 28px; color: var(--primary); margin-top: 8px; }
-.login-wrap {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: linear-gradient(140deg, #322064, #8064dc);
-}
-.login-card { background: white; padding: 28px; border-radius: 20px; width: min(100%, 440px); }
-.login-logo { font-size: 30px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
-.row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.row > * { flex: 1; }
-.profile-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
-.profile-photo {
-  width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
-  border: 4px solid #e4dcff; background: #f0ecff;
-}
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-th, td { padding: 12px; border-bottom: 1px solid #eeeaf5; text-align: left; }
-th { color: #655b7f; font-size: 13px; }
-.badge { background: #eee9ff; color: var(--secondary); padding: 5px 9px; border-radius: 20px; font-size: 12px; }
-.menu-day { border-left: 4px solid var(--primary); padding: 12px; margin: 10px 0; background: #faf9ff; border-radius: 8px; }
-.notice { padding: 13px; border-bottom: 1px solid #eee; }
-footer { text-align: center; color: #88829a; padding: 18px; font-size: 12px; }
-@media(max-width:700px) {
-  .layout { display: block; }
-  .sidebar { width: 100%; display: flex; overflow-x: auto; gap: 4px; padding: 8px; border-right: 0; border-bottom: 1px solid #eee; }
-  .nav-btn { width: auto; white-space: nowrap; margin: 0; }
-  main { padding: 14px; }
-  .app-header { padding: 14px; }
-  .profile-top { align-items: flex-start; }
+:root{--p:#5b45d6;--p2:#8170f1;--bg:#f6f5fc;--ink:#27253b;--muted:#77758c;--line:#e8e5f4;--green:#16845b;--red:#c83b50}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;touch-action:manipulation}
+.hidden{display:none!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a89cff;outline-offset:2px}
+.btn{border:0;border-radius:11px;background:var(--p);color:white;padding:11px 15px;font-weight:750;min-height:43px}
+.btn.secondary{background:#eeeaff;color:var(--p)}
+.btn.danger{background:#fff0f2;color:var(--red)}
+.btn.success{background:#e5f8ed;color:var(--green)}
+.btn.mini{padding:7px 10px;min-height:34px;font-size:12px}
+.row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:850}
+.logo{width:42px;height:42px;border-radius:13px;background:white;color:var(--p);display:grid;place-items:center;font-size:28px;flex-shrink:0}
+.auth{min-height:100dvh;padding:15px;display:grid;place-items:center;background:radial-gradient(circle at 5% 5%,#e4ddff,transparent 30%),#f8f7ff}
+.auth-wrap{width:min(100%,980px);display:grid;grid-template-columns:1fr 1fr;background:white;border:1px solid var(--line);border-radius:25px;overflow:hidden;box-shadow:0 20px 65px #3b278b18}
+.art{position:relative;overflow:hidden;min-height:530px;padding:30px;background:linear-gradient(145deg,#4e39c5,#7565ed 70%,#a29aff);color:white;display:flex;flex-direction:column;justify-content:space-between}
+.art h1{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:22px 0 10px}
+.art p{color:#f0edff}
+.building{width:100%;max-width:360px;align-self:center}
+.auth-panel{padding:clamp(22px,4vw,42px);display:flex;flex-direction:column;justify-content:center}
+h2{margin:0 0 7px}.intro,.muted{color:var(--muted)}
+.field{margin-bottom:14px}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #dedbea;border-radius:10px;background:white;color:var(--ink);font-size:16px}
+.field textarea{min-height:95px;resize:vertical}
+.auth-panel .btn{width:100%}.auth-switch{text-align:center;font-size:13px;color:var(--muted);margin-top:17px}
+.link{border:0;background:none;color:var(--p);font-weight:800}
+.header{position:sticky;top:0;z-index:20;min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;background:linear-gradient(110deg,#4c38be,#7867ed);color:white;box-shadow:0 5px 20px #35239320}
+.header .logo{width:36px;height:36px}.header-right{display:flex;align-items:center;gap:8px}
+.header-btn{background:#ffffff20;border:1px solid #ffffff55;color:white;padding:8px 11px;border-radius:9px;font-weight:700;min-height:40px}
+.user-summary{text-align:right;font-size:12px}
+.layout{display:flex;min-height:calc(100vh - 65px)}
+.sidebar{width:220px;flex-shrink:0;background:white;border-right:1px solid var(--line);padding:14px 10px}
+.nav-label{font-size:10px;letter-spacing:1.3px;font-weight:850;color:#a09db4;padding:12px}
+.nav-btn{width:100%;display:flex;align-items:center;gap:9px;text-align:left;color:#65647a;background:transparent;border:0;padding:12px;border-radius:11px;margin:3px 0;font-weight:650;white-space:nowrap}
+.nav-btn.active,.nav-btn:hover{background:#efecff;color:var(--p)}
+.main{flex:1;min-width:0;max-width:1500px;margin:0 auto;padding:24px;width:100%}
+.heading{margin:0 0 20px}.heading h1{font-size:28px;margin:0 0 4px;letter-spacing:-.7px}.heading p{margin:0;color:var(--muted)}
+.welcome{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(115deg,#5b45d6,#8170f1);color:white;border-radius:20px;padding:22px;margin-bottom:17px;overflow:hidden}
+.welcome h2{font-size:clamp(24px,3vw,33px);line-height:1.15;margin:8px 0}.welcome p{margin:0;color:#f0edff}.welcome .building{width:190px;max-width:35%}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:white;border:1px solid var(--line);border-radius:15px;padding:17px;margin-bottom:15px;min-width:0;overflow-wrap:anywhere}
+.card h3{margin:0 0 13px;font-size:17px}.stat-icon{width:40px;height:40px;border-radius:12px;background:#eeeaff;display:grid;place-items:center;font-size:21px;margin-bottom:10px}
+.stat-label{font-size:12px;color:var(--muted);font-weight:700}.stat-value{font-size:27px;font-weight:850}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 13px}.full{grid-column:1/-1}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:500px}th,td{text-align:left;padding:11px 9px;border-bottom:1px solid var(--line);font-size:13px}th{color:#85829c;background:#fbfaff;font-size:11px;text-transform:uppercase}
+.badge{display:inline-block;border-radius:30px;padding:4px 9px;font-size:10px;font-weight:850;background:#eeeaff;color:var(--p);white-space:nowrap}.badge.green{background:#e4f8ec;color:var(--green)}.badge.orange{background:#fff2db;color:#a96805}.badge.red{background:#ffebee;color:var(--red)}
+.notice{padding:12px 14px;border-radius:11px;background:#f0edff;color:#4c3ab7;margin-bottom:13px}.notice.error{background:#fff0f2;color:#a72a3d}
+.item{padding:13px;border:1px solid var(--line);border-radius:12px;margin:10px 0}.item-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.item h4{margin:0 0 6px}.empty{text-align:center;padding:24px;color:var(--muted)}
+.profile-top{display:flex;align-items:center;gap:15px;margin-bottom:20px}.avatar{width:78px;height:78px;border-radius:50%;overflow:hidden;display:grid;place-items:center;flex-shrink:0;background:#eeeaff;color:var(--p);font-size:28px;font-weight:850}.avatar img{width:100%;height:100%;object-fit:cover}
+.meal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.meal-item label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}.meal-item input{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;font-size:16px}
+.footer{text-align:center;color:#9996ad;padding:18px;font-size:11px}
+#toast{position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#282440;color:white;padding:12px 18px;border-radius:12px;z-index:99;box-shadow:0 8px 28px #21174830;max-width:90%;text-align:center}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){
+.auth{padding:9px}.auth-wrap{grid-template-columns:1fr;border-radius:19px}.art{min-height:230px;padding:21px}.art h1{font-size:29px;margin:12px 0 5px;max-width:280px}.art p{font-size:13px;max-width:270px;margin:0}.art .brand{font-size:18px}.building{width:120px;position:absolute;right:0;bottom:0;opacity:.8}.auth-panel{padding:23px}
+.header{padding:9px 11px}.header .brand{font-size:17px}.header .logo{width:33px;height:33px}.user-summary{display:none}.header-btn{font-size:11px;padding:8px}
+.layout{display:flex;flex-direction:column;padding-bottom:72px}.sidebar{position:fixed;bottom:0;top:auto;left:0;right:0;width:100%;height:calc(65px + env(safe-area-inset-bottom));padding:6px 5px env(safe-area-inset-bottom);display:flex;align-items:center;justify-content:space-around;gap:2px;overflow-x:auto;border-right:0;border-top:1px solid var(--line);z-index:30;box-shadow:0 -4px 18px #261b6810}
+.nav-label{display:none}.nav-btn{width:auto;min-width:54px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px;font-size:10px;padding:6px 4px;margin:0;text-align:center;white-space:nowrap}.main{padding:15px 10px 25px}.heading h1{font-size:24px}.welcome{padding:17px;min-height:145px}.welcome h2{font-size:23px}.welcome .building{width:110px}.grid{gap:8px}.card{padding:12px}.stat-value{font-size:23px}.grid.two,.form-grid,.meal-grid{grid-template-columns:1fr}.profile-top{align-items:flex-start}.footer{padding-bottom:90px}
 }
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
-<section id="loginPage" class="login-wrap">
-  <div class="login-card">
-    <div class="login-logo">🏠 HostelHub</div>
-    <p class="muted">Your hostel, all in one place.</p>
-
-    <form id="loginForm">
-      <label for="loginUsername">Username</label>
-      <input id="loginUsername" required autocomplete="username" placeholder="Enter username">
-
-      <label for="loginPassword">Password</label>
-      <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter password">
-
-      <label for="loginRole">Login as</label>
-      <select id="loginRole">
-        <option value="student">Student</option>
-        <option value="warden">Warden</option>
-      </select>
-
-      <button style="width:100%" type="submit">Login</button>
-      <p id="loginMessage" class="error" role="status"></p>
-    </form>
-
-    <hr style="border:0;border-top:1px solid #eee;margin:20px 0">
-    <h3>Create an account</h3>
-    <form id="registerForm">
-      <label for="regName">Full name</label>
-      <input id="regName" required placeholder="Your full name">
-
-      <label for="regUsername">Username</label>
-      <input id="regUsername" required minlength="3" placeholder="Choose a username">
-
-      <label for="regPassword">Password</label>
-      <input id="regPassword" type="password" required minlength="4" placeholder="At least 4 characters">
-
-      <label for="regRole">Account type</label>
-      <select id="regRole">
-        <option value="student">Student</option>
-        <option value="warden">Warden</option>
-      </select>
-
-      <button class="secondary" style="width:100%" type="submit">Register</button>
-      <p id="registerMessage" class="muted" role="status"></p>
-    </form>
-
-    <p class="muted">Demo student: student1 / 1234<br>Demo warden: warden1 / 1234</p>
-  </div>
-</section>
-
-<!-- APP -->
-<section id="appPage" class="hidden">
-  <header class="app-header">
-    <div class="brand">🏠 Hostel<span>Hub</span></div>
-    <div class="header-user">
-      <img id="headerPhoto" alt="Profile">
-      <span id="headerName">User</span>
-      <button id="logoutBtn" class="secondary">Logout</button>
-    </div>
-  </header>
-
-  <div class="layout">
-    <nav class="sidebar" id="sidebar">
-      <button class="nav-btn active" data-page="dashboard">🏠 Dashboard</button>
-      <button class="nav-btn" data-page="profile">👤 My Profile</button>
-      <button class="nav-btn" data-page="students" data-warden>👥 Students</button>
-      <button class="nav-btn" data-page="notices">📢 Notices</button>
-      <button class="nav-btn" data-page="menu">🍽️ Weekly Menu</button>
-      <button class="nav-btn" data-page="complaints">📝 Complaints</button>
-      <button class="nav-btn" data-page="fees">💳 Fees</button>
-      <button class="nav-btn" data-page="gate">🕒 Gate Timings</button>
-    </nav>
-
-    <main><div class="page" id="pageContent"></div></main>
-  </div>
-  <footer>HostelHub · Hostel management made simple</footer>
-</section>
-
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><symbol id="hostel-art" viewBox="0 0 420 300"><ellipse cx="210" cy="270" rx="178" ry="18" fill="#33229a" opacity=".18"/><path d="M70 260V118L210 39l140 79v142Z" fill="#f6f4ff"/><path d="M48 124 210 29l162 95-17 20-145-84-145 84Z" fill="#ffcc70"/><path d="M88 129 210 58l122 71v131H88Z" fill="#e7e2ff"/><path d="M110 144h200v116H110Z" fill="#b8adff"/><path d="M131 160h43v39h-43zm58 0h43v39h-43zm58 0h43v39h-43zM131 213h43v39h-43zm116 0h43v39h-43z" fill="#5a46c9"/><path d="M190 213h42v47h-42Z" fill="#fff0c6"/><circle cx="221" cy="237" r="3" fill="#f4b846"/><path d="M174 85h72v29h-72Z" fill="#fff"/><path d="M181 91h58v17h-58Z" fill="#6f5ae5"/><path d="M37 260h346" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".8"/><circle cx="333" cy="45" r="16" fill="#ffcf79"/></symbol></svg>
+<section id="authScreen" class="auth"><div class="auth-wrap">
+<div class="art"><div><div class="brand"><span class="logo">🏠</span>HostelHub</div><h1>Your hostel life, all in one place.</h1><p>Meals, notices, fees and hostel support — simple, organized and connected.</p></div><svg class="building" viewBox="0 0 420 300" role="img" aria-label="Hostel building illustration"><use href="#hostel-art"/></svg></div>
+<div class="auth-panel"><div id="authMessage"></div>
+<form id="loginForm"><h2>Welcome back 👋</h2><p class="intro">Sign in to your HostelHub account.</p><div class="field"><label for="loginUsername">Username</label><input id="loginUsername" required autocomplete="username" placeholder="Enter your username"></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Enter your password"></div><button class="btn" type="submit">Login →</button><div class="auth-switch">New to HostelHub? <button class="link" type="button" onclick="showRegister()">Create account</button></div></form>
+<form id="registerForm" class="hidden"><h2>Create your account</h2><p class="intro">New accounts are created with student access.</p><div class="field"><label for="regName">Full name *</label><input id="regName" required maxlength="80"></div><div class="field"><label for="regUsername">Username *</label><input id="regUsername" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_.-]+"></div><div class="field"><label for="regPassword">Password *</label><input id="regPassword" type="password" required minlength="4" maxlength="100"></div><div class="field"><label for="regPhone">Phone number</label><input id="regPhone" type="tel" maxlength="20"></div><button class="btn" type="submit">Create student account →</button><div class="auth-switch">Already have an account? <button class="link" type="button" onclick="showLogin()">Back to login</button></div></form>
+</div></div></section>
+<section id="appScreen" class="hidden"><header class="header"><div class="brand"><span class="logo">🏠</span>HostelHub</div><div class="header-right"><div class="user-summary"><strong id="headerName">User</strong><br><span id="headerRole">Student</span></div><button class="header-btn" onclick="render('profile')">👤 Profile</button><button class="header-btn" onclick="logout()">Logout</button></div></header>
+<div class="layout"><aside class="sidebar"><div class="nav-label">YOUR HOSTEL</div><button class="nav-btn active" data-page="dashboard">🏠<span>Home</span></button><button class="nav-btn" data-page="profile">👤<span>Profile</span></button><button class="nav-btn" data-page="students" data-warden>👥<span>Students</span></button><button class="nav-btn" data-page="announcements">📢<span>Notices</span></button><button class="nav-btn" data-page="menu">🍽️<span>Menu</span></button><button class="nav-btn" data-page="complaints">📝<span>Complaints</span></button><button class="nav-btn" data-page="fees">💳<span>Fees</span></button><button class="nav-btn" data-page="gate">🚪<span>Gate</span></button></aside><main id="mainContent" class="main"></main></div><div class="footer">HostelHub · Your hostel, organized</div></section><div id="toast" class="hidden" role="status" aria-live="polite"></div>
 <script>
 "use strict";
-
-const $ = id => document.getElementById(id);
-const STORE = {
-  accounts: "hostelhub_accounts_v1",
-  profiles: "hostelhub_profiles_v1",
-  students: "hostelhub_students_v1",
-  notices: "hostelhub_notices_v1",
-  menu: "hostelhub_menu_v1",
-  complaints: "hostelhub_complaints_v1",
-  fees: "hostelhub_fees_v1",
-  gate: "hostelhub_gate_v1"
-};
-
-let currentUser = null;
-let currentPage = "dashboard";
-let pendingProfilePhoto = null;
-
-function readStore(key, fallback) {
-  try {
-    const value = JSON.parse(localStorage.getItem(key));
-    return value === null ? fallback : value;
-  } catch {
-    return fallback;
-  }
-}
-function writeStore(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[ch]);
-}
-function getAccounts() { return readStore(STORE.accounts, []); }
-function getProfiles() { return readStore(STORE.profiles, {}); }
-function getProfile(username) {
-  return getProfiles()[username] || { name: username, phone:"", email:"", photo:"", role:"student" };
-}
-function getPhoto(username) {
-  return getProfile(username).photo || "https://placehold.co/120x120?text=Profile";
-}
-function seedDemoData() {
-  let accounts = getAccounts();
-  if (!accounts.some(a => a.username === "student1")) {
-    accounts.push({ username:"student1", password:"1234", role:"student", name:"Demo Student" });
-  }
-  if (!accounts.some(a => a.username === "warden1")) {
-    accounts.push({ username:"warden1", password:"1234", role:"warden", name:"Demo Warden" });
-  }
-  writeStore(STORE.accounts, accounts);
-
-  const profiles = getProfiles();
-  if (!profiles.student1) profiles.student1 = { name:"Demo Student", phone:"", email:"", photo:"", role:"student" };
-  if (!profiles.warden1) profiles.warden1 = { name:"Demo Warden", phone:"", email:"", photo:"", role:"warden" };
-  writeStore(STORE.profiles, profiles);
-
-  if (!localStorage.getItem(STORE.students)) writeStore(STORE.students, [
-    { username:"student1", name:"Demo Student", room:"101", phone:"", status:"Active" }
-  ]);
-  if (!localStorage.getItem(STORE.notices)) writeStore(STORE.notices, [
-    { id:1, title:"Welcome to HostelHub", body:"Check the weekly food menu and hostel notices here.", date:new Date().toLocaleDateString() }
-  ]);
-  if (!localStorage.getItem(STORE.menu)) writeStore(STORE.menu, [
-    { day:"Monday", breakfast:"Idli and sambar", lunch:"Rice, dal and vegetables", dinner:"Chapati and curry" },
-    { day:"Tuesday", breakfast:"Dosa and chutney", lunch:"Rice and chicken curry", dinner:"Vegetable pulao" },
-    { day:"Wednesday", breakfast:"Puttu and kadala", lunch:"Rice, sambar and vegetables", dinner:"Chapati and egg curry" },
-    { day:"Thursday", breakfast:"Upma and banana", lunch:"Rice and fish curry", dinner:"Dosa and chutney" },
-    { day:"Friday", breakfast:"Appam and stew", lunch:"Rice, dal and vegetables", dinner:"Fried rice" },
-    { day:"Saturday", breakfast:"Poori and potato", lunch:"Rice and curry", dinner:"Chapati and paneer curry" },
-    { day:"Sunday", breakfast:"Bread and omelette", lunch:"Special lunch", dinner:"Light dinner" }
-  ]);
-  if (!localStorage.getItem(STORE.complaints)) writeStore(STORE.complaints, []);
-  if (!localStorage.getItem(STORE.fees)) writeStore(STORE.fees, []);
-  if (!localStorage.getItem(STORE.gate)) writeStore(STORE.gate, { open:"06:00", close:"21:00", note:"Please return before closing time." });
-}
-seedDemoData();
-
-$("loginForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const username = $("loginUsername").value.trim();
-  const password = $("loginPassword").value;
-  const role = $("loginRole").value;
-  const account = getAccounts().find(a => a.username.toLowerCase() === username.toLowerCase()
-    && a.password === password && a.role === role);
-
-  if (!account) {
-    $("loginMessage").textContent = "Invalid username, password, or account type.";
-    return;
-  }
-  loginAs(account);
-});
-
-$("registerForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const name = $("regName").value.trim();
-  const username = $("regUsername").value.trim();
-  const password = $("regPassword").value;
-  const role = $("regRole").value;
-  const message = $("registerMessage");
-
-  if (name.length < 2) { message.textContent = "Please enter your full name."; return; }
-  if (!/^[a-zA-Z0-9_.-]{3,30}$/.test(username)) {
-    message.textContent = "Username must be 3–30 characters (letters, numbers, _, . or -).";
-    return;
-  }
-  if (password.length < 4) { message.textContent = "Password must contain at least 4 characters."; return; }
-
-  const accounts = getAccounts();
-  if (accounts.some(a => a.username.toLowerCase() === username.toLowerCase())) {
-    message.textContent = "That username is already registered.";
-    return;
-  }
-
-  accounts.push({ username, password, role, name });
-  writeStore(STORE.accounts, accounts);
-
-  const profiles = getProfiles();
-  profiles[username] = { name, phone:"", email:"", photo:"", role };
-  writeStore(STORE.profiles, profiles);
-
-  if (role === "student") {
-    const students = readStore(STORE.students, []);
-    students.push({ username, name, room:"Not assigned", phone:"", status:"Active" });
-    writeStore(STORE.students, students);
-  }
-
-  message.className = "success";
-  message.textContent = "Account created. You can now log in.";
-  $("loginUsername").value = username;
-  $("loginRole").value = role;
-});
-
-function loginAs(account) {
-  currentUser = { username:account.username, role:account.role };
-  currentPage = "dashboard";
-  $("loginPage").classList.add("hidden");
-  $("appPage").classList.remove("hidden");
-  document.querySelectorAll("[data-warden]").forEach(el => {
-    el.classList.toggle("hidden", currentUser.role !== "warden");
-  });
-  updateHeader();
-  renderPage("dashboard");
-}
-
-function updateHeader() {
-  const profile = getProfile(currentUser.username);
-  $("headerName").textContent = profile.name || currentUser.username;
-  $("headerPhoto").src = getPhoto(currentUser.username);
-}
-
-$("logoutBtn").addEventListener("click", () => {
-  currentUser = null;
-  pendingProfilePhoto = null;
-  $("appPage").classList.add("hidden");
-  $("loginPage").classList.remove("hidden");
-  $("loginForm").reset();
-  $("loginMessage").textContent = "";
-});
-
-$("sidebar").addEventListener("click", event => {
-  const button = event.target.closest("[data-page]");
-  if (!button || button.classList.contains("hidden")) return;
-  renderPage(button.dataset.page);
-});
-
-function renderPage(page) {
-  if (!currentUser) return;
-  if (page === "students" && currentUser.role !== "warden") page = "dashboard";
-  currentPage = page;
-
-  document.querySelectorAll(".nav-btn").forEach(btn =>
-    btn.classList.toggle("active", btn.dataset.page === page)
-  );
-
-  const content = $("pageContent");
-  const profile = getProfile(currentUser.username);
-
-  if (page === "dashboard") {
-    const studentCount = readStore(STORE.students, []).length;
-    const noticeCount = readStore(STORE.notices, []).length;
-    content.innerHTML = `
-      <h1>Welcome, ${escapeHTML(profile.name || currentUser.username)}!</h1>
-      <p class="muted">Here is your HostelHub overview.</p>
-      <div class="grid">
-        <div class="stat">Account type<strong>${escapeHTML(currentUser.role)}</strong></div>
-        <div class="stat">Notices<strong>${noticeCount}</strong></div>
-        ${currentUser.role === "warden" ? `<div class="stat">Students<strong>${studentCount}</strong></div>` : ""}
-      </div>
-      <div class="card" style="margin-top:18px">
-        <h2>Quick Actions</h2>
-        <div class="row">
-          <button onclick="renderPage('profile')">Edit My Profile</button>
-          <button class="secondary" onclick="renderPage('menu')">View Weekly Menu</button>
-          <button class="secondary" onclick="renderPage('notices')">View Notices</button>
-        </div>
-      </div>
-      <div class="card"><h2>Latest Notices</h2>${noticeListHTML(3)}</div>`;
-  }
-
-  if (page === "profile") {
-    pendingProfilePhoto = profile.photo || "";
-    content.innerHTML = `
-      <h1>My Profile</h1>
-      <div class="card">
-        <div class="profile-top">
-          <img class="profile-photo" id="profilePreview" src="${escapeHTML(pendingProfilePhoto || "https://placehold.co/120x120?text=Profile")}" alt="Profile picture">
-          <div><h3>${escapeHTML(profile.name || currentUser.username)}</h3>
-            <span class="badge">${escapeHTML(currentUser.role)}</span>
-            <p class="muted">Update your personal information below.</p>
-          </div>
-        </div>
-        <form id="profileForm">
-          <label for="profilePhoto">Profile picture</label>
-          <input id="profilePhoto" type="file" accept="image/*">
-          <label for="profileName">Full name</label>
-          <input id="profileName" required maxlength="80" value="${escapeHTML(profile.name || "")}">
-          <label for="profilePhone">Phone number</label>
-          <input id="profilePhone" type="tel" maxlength="20" value="${escapeHTML(profile.phone || "")}" placeholder="Enter phone number">
-          <label for="profileEmail">Email address</label>
-          <input id="profileEmail" type="email" maxlength="120" value="${escapeHTML(profile.email || "")}" placeholder="Enter email address">
-          <label>Username</label>
-          <input value="${escapeHTML(currentUser.username)}" readonly>
-          <label>Account type</label>
-          <input value="${escapeHTML(currentUser.role)}" readonly>
-          <p id="profileMessage" role="status" class="muted"></p>
-          <button type="submit">Save Changes</button>
-          <button type="button" class="secondary" id="resetProfilePhoto">Restore Saved Picture</button>
-        </form>
-      </div>`;
-
-    $("profilePhoto").addEventListener("change", handlePhotoChange);
-    $("resetProfilePhoto").addEventListener("click", () => {
-      pendingProfilePhoto = profile.photo || "";
-      $("profilePreview").src = pendingProfilePhoto || "https://placehold.co/120x120?text=Profile";
-      $("profilePhoto").value = "";
-    });
-    $("profileForm").addEventListener("submit", saveProfile);
-  }
-
-  if (page === "students") renderStudents(content);
-  if (page === "notices") renderNotices(content);
-  if (page === "menu") renderMenu(content);
-  if (page === "complaints") renderComplaints(content);
-  if (page === "fees") renderFees(content);
-  if (page === "gate") renderGate(content);
-}
-
-function handlePhotoChange(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    alert("Please choose a valid image file.");
-    event.target.value = "";
-    return;
-  }
-  if (file.size > 2 * 1024 * 1024) {
-    alert("Please choose an image smaller than 2 MB.");
-    event.target.value = "";
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingProfilePhoto = reader.result;
-    $("profilePreview").src = reader.result;
-  };
-  reader.onerror = () => alert("Could not read that image.");
-  reader.readAsDataURL(file);
-}
-
-function saveProfile(event) {
-  event.preventDefault();
-  const name = $("profileName").value.trim();
-  const phone = $("profilePhone").value.trim();
-  const email = $("profileEmail").value.trim();
-  const message = $("profileMessage");
-
-  if (name.length < 2) {
-    message.className = "error";
-    message.textContent = "Please enter a valid name.";
-    return;
-  }
-  if (phone && !/^[+\d\s()-]{7,20}$/.test(phone)) {
-    message.className = "error";
-    message.textContent = "Please enter a valid phone number.";
-    return;
-  }
-  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    message.className = "error";
-    message.textContent = "Please enter a valid email address.";
-    return;
-  }
-
-  const profiles = getProfiles();
-  profiles[currentUser.username] = {
-    ...getProfile(currentUser.username),
-    name, phone, email,
-    photo: pendingProfilePhoto || "",
-    role: currentUser.role
-  };
-
-  try {
-    writeStore(STORE.profiles, profiles);
-
-    const accounts = getAccounts().map(a =>
-      a.username === currentUser.username ? { ...a, name } : a
-    );
-    writeStore(STORE.accounts, accounts);
-
-    const students = readStore(STORE.students, []).map(s =>
-      s.username === currentUser.username ? { ...s, name, phone } : s
-    );
-    writeStore(STORE.students, students);
-
-    updateHeader();
-    message.className = "success";
-    message.textContent = "Your profile has been saved successfully.";
-    const heading = document.querySelector("#pageContent .profile-top h3");
-    if (heading) heading.textContent = name;
-  } catch {
-    message.className = "error";
-    message.textContent = "Could not save profile. Try a smaller image.";
-  }
-}
-
-function renderStudents(content) {
-  const students = readStore(STORE.students, []);
-  content.innerHTML = `
-    <h1>Student Management</h1>
-    <div class="card">
-      <h2>Add Student</h2>
-      <form id="addStudentForm" class="grid">
-        <div><label for="studentName">Student name</label><input id="studentName" required></div>
-        <div><label for="studentUsername">Username (optional)</label><input id="studentUsername"></div>
-        <div><label for="studentRoom">Room number</label><input id="studentRoom" required></div>
-        <div><label for="studentPhone">Phone number</label><input id="studentPhone"></div>
-        <div style="align-self:end"><button type="submit">Add Student</button></div>
-      </form>
-      <p id="studentMessage" class="muted"></p>
-    </div>
-    <div class="card"><h2>Registered Students (${students.length})</h2>
-      <div class="table-wrap"><table><thead><tr><th>Name</th><th>Username</th><th>Room</th><th>Phone</th><th>Status</th><th>Action</th></tr></thead>
-      <tbody>${students.map((s,i)=>`<tr>
-        <td>${escapeHTML(s.name)}</td><td>${escapeHTML(s.username || "—")}</td>
-        <td>${escapeHTML(s.room)}</td><td>${escapeHTML(s.phone || "—")}</td>
-        <td>${escapeHTML(s.status || "Active")}</td>
-        <td><button class="danger" data-remove-student="${i}">Remove</button></td>
-      </tr>`).join("") || `<tr><td colspan="6">No students yet.</td></tr>`}</tbody></table></div>
-    </div>`;
-
-  $("addStudentForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const name = $("studentName").value.trim();
-    const username = $("studentUsername").value.trim();
-    const room = $("studentRoom").value.trim();
-    const phone = $("studentPhone").value.trim();
-    if (!name || !room) return;
-    const list = readStore(STORE.students, []);
-    list.push({ name, username, room, phone, status:"Active" });
-    writeStore(STORE.students, list);
-    renderPage("students");
-  });
-
-  content.querySelectorAll("[data-remove-student]").forEach(button => {
-    button.addEventListener("click", () => {
-      const index = Number(button.dataset.removeStudent);
-      const list = readStore(STORE.students, []);
-      if (!confirm("Remove this student from the list?")) return;
-      list.splice(index, 1);
-      writeStore(STORE.students, list);
-      renderPage("students");
-    });
-  });
-}
-
-function noticeListHTML(limit = 100) {
-  const notices = readStore(STORE.notices, []).slice().reverse().slice(0,limit);
-  if (!notices.length) return `<p class="muted">No notices posted.</p>`;
-  return notices.map(n => `<div class="notice"><strong>${escapeHTML(n.title)}</strong>
-    <p>${escapeHTML(n.body)}</p><small class="muted">${escapeHTML(n.date || "")}</small></div>`).join("");
-}
-
-function renderNotices(content) {
-  const warden = currentUser.role === "warden";
-  content.innerHTML = `<h1>Notices</h1>
-    ${warden ? `<div class="card"><h2>Post a Notice</h2>
-      <form id="noticeForm"><label for="noticeTitle">Title</label><input id="noticeTitle" required maxlength="100">
-      <label for="noticeBody">Message</label><textarea id="noticeBody" required maxlength="2000"></textarea>
-      <button type="submit">Publish Notice</button></form></div>` : ""}
-    <div class="card"><h2>Latest Updates</h2>${noticeListHTML()}</div>`;
-
-  if (warden) $("noticeForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const notices = readStore(STORE.notices, []);
-    notices.push({
-      id: Date.now(),
-      title: $("noticeTitle").value.trim(),
-      body: $("noticeBody").value.trim(),
-      date: new Date().toLocaleString()
-    });
-    writeStore(STORE.notices, notices);
-    renderPage("notices");
-  });
-}
-
-function renderMenu(content) {
-  const menu = readStore(STORE.menu, []);
-  const warden = currentUser.role === "warden";
-  content.innerHTML = `<h1>Weekly Food Menu</h1>
-    ${warden ? `<div class="card"><h2>Edit Weekly Menu</h2>
-      <form id="menuForm">
-      ${menu.map((m,i)=>`<div class="menu-day"><h3>${escapeHTML(m.day)}</h3>
-        <label for="breakfast${i}">Breakfast</label><input id="breakfast${i}" required maxlength="200" value="${escapeHTML(m.breakfast)}">
-        <label for="lunch${i}">Lunch</label><input id="lunch${i}" required maxlength="200" value="${escapeHTML(m.lunch)}">
-        <label for="dinner${i}">Dinner</label><input id="dinner${i}" required maxlength="200" value="${escapeHTML(m.dinner)}">
-      </div>`).join("")}
-      <button type="submit">Save Weekly Menu</button>
-      </form></div>` : ""}
-    <div class="card"><h2>This Week</h2>
-      ${menu.map(m=>`<div class="menu-day"><h3>${escapeHTML(m.day)}</h3>
-        <p><strong>Breakfast:</strong> ${escapeHTML(m.breakfast)}</p>
-        <p><strong>Lunch:</strong> ${escapeHTML(m.lunch)}</p>
-        <p><strong>Dinner:</strong> ${escapeHTML(m.dinner)}</p>
-      </div>`).join("")}</div>`;
-
-  if (warden) $("menuForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const updated = menu.map((m,i)=>({
-      day:m.day,
-      breakfast:$("breakfast"+i).value.trim(),
-      lunch:$("lunch"+i).value.trim(),
-      dinner:$("dinner"+i).value.trim()
-    }));
-    writeStore(STORE.menu, updated);
-    alert("Weekly menu saved.");
-    renderPage("menu");
-  });
-}
-
-function renderComplaints(content) {
-  const complaints = readStore(STORE.complaints, []);
-  const mine = complaints.filter(c => currentUser.role === "warden" || c.username === currentUser.username);
-  content.innerHTML = `<h1>Complaints & Requests</h1>
-    <div class="card"><h2>Submit a Complaint</h2>
-      <form id="complaintForm"><label for="complaintTitle">Subject</label><input id="complaintTitle" required maxlength="100">
-      <label for="complaintBody">Details</label><textarea id="complaintBody" required maxlength="2000"></textarea>
-      <button type="submit">Submit Complaint</button></form></div>
-    <div class="card"><h2>${currentUser.role === "warden" ? "All Complaints" : "My Complaints"}</h2>
-    ${mine.map(c=>`<div class="notice"><strong>${escapeHTML(c.title)}</strong>
-      <p>${escapeHTML(c.body)}</p><small class="muted">By ${escapeHTML(c.username)} · ${escapeHTML(c.date)}</small>
-      <p>Status: <span class="badge">${escapeHTML(c.status)}</span></p>
-      ${currentUser.role === "warden" ? `<button data-resolve="${c.id}">${c.status === "Resolved" ? "Reopen" : "Mark Resolved"}</button>` : ""}
-    </div>`).join("") || `<p class="muted">No complaints found.</p>`}</div>`;
-
-  $("complaintForm").addEventListener("submit", event => {
-    event.preventDefault();
-    const list = readStore(STORE.complaints, []);
-    list.push({ id:Date.now(), username:currentUser.username, title:$("complaintTitle").value.trim(),
-      body:$("complaintBody").value.trim(), date:new Date().toLocaleString(), status:"Open" });
-    writeStore(STORE.complaints, list);
-    renderPage("complaints");
-  });
-
-  content.querySelectorAll("[data-resolve]").forEach(button => button.addEventListener("click", () => {
-    const id = Number(button.dataset.resolve);
-    const list = readStore(STORE.complaints, []).map(c => c.id === id
-      ? {...c, status:c.status === "Resolved" ? "Open" : "Resolved"} : c);
-    writeStore(STORE.complaints, list);
-    renderPage("complaints");
-  }));
-}
-
-function renderFees(content) {
-  let fees = readStore(STORE.fees, []);
-  if (currentUser.role === "warden") {
-    content.innerHTML = `<h1>Fee Management</h1>
-      <div class="card"><h2>Add Fee Record</h2>
-        <form id="feeForm" class="grid">
-          <div><label for="feeUser">Student username</label><input id="feeUser" required></div>
-          <div><label for="feeAmount">Amount</label><input id="feeAmount" type="number" min="0.01" step="0.01" required></div>
-          <div><label for="feeDue">Due date</label><input id="feeDue" type="date" required></div>
-          <div><label for="feeDescription">Description</label><input id="feeDescription" required></div>
-          <div style="align-self:end"><button type="submit">Add Fee</button></div>
-        </form></div>
-      <div class="card"><h2>All Fee Records</h2>${feeTable(fees,true)}</div>`;
-
-    $("feeForm").addEventListener("submit", event => {
-      event.preventDefault();
-      fees.push({ id:Date.now(), username:$("feeUser").value.trim(),
-        amount:Number($("feeAmount").value), due:$("feeDue").value,
-        description:$("feeDescription").value.trim(), status:"Unpaid" });
-      writeStore(STORE.fees, fees);
-      renderPage("fees");
-    });
-
-    content.querySelectorAll("[data-paid]").forEach(button => button.addEventListener("click", () => {
-      const id = Number(button.dataset.paid);
-      fees = readStore(STORE.fees, []).map(f => f.id === id
-        ? {...f, status:f.status === "Paid" ? "Unpaid" : "Paid"} : f);
-      writeStore(STORE.fees, fees);
-      renderPage("fees");
-    }));
-  } else {
-    fees = fees.filter(f => f.username === currentUser.username);
-    content.innerHTML = `<h1>My Fees</h1><div class="card"><p class="muted">Contact your warden if you have questions about a fee record.</p>${feeTable(fees,false)}</div>`;
-  }
-}
-
-function feeTable(fees, warden) {
-  if (!fees.length) return `<p class="muted">No fee records found.</p>`;
-  return `<div class="table-wrap"><table><thead><tr><th>Student</th><th>Description</th><th>Amount</th><th>Due date</th><th>Status</th>${warden?"<th>Action</th>":""}</tr></thead><tbody>
-  ${fees.map(f=>`<tr><td>${escapeHTML(f.username)}</td><td>${escapeHTML(f.description)}</td><td>${Number(f.amount).toFixed(2)}</td><td>${escapeHTML(f.due)}</td><td>${escapeHTML(f.status)}</td>
-  ${warden?`<td><button data-paid="${f.id}">${f.status==="Paid"?"Mark Unpaid":"Mark Paid"}</button></td>`:""}</tr>`).join("")}
-  </tbody></table></div>`;
-}
-
-function renderGate(content) {
-  const gate = readStore(STORE.gate, {open:"06:00",close:"21:00",note:"Please return before closing time."});
-  const warden = currentUser.role === "warden";
-  content.innerHTML = `<h1>Gate Timings</h1>
-    <div class="card"><h2>Hostel Gate Schedule</h2>
-      <div class="grid"><div class="stat">Opening Time<strong>${escapeHTML(gate.open)}</strong></div>
-      <div class="stat">Closing Time<strong>${escapeHTML(gate.close)}</strong></div></div>
-      <p>${escapeHTML(gate.note)}</p>
-      ${warden?`<hr style="border:0;border-top:1px solid #eee;margin:20px 0">
-        <h3>Edit Gate Timings</h3>
-        <form id="gateForm"><label for="gateOpen">Opening time</label><input id="gateOpen" type="time" required value="${escapeHTML(gate.open)}">
-        <label for="gateClose">Closing time</label><input id="gateClose" type="time" required value="${escapeHTML(gate.close)}">
-        <label for="gateNote">Message</label><textarea id="gateNote" maxlength="500">${escapeHTML(gate.note)}</textarea>
-        <button type="submit">Save Timings</button></form>`:""}
-    </div>`;
-
-  if (warden) $("gateForm").addEventListener("submit", event => {
-    event.preventDefault();
-    writeStore(STORE.gate, {open:$("gateOpen").value, close:$("gateClose").value, note:$("gateNote").value.trim()});
-    renderPage("gate");
-  });
-}
+const DB_KEY="hostelhub_phone_v1",SESSION_KEY="hostelhub_session_v1",DAYS=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],MEALS=["Breakfast","Lunch","Snacks","Dinner"];
+function defaultMenu(){let o={};DAYS.forEach(d=>o[d]={Breakfast:"Idli, sambar and chutney",Lunch:"Rice, curry and vegetables",Snacks:"Tea and snacks",Dinner:"Chapati and curry"});return o}
+function freshDB(){return{users:[],announcements:[],menu:defaultMenu(),complaints:[],fees:[],gate:{start:"06:00",end:"21:00",note:"Please follow hostel rules and return before gate closing time."}}}
+function loadDB(){try{let s=localStorage.getItem(DB_KEY);if(!s){let d=freshDB();localStorage.setItem(DB_KEY,JSON.stringify(d));return d}let d=JSON.parse(s);if(!d||!Array.isArray(d.users))throw Error();d.announcements||=[];d.complaints||=[];d.fees||=[];d.menu||=defaultMenu();d.gate||={start:"06:00",end:"21:00",note:""};return d}catch(e){let d=freshDB();localStorage.setItem(DB_KEY,JSON.stringify(d));return d}}
+let db=loadDB(),currentUser=null,toastTimer;
+function saveDB(){try{localStorage.setItem(DB_KEY,JSON.stringify(db));return true}catch(e){notify("Could not save. Browser storage may be full.");return false}}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function notify(m){let t=document.getElementById("toast");t.textContent=m;t.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add("hidden"),3000)}
+function showLogin(){loginForm.classList.remove("hidden");registerForm.classList.add("hidden");authMessage.innerHTML=""}
+function showRegister(){loginForm.classList.add("hidden");registerForm.classList.remove("hidden");authMessage.innerHTML=""}
+function enterApp(u){currentUser=u;sessionStorage.setItem(SESSION_KEY,u.id);authScreen.classList.add("hidden");appScreen.classList.remove("hidden");updateHeader();updateNav();render("dashboard")}
+function updateHeader(){headerName.textContent=currentUser.name||currentUser.username;headerRole.textContent=currentUser.role==="warden"?"Warden":"Student"}
+function updateNav(){document.querySelectorAll("[data-warden]").forEach(b=>b.classList.toggle("hidden",currentUser.role!=="warden"))}
+function logout(){sessionStorage.removeItem(SESSION_KEY);currentUser=null;appScreen.classList.add("hidden");authScreen.classList.remove("hidden");loginPassword.value="";showLogin()}
+loginForm.addEventListener("submit",e=>{e.preventDefault();db=loadDB();let un=loginUsername.value.trim().toLowerCase(),pw=loginPassword.value,u=db.users.find(x=>x.username.toLowerCase()===un&&x.password===pw);if(!u){authMessage.innerHTML='<div class="notice error">Incorrect username or password. Ask your hostel administrator to create your account.</div>';return}enterApp(u)});
+registerForm.addEventListener("submit",e=>{e.preventDefault();let name=regName.value.trim(),username=regUsername.value.trim(),password=regPassword.value,phone=regPhone.value.trim();if(name.length<2)return notify("Please enter your full name.");if(!/^[A-Za-z0-9_.-]{3,30}$/.test(username))return notify("Username must be 3–30 valid characters.");if(password.length<4)return notify("Password must be at least 4 characters.");if(db.users.some(u=>u.username.toLowerCase()===username.toLowerCase()))return notify("That username already exists.");let u={id:"u_"+Date.now(),username,password,role:"student",name,phone,email:"",room:"",course:"",avatar:""};db.users.push(u);if(saveDB()){e.target.reset();enterApp(u);notify("Student account created.")}});
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>{if(b.hasAttribute("data-warden")&&currentUser.role!=="warden")return notify("Warden access only.");render(b.dataset.page)}));
+function heading(t,s){return `<div class="heading"><h1>${esc(t)}</h1><p>${esc(s)}</p></div>`}
+function stat(i,l,v){return `<div class="card"><div class="stat-icon">${i}</div><div class="stat-label">${esc(l)}</div><div class="stat-value">${esc(v)}</div></div>`}
+function dateFmt(d){let x=new Date(d);return isNaN(x)?"Date unavailable":x.toLocaleString(undefined,{year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})}
+function render(page){if(!currentUser)return;let allowed=["dashboard","profile","students","announcements","menu","complaints","fees","gate"];if(!allowed.includes(page)||(page==="students"&&currentUser.role!=="warden"))page="dashboard";document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===page));let fn={dashboard,profile,students,announcements,menu,complaints,fees,gate};mainContent.innerHTML=fn[page]();bind(page)}
+function dashboard(){let w=currentUser.role==="warden",students=db.users.filter(u=>u.role==="student"),mine=db.complaints.filter(c=>w||c.studentId===currentUser.id),unpaid=db.fees.filter(f=>(w||f.studentId===currentUser.id)&&f.status!=="Paid");return heading(w?"Warden Dashboard":"Student Dashboard",w?"Manage your hostel from one place.":"Everything you need for hostel life.")+`<div class="welcome"><div><div class="eyebrow">WELCOME TO HOSTELHUB</div><h2>Hello, ${esc(currentUser.name||currentUser.username)}! 👋</h2><p>${w?"Keep your hostel running smoothly.":"Your hostel life, all in one place."}</p></div><svg class="building" viewBox="0 0 420 300"><use href="#hostel-art"/></svg></div><div class="grid">${w?stat("👥","Students",students.length):stat("👤","Room",currentUser.room||"Not assigned")}${stat("📢","Announcements",db.announcements.length)}${stat("📝","Complaints",mine.length)}${stat("💳","Unpaid fees",unpaid.length)}</div><div class="card"><h3>Quick access</h3><div class="row"><button class="btn secondary" onclick="render('menu')">🍽️ Weekly menu</button><button class="btn secondary" onclick="render('announcements')">📢 Announcements</button><button class="btn secondary" onclick="render('complaints')">📝 Complaints</button><button class="btn secondary" onclick="render('gate')">🚪 Gate timings</button></div></div><div class="card"><h3>Latest announcements</h3>${db.announcements.length?db.announcements.slice().reverse().slice(0,3).map(a=>`<div class="item"><h4>${esc(a.title)}</h4><p>${esc(a.message)}</p><div class="small muted">${esc(dateFmt(a.date))}</div></div>`).join(""):'<div class="empty">No announcements yet.</div>'}</div>`}
+function profile(){return heading("My Profile","View and update your account details.")+`<div class="card"><div class="profile-top"><div class="avatar" id="avatarPreview">${currentUser.avatar?`<img src="${currentUser.avatar}" alt="Profile">`:esc((currentUser.name||"U")[0].toUpperCase())}</div><div><h3>${esc(currentUser.name)}</h3><p class="muted">${currentUser.role==="warden"?"Warden":"Student"} account</p><div class="field"><label for="pPhoto">Profile photo (PNG, JPG or WebP, max 2 MB)</label><input id="pPhoto" type="file" accept="image/png,image/jpeg,image/webp"></div></div></div><form id="profileForm"><div class="form-grid"><div class="field"><label>Full name *</label><input id="pName" required maxlength="80" value="${esc(currentUser.name)}"></div><div class="field"><label>Phone</label><input id="pPhone" maxlength="20" value="${esc(currentUser.phone)}"></div><div class="field"><label>Email</label><input id="pEmail" type="email" maxlength="120" value="${esc(currentUser.email)}"></div>${currentUser.role==="student"?`<div class="field"><label>Room number</label><input id="pRoom" maxlength="30" value="${esc(currentUser.room)}"></div><div class="field"><label>Course</label><input id="pCourse" maxlength="80" value="${esc(currentUser.course)}"></div>`:""}</div><button class="btn" type="submit">Save profile</button></form></div>`}
+function students(){if(currentUser.role!=="warden")return heading("Access denied","Warden access only.");let list=db.users.filter(u=>u.role==="student");return heading("Student Management","Add and manage student accounts.")+`<div class="card"><h3>➕ Add student</h3><form id="addStudentForm"><div class="form-grid"><div class="field"><label>Full name *</label><input name="name" required maxlength="80"></div><div class="field"><label>Username *</label><input name="username" required pattern="[A-Za-z0-9_.-]{3,30}"></div><div class="field"><label>Temporary password *</label><input name="password" required minlength="4" maxlength="100"></div><div class="field"><label>Phone</label><input name="phone" maxlength="20"></div><div class="field"><label>Room number</label><input name="room" maxlength="30"></div><div class="field"><label>Course</label><input name="course" maxlength="80"></div></div><button class="btn" type="submit">Add student</button></form></div><div class="card"><h3>Students (${list.length})</h3><div class="table-wrap"><table><thead><tr><th>Name</th><th>Username</th><th>Room</th><th>Phone</th><th>Actions</th></tr></thead><tbody>${list.length?list.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.username)}</td><td>${esc(u.room||"—")}</td><td>${esc(u.phone||"—")}</td><td><button class="btn secondary mini" onclick="editStudent('${esc(u.id)}')">Edit</button> <button class="btn danger mini" onclick="deleteStudent('${esc(u.id)}')">Delete</button></td></tr>`).join(""):'<tr><td colspan="5" class="empty">No students registered.</td></tr>'}</tbody></table></div></div>`}
+function editStudent(id){if(currentUser.role!=="warden")return;let u=db.users.find(x=>x.id===id&&x.role==="student");if(!u)return;let name=prompt("Student name:",u.name);if(name===null)return;name=name.trim();if(name.length<2)return notify("Enter a valid name.");let room=prompt("Room number:",u.room||"");if(room===null)return;let phone=prompt("Phone:",u.phone||"");if(phone===null)return;u.name=name;u.room=room.trim();u.phone=phone.trim();if(saveDB()){notify("Student updated.");render("students")}}
+function deleteStudent(id){if(currentUser.role!=="warden"||!confirm("Delete this student and their linked records?"))return;db.users=db.users.filter(u=>u.id!==id);db.complaints=db.complaints.filter(c=>c.studentId!==id);db.fees=db.fees.filter(f=>f.studentId!==id);if(saveDB()){notify("Student deleted.");render("students")}}
+function announcements(){let w=currentUser.role==="warden",items=db.announcements.slice().sort((a,b)=>new Date(b.date)-new Date(a.date));return heading("Announcements","Hostel notices and important updates.")+(w?`<div class="card"><h3>📢 Publish announcement</h3><form id="announcementForm"><div class="field"><label>Title *</label><input name="title" required maxlength="120"></div><div class="field"><label>Message *</label><textarea name="message" required maxlength="3000"></textarea></div><button class="btn" type="submit">Publish announcement</button></form></div>`:"")+`<div class="card"><h3>Latest notices</h3>${items.length?items.map(a=>`<div class="item"><div class="item-top"><h4>${esc(a.title)}</h4>${w?`<button class="btn danger mini" onclick="deleteAnnouncement('${esc(a.id)}')">Delete</button>`:""}</div><p style="white-space:pre-wrap">${esc(a.message)}</p><div class="small muted">${esc(dateFmt(a.date))}</div></div>`).join(""):'<div class="empty">No announcements yet.</div>'}</div>`}
+function deleteAnnouncement(id){if(currentUser.role!=="warden"||!confirm("Delete this announcement?"))return;db.announcements=db.announcements.filter(a=>a.id!==id);if(saveDB()){notify("Announcement deleted.");render("announcements")}}
+function menu(){let w=currentUser.role==="warden";return heading("Weekly Menu",w?"Edit meals for all seven days.":"Check the hostel meal schedule.")+`<form id="menuForm"><div class="card"><div class="meal-grid">${DAYS.map(d=>`<div class="meal-item item"><h3>${d}</h3>${MEALS.map(m=>`<label for="m_${d}_${m}">${m}</label><input id="m_${d}_${m}" maxlength="180" ${w?"":"readonly"} value="${esc((db.menu[d]||{})[m]||"")}">`).join("")}</div>`).join("")}</div>${w?'<button class="btn" type="submit">Save weekly menu</button>':""}</div></form>`}
+function complaints(){let w=currentUser.role==="warden",items=db.complaints.filter(c=>w||c.studentId===currentUser.id).sort((a,b)=>new Date(b.date)-new Date(a.date));return heading("Complaints","Report issues and follow their resolution status.")+(!w?`<div class="card"><h3>📝 Submit a complaint</h3><form id="complaintForm"><div class="field"><label>Subject *</label><input name="title" required maxlength="120" placeholder="e.g. Room maintenance"></div><div class="field"><label>Category</label><select name="category"><option>Maintenance</option><option>Food</option><option>Cleanliness</option><option>Internet</option><option>Room</option><option>Other</option></select></div><div class="field"><label>Details *</label><textarea name="message" required maxlength="2000"></textarea></div><button class="btn" type="submit">Submit complaint</button></form></div>`:"")+`<div class="card"><h3>${w?"All student complaints":"My complaints"}</h3>${items.length?items.map(c=>{let s=db.users.find(u=>u.id===c.studentId);return `<div class="item"><div class="item-top"><h4>${esc(c.title)}</h4><span class="badge ${c.status==="Resolved"?"green":c.status==="In Progress"?"orange":"red"}">${esc(c.status)}</span></div><p class="small muted">${esc(c.category)} · ${esc(dateFmt(c.date))}</p>${w?`<p class="small">Student: ${esc(s?s.name:"Unknown")}</p>`:""}<p style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(c.message)}</p>${w?`<div class="row"><button class="btn secondary mini" onclick="setComplaint('${esc(c.id)}','Open')">Open</button><button class="btn secondary mini" onclick="setComplaint('${esc(c.id)}','In Progress')">In progress</button><button class="btn success mini" onclick="setComplaint('${esc(c.id)}','Resolved')">Resolved</button></div>`:""}</div>`}).join(""):'<div class="empty">No complaints yet.</div>'}</div>`}
+function setComplaint(id,status){if(currentUser.role!=="warden")return;let c=db.complaints.find(x=>x.id===id);if(!c)return notify("Complaint not found.");c.status=status;if(saveDB()){notify("Complaint status updated.");render("complaints")}}
+function fees(){let w=currentUser.role==="warden",sl=db.users.filter(u=>u.role==="student"),items=db.fees.filter(f=>w||f.studentId===currentUser.id).sort((a,b)=>new Date(b.date)-new Date(a.date));return heading("Fee Records",w?"Create fee records and update payment status.":"Review your hostel fee records.")+(w?`<div class="card"><h3>💳 Add fee record</h3><form id="feeForm"><div class="form-grid"><div class="field"><label>Student *</label><select name="studentId" required><option value="">Select student</option>${sl.map(u=>`<option value="${esc(u.id)}">${esc(u.name)} (${esc(u.username)})</option>`).join("")}</select></div><div class="field"><label>Description *</label><input name="description" required maxlength="120" placeholder="Hostel fee"></div><div class="field"><label>Amount (₹) *</label><input name="amount" type="number" min=".01" max="100000000" step=".01" required></div><div class="field"><label>Due date</label><input name="dueDate" type="date"></div></div><button class="btn" type="submit">Add fee record</button></form></div>`:"")+`<div class="card"><h3>${w?"All fee records":"My fee records"}</h3><div class="table-wrap"><table><thead><tr>${w?"<th>Student</th>":""}<th>Description</th><th>Amount</th><th>Due date</th><th>Status</th>${w?"<th>Actions</th>":""}</tr></thead><tbody>${items.length?items.map(f=>{let s=db.users.find(u=>u.id===f.studentId);return `<tr>${w?`<td>${esc(s?s.name:"Unknown")}</td>`:""}<td>${esc(f.description)}</td><td>₹${Number(f.amount).toLocaleString("en-IN",{minimumFractionDigits:2,maximumFractionDigits:2})}</td><td>${esc(f.dueDate||"—")}</td><td><span class="badge ${f.status==="Paid"?"green":"orange"}">${esc(f.status)}</span></td>${w?`<td><button class="btn success mini" onclick="toggleFee('${esc(f.id)}')">${f.status==="Paid"?"Mark unpaid":"Mark paid"}</button> <button class="btn danger mini" onclick="deleteFee('${esc(f.id)}')">Delete</button></td>`:""}</tr>`}).join(""):`<tr><td colspan="${w?6:4}" class="empty">No fee records found.</td></tr>`}</tbody></table></div></div>`}
+function toggleFee(id){if(currentUser.role!=="warden")return;let f=db.fees.find(x=>x.id===id);if(!f)return notify("Fee record not found.");f.status=f.status==="Paid"?"Unpaid":"Paid";if(saveDB()){notify("Payment status updated.");render("fees")}}
+function deleteFee(id){if(currentUser.role!=="warden"||!confirm("Delete this fee record?"))return;db.fees=db.fees.filter(f=>f.id!==id);if(saveDB()){notify("Fee record deleted.");render("fees")}}
+function gate(){let w=currentUser.role==="warden";return heading("Gate Timings","Hostel gate schedule and instructions.")+`<div class="grid two">${stat("🌅","Gate opens",db.gate.start)}${stat("🌙","Gate closes",db.gate.end)}</div><div class="card"><h3>📌 Instructions</h3><p style="white-space:pre-wrap">${esc(db.gate.note||"Please follow hostel gate rules.")}</p></div>${w?`<div class="card"><h3>Edit gate timings</h3><form id="gateForm"><div class="form-grid"><div class="field"><label>Opening time *</label><input name="start" type="time" required value="${esc(db.gate.start)}"></div><div class="field"><label>Closing time *</label><input name="end" type="time" required value="${esc(db.gate.end)}"></div><div class="field full"><label>Instructions</label><textarea name="note" maxlength="1000">${esc(db.gate.note)}</textarea></div></div><button class="btn" type="submit">Save gate timings</button></form></div>`:""}`}
+function bind(page){if(page==="profile"){let input=document.getElementById("pPhoto");input.addEventListener("change",()=>{let f=input.files[0];if(!f)return;if(!["image/png","image/jpeg","image/webp"].includes(f.type)){input.value="";return notify("Choose a PNG, JPG or WebP image.")}if(f.size>2*1024*1024){input.value="";return notify("Image must be under 2 MB.")}let r=new FileReader();r.onload=()=>avatarPreview.innerHTML=`<img alt="Profile preview" src="${r.result}">`;r.readAsDataURL(f)});profileForm.addEventListener("submit",async e=>{e.preventDefault();let name=pName.value.trim();if(name.length<2)return notify("Enter a valid name.");let avatar=currentUser.avatar||"",file=input.files[0];if(file){try{avatar=await readFile(file)}catch(x){return notify("Could not read image.")}}Object.assign(currentUser,{name,phone:pPhone.value.trim(),email:pEmail.value.trim(),avatar});if(currentUser.role==="student")Object.assign(currentUser,{room:pRoom.value.trim(),course:pCourse.value.trim()});if(saveDB()){updateHeader();notify("Profile saved successfully.");render("profile")}})}
+if(page==="students")addStudentForm.addEventListener("submit",e=>{e.preventDefault();if(currentUser.role!=="warden")return;let f=new FormData(e.target),username=String(f.get("username")).trim(),name=String(f.get("name")).trim();if(name.length<2)return notify("Enter a valid name.");if(db.users.some(u=>u.username.toLowerCase()===username.toLowerCase()))return notify("Username already exists.");db.users.push({id:"u_"+Date.now(),username,password:String(f.get("password")),role:"student",name,phone:String(f.get("phone")||"").trim(),room:String(f.get("room")||"").trim(),course:String(f.get("course")||"").trim(),email:"",avatar:""});if(saveDB()){notify("Student added successfully.");render("students")}});
+if(page==="announcements"&&currentUser.role==="warden")announcementForm.addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target),title=String(f.get("title")).trim(),message=String(f.get("message")).trim();if(!title||!message)return notify("Complete both fields.");db.announcements.push({id:"a_"+Date.now(),title,message,date:new Date().toISOString()});if(saveDB()){notify("Announcement published.");render("announcements")}});
+if(page==="menu"&&currentUser.role==="warden")menuForm.addEventListener("submit",e=>{e.preventDefault();DAYS.forEach(d=>{db.menu[d]||={};MEALS.forEach(m=>db.menu[d][m]=document.getElementById(`m_${d}_${m}`).value.trim())});if(saveDB()){notify("Weekly menu saved successfully.");render("menu")}});
+if(page==="complaints"&&currentUser.role==="student")complaintForm.addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target),title=String(f.get("title")).trim(),message=String(f.get("message")).trim();if(!title||!message)return notify("Complete the complaint details.");db.complaints.push({id:"c_"+Date.now(),studentId:currentUser.id,title,message,category:String(f.get("category")),date:new Date().toISOString(),status:"Open"});if(saveDB()){notify("Complaint submitted.");render("complaints")}});
+if(page==="fees"&&currentUser.role==="warden")feeForm.addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target),studentId=String(f.get("studentId")),description=String(f.get("description")).trim(),amount=Number(f.get("amount"));if(!db.users.some(u=>u.id===studentId&&u.role==="student"))return notify("Select a valid student.");if(!description||!Number.isFinite(amount)||amount<=0)return notify("Enter a valid fee amount.");db.fees.push({id:"f_"+Date.now(),studentId,description,amount,dueDate:String(f.get("dueDate")||""),status:"Unpaid",date:new Date().toISOString()});if(saveDB()){notify("Fee record added.");render("fees")}});
+if(page==="gate"&&currentUser.role==="warden")gateForm.addEventListener("submit",e=>{e.preventDefault();let f=new FormData(e.target),start=String(f.get("start")),end=String(f.get("end"));if(!start||!end)return notify("Enter both gate times.");db.gate={start,end,note:String(f.get("note")||"").trim()};if(saveDB()){notify("Gate timings saved.");render("gate")}})}
+function readFile(file){return new Promise((resolve,reject)=>{let r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+(function restore(){let id=sessionStorage.getItem(SESSION_KEY),u=id&&db.users.find(x=>x.id===id);if(u)enterApp(u);else showLogin()})();
 </script>
 </body>
 </html>
